@@ -4,7 +4,6 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://ruina.photos',
-	base: 'astro-photography-portfolio',
 	vite: {
 		plugins: [tailwindcss()],
 	},

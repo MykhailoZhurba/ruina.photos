@@ -8,9 +8,9 @@ export interface SocialLink {
 }
 
 export default {
-	title: 'SR',
+	title: 'Mz photography portfolio',
 	favicon: 'favicon.ico',
-	owner: 'Sara Richard',
+	owner: 'Mykhailo Zhurba',
 	profileImage: 'profile.webp',
 	socialLinks: [
 		{
