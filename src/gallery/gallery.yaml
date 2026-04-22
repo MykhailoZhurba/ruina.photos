@@ -22,7 +22,6 @@ images:
         - automotive
     exif: {}
 
-
   - path: automotive/automotive-3.jpg
     meta:
       title: Automotive scene 3
@@ -32,15 +31,13 @@ images:
         - automotive
     exif: {}
 
-
-   - path: automotive/automotive-4.jpg
-      meta:
+  - path: automotive/automotive-4.jpg
+    meta:
       title: Automotive scene 4
       description: Sharp silhouettes in an urban environment.
       collections:
         - automotive
     exif: {}
-
 
   - path: automotive/automotive-5.jpg
     meta:
@@ -50,7 +47,6 @@ images:
         - automotive
     exif: {}
 
-
   - path: automotive/automotive-6.jpg
     meta:
       title: Automotive scene 6
@@ -58,7 +54,6 @@ images:
       collections:
         - automotive
     exif: {}
-
 
   - path: automotive/automotive-7.jpg
     meta:
@@ -69,8 +64,6 @@ images:
         - automotive
     exif: {}
 
-
-
   - path: automotive/automotive-8.jpg
     meta:
       title: Automotive scene 8
@@ -78,8 +71,6 @@ images:
       collections:
         - automotive
     exif: {}
-
-
 
   - path: automotive/automotive-9.jpg
     meta:
@@ -98,7 +89,6 @@ images:
         - automotive
     exif: {}
 
-
   - path: street/street-1.jpg
     meta:
       title: Street photography 1
@@ -107,7 +97,6 @@ images:
         - featured
         - street
     exif: {}
-
 
   - path: travel/travel-1.jpg
     meta:
