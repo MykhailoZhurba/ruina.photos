@@ -67,7 +67,7 @@ images:
   - path: automotive/automotive-8.jpg
     meta:
       title: Automotive scene 8
-      description: Ready for the road: a study in rugged design.
+      description: "Ready for the road: a study in rugged design."
       collections:
         - automotive
     exif: {}
