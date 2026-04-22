@@ -1,95 +1,71 @@
 collections:
-  - id: automotive
-    name: Automotive
+  - id: nature
+    name: Nature
   - id: travel
     name: Travel
   - id: street
     name: Street
 images:
-  - path: automotive/automotive.jpg
+  - path: nature/nature-2.jpg
     meta:
-      title: Automotive scene 1
-      description: Modern engineering meeting the city streets.
+      title: Nature scene 2
+      description: Serene natural landscape capturing the essence of wilderness.
       collections:
-        - automotive
+        - nature
     exif: {}
-
-  - path: automotive/automotive-2.jpg
+  - path: nature/nature-3.jpg
     meta:
-      title: Automotive scene 2
-      description: Soft light hitting classic automotive lines.
-      collections:
-        - automotive
-    exif: {}
-
-  - path: automotive/automotive-3.jpg
-    meta:
-      title: Automotive scene 3
-      description: A detailed look at high-performance design.  
+      title: Nature scene 3
+      description: Breathtaking natural vista showcasing environmental beauty.
       collections:
         - featured
-        - automotive
+        - nature
     exif: {}
-
-  - path: automotive/automotive-4.jpg
+  - path: nature/nature-5.jpg
     meta:
-      title: Automotive scene 4
-      description: Sharp silhouettes in an urban environment.
+      title: Nature scene 5
+      description: Natural landscape showing the raw beauty of the environment.
       collections:
-        - automotive
+        - nature
     exif: {}
-
-  - path: automotive/automotive-5.jpg
+  - path: nature/nature-7.jpg
     meta:
-      title: Automotive scene 5
-      description: Where speed and contemporary style intersect.
-      collections:
-        - automotive
-    exif: {}
-
-  - path: automotive/automotive-6.jpg
-    meta:
-      title: Automotive scene 6
-      description: Where speed and contemporary style intersect.
-      collections:
-        - automotive
-    exif: {}
-
-  - path: automotive/automotive-7.jpg
-    meta:
-      title: Automotive scene 7
-      description: Capturing the essence of timeless vehicle elegance.
+      title: Nature scene 7
+      description: Stunning natural landscape capturing environmental beauty.
       collections:
         - featured
-        - automotive
+        - nature
     exif: {}
-
-  - path: automotive/automotive-8.jpg
+  - path: nature/nature-8.jpg
     meta:
-      title: Automotive scene 8
-      description: "Ready for the road: a study in rugged design."
+      title: Nature scene 8
+      description: Beautiful natural vista showcasing environmental wonder.
       collections:
-        - automotive
+        - nature
     exif: {}
-
-  - path: automotive/automotive-9.jpg
+  - path: nature/L1002174.jpg
     meta:
-      title: Automotive scene 9
+      title: Travel scene 6
       description: null
       collections:
         - featured
-        - automotive
-    exif: {}
-    
-  - path: automotive/automotive-10.jpg
+        - nature
+    exif:
+      captureDate: 2025-03-27T10:35:21.000Z
+      fNumber: 8
+      focalLength: 28
+      iso: 100
+      model: LEICA Q3
+      shutterSpeed: 1250
+      lensModel: SUMMILUX 1:1.7/28 ASPH.
+  - path: nature/nature-10.jpg
     meta:
-      title: Automotive scene 10
-      description: A dynamic shot of a high-performance vehicle in motion.
+      title: Nature scene 10
+      description: Majestic natural landscape displaying environmental splendor.
       collections:
-        - automotive
+        - nature
     exif: {}
-
-  - path: street/street-1.jpg
+  - path: street/stree-1.jpg
     meta:
       title: Street photography 1
       description: Urban scene capturing the essence of city life.
@@ -97,7 +73,6 @@ images:
         - featured
         - street
     exif: {}
-
   - path: travel/travel-1.jpg
     meta:
       title: Travel scene 1
@@ -105,4 +80,11 @@ images:
       collections:
         - featured
         - travel
+    exif: {}
+  - path: nature/nature-1.jpg
+    meta:
+      title: Nature 1
+      description: ''
+      collections:
+        - nature
     exif: {}
