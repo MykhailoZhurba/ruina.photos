@@ -45,8 +45,8 @@ images:
     exif: {}
   - path: nature/nature-9.jpg
     meta:
-      title: Travel scene 6
-      description: null
+      title: Nature scene 9
+      description: Tranquil natural setting showcasing the beauty of the outdoors.
       collections:
         - featured
         - nature
