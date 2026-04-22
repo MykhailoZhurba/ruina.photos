@@ -1,5 +1,5 @@
 import type { AstroInstance } from 'astro';
-import { Github, Instagram } from 'lucide-astro';
+import { Facebook, Instagram } from 'lucide-astro';
 
 export interface SocialLink {
 	name: string;
@@ -14,13 +14,13 @@ export default {
 	profileImage: 'profile.webp',
 	socialLinks: [
 		{
-			name: 'GitHub',
-			url: 'https://github.com/rockem/astro-photography-portfolio',
-			icon: Github,
+			name: 'Facebook',
+			url: 'https://www.facebook.com/ruina.photos',
+			icon: Facebook,
 		} as SocialLink,
 		{
 			name: 'Instagram',
-			url: 'https://www.instagram.com',
+			url: 'https://www.instagram.com/ruina.photos/',
 			icon: Instagram,
 		} as SocialLink,
 	],
