@@ -43,7 +43,7 @@ images:
       collections:
         - nature
     exif: {}
-  - path: nature/L1002174.jpg
+  - path: nature/nature-9.jpg
     meta:
       title: Travel scene 6
       description: null
