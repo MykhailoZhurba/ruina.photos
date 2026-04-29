@@ -65,8 +65,8 @@ Edit the `site.config.mts` file to update your personal information:
 ```typescript
 export default {
   title: 'SR',
-  favicon: 'favicon.ico',
-  owner: 'Sara Richard',
+  favicon: 'favicon.png',
+  owner: 'Mykhailo Zhurba',
   // ... Other configurations
 };
 ```

@@ -9,7 +9,7 @@ export interface SocialLink {
 
 export default {
 	title: 'Mz photography portfolio',
-	favicon: 'favicon.ico',
+	favicon: 'favicon.png',
 	owner: 'Mykhailo Zhurba',
 	profileImage: 'profile.webp',
 	socialLinks: [
