@@ -1,29 +1,39 @@
-/* src/styles/glightbox-custom.css */
-
-/* Remove the square framing from the opened view container */
+.glightbox-container .gslide-media,
 .glightbox-container .gslide-image {
-    background: transparent !important;
     width: auto !important;
     height: auto !important;
-    max-width: 95vw !important;
-    max-height: 95vh !important;
+    background: transparent !important;
     box-shadow: none !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
-/* Style the image itself when opened */
+/* 2. Force the image and frame to scale naturally */
 .glightbox-container .gslide-image img {
-    /* ... other styles ... */
-
-    /* SWITCH FROM OUTLINE TO BORDER */
-    outline: none !important; 
-    border: 10px solid white !important; /* Side thickness */
-    border-top-width: 20px !important;    /* Thicker Top */
-    border-bottom-width: 20px !important; /* Thicker Bottom */
+    /* Strip all strict sizing */
+    width: auto !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
     
-    background-color: transparent;
-    object-fit: contain !important;
-}
+    /* Let the image scale up to the screen bounds */
+    max-width: 90vw !important;
+    max-height: 85vh !important;
+    
+    /* scale-down is safer than unset for EXIF conflicts */
+    object-fit: scale-down !important; 
 
+    /* The Frame */
+    box-sizing: border-box !important;
+    border: 10px solid white !important;
+    border-top-width: 25px !important;
+    border-bottom-width: 25px !important;
+    padding: 12px !important;
+    margin: auto !important;
+
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8) !important;
+}
 /* Ensure description text stays below the image */
 .glightbox-container .gslide-description {
 	background: transparent !important;

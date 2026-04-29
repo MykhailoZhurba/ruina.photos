@@ -53,6 +53,7 @@ images:
       title: Automotive 15
       description: ''
       collections:
+        - featured
         - automotive
     exif: {}
   - path: automotive/automotive-2.jpg
@@ -81,6 +82,7 @@ images:
       title: Automotive 5
       description: ''
       collections:
+        - featured
         - automotive
     exif: {}
   - path: automotive/automotive-6.jpg
@@ -89,6 +91,7 @@ images:
       description: ''
       collections:
         - automotive
+        - featured
     exif: {}
   - path: automotive/automotive-7.jpg
     meta:
@@ -96,6 +99,7 @@ images:
       description: ''
       collections:
         - automotive
+        - featured
     exif: {}
   - path: automotive/automotive-8.jpg
     meta:
@@ -117,6 +121,7 @@ images:
       description: ''
       collections:
         - street
+        - featured
     exif: {}
   - path: street/street2.jpg
     meta:
@@ -152,6 +157,7 @@ images:
       description: ''
       collections:
         - street
+        - featured
     exif: {}
   - path: street/street7.jpg
     meta:
@@ -166,8 +172,280 @@ images:
       description: ''
       collections:
         - street
+        - featured
     exif: {}
   - path: street/street9.jpg
+    meta:
+      title: Street9
+      description: ''
+      collections:
+        - street
+        - featured
+    exif: {}
+  - path: automotive\automotive-1.jpg
+    meta:
+      title: Automotive 1
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-10.jpg
+    meta:
+      title: Automotive 10
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-11.jpg
+    meta:
+      title: Automotive 11
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-12.jpg
+    meta:
+      title: Automotive 12
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-13.jpg
+    meta:
+      title: Automotive 13
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-14.jpg
+    meta:
+      title: Automotive 14
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-15.jpg
+    meta:
+      title: Automotive 15
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-2.jpg
+    meta:
+      title: Automotive 2
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-3.jpg
+    meta:
+      title: Automotive 3
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-4.jpg
+    meta:
+      title: Automotive 4
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-5.jpg
+    meta:
+      title: Automotive 5
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-6.jpg
+    meta:
+      title: Automotive 6
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-7.jpg
+    meta:
+      title: Automotive 7
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-8.jpg
+    meta:
+      title: Automotive 8
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-9.jpg
+    meta:
+      title: Automotive 9
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: portraits\portraits-1.jpg
+    meta:
+      title: Portraits 1
+      description: ''
+      collections:
+        - featured
+        - portraits
+    exif: {}
+  - path: portraits\portraits-10.jpg
+    meta:
+      title: Portraits 10
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: portraits\portraits-11.jpg
+    meta:
+      title: Portraits 11
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: portraits\portraits-12.jpg
+    meta:
+      title: Portraits 12
+      description: ''
+      collections:
+        - featured
+        - portraits
+    exif: {}
+  - path: portraits\portraits-2.jpg
+    meta:
+      title: Portraits 2
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: portraits\portraits-3.jpg
+    meta:
+      title: Portraits 3
+      description: ''
+      collections:
+        - portraits
+        - featured
+    exif: {}
+  - path: portraits\portraits-4.jpg
+    meta:
+      title: Portraits 4
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: portraits\portraits-5.jpg
+    meta:
+      title: Portraits 5
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: portraits\portraits-6.jpg
+    meta:
+      title: Portraits 6
+      description: ''
+      collections:
+        - portraits
+        - featured
+    exif: {}
+  - path: portraits\portraits-7.jpg
+    meta:
+      title: Portraits 7
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: portraits\portraits-8.jpg
+    meta:
+      title: Portraits 8
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: portraits\portraits-9.jpg
+    meta:
+      title: Portraits 9
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: street\street1.jpg
+    meta:
+      title: Street1
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street10.jpg
+    meta:
+      title: Street10
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street11.jpg
+    meta:
+      title: Street11
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street2.jpg
+    meta:
+      title: Street2
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street3.jpg
+    meta:
+      title: Street3
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street4.jpg
+    meta:
+      title: Street4
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street5.jpg
+    meta:
+      title: Street5
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street6.jpg
+    meta:
+      title: Street6
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street7.jpg
+    meta:
+      title: Street7
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street8.jpg
+    meta:
+      title: Street8
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street9.jpg
     meta:
       title: Street9
       description: ''
