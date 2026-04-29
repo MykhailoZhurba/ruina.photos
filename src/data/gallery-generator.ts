@@ -66,6 +66,8 @@ async function createGalleryObjFrom(galleryDir: string): Promise<GalleryData> {
 	const imageFiles = await fg(`${galleryDir}/**/*.{jpg,jpeg,png}`, {
 		dot: false,
 	});
+    
+    // Use posix-style paths for the generator to ensure forward slashes
 	return {
 		collections: createCollectionsFrom(imageFiles, galleryDir),
 		images: await createImagesFrom(imageFiles, galleryDir),
@@ -74,14 +76,18 @@ async function createGalleryObjFrom(galleryDir: string): Promise<GalleryData> {
 
 function createCollectionsFrom(imageFiles: string[], galleryDir: string) {
 	const uniqueDirNames = new Set(
-		imageFiles.map((file) => path.dirname(path.relative(galleryDir, file))),
+		imageFiles.map((file) => {
+            // Normalize path to use forward slashes
+            const relativePath = path.relative(galleryDir, file).split(path.sep).join('/');
+            return path.dirname(relativePath);
+        }),
 	);
 
 	return [...uniqueDirNames]
 		.map((dir) => {
 			return createGalleryCollection(dir);
 		})
-		.filter((col) => col.id !== '.');
+		.filter((col) => col.id !== '.' && col.id !== '');
 }
 
 async function createImagesFrom(imageFiles: string[], galleryDir: string) {

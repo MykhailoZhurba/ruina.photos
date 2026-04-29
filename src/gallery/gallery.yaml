@@ -6,168 +6,168 @@ collections:
   - id: street
     name: Street
 images:
-  - path: automotive\automotive-1.jpg
+  - path: automotive/automotive-1.jpg
     meta:
       title: Automotive 1
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-10.jpg
+  - path: automotive/automotive-10.jpg
     meta:
       title: Automotive 10
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-11.jpg
+  - path: automotive/automotive-11.jpg
     meta:
       title: Automotive 11
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-12.jpg
+  - path: automotive/automotive-12.jpg
     meta:
       title: Automotive 12
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-13.jpg
+  - path: automotive/automotive-13.jpg
     meta:
       title: Automotive 13
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-14.jpg
+  - path: automotive/automotive-14.jpg
     meta:
       title: Automotive 14
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-15.jpg
+  - path: automotive/automotive-15.jpg
     meta:
       title: Automotive 15
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-2.jpg
+  - path: automotive/automotive-2.jpg
     meta:
       title: Automotive 2
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-3.jpg
+  - path: automotive/automotive-3.jpg
     meta:
       title: Automotive 3
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-4.jpg
+  - path: automotive/automotive-4.jpg
     meta:
       title: Automotive 4
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-5.jpg
+  - path: automotive/automotive-5.jpg
     meta:
       title: Automotive 5
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-6.jpg
+  - path: automotive/automotive-6.jpg
     meta:
       title: Automotive 6
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-7.jpg
+  - path: automotive/automotive-7.jpg
     meta:
       title: Automotive 7
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-8.jpg
+  - path: automotive/automotive-8.jpg
     meta:
       title: Automotive 8
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: automotive\automotive-9.jpg
+  - path: automotive/automotive-9.jpg
     meta:
       title: Automotive 9
       description: ''
       collections:
         - automotive
     exif: {}
-  - path: street\street1.jpg
+  - path: street/street1.jpg
     meta:
       title: Street1
       description: ''
       collections:
         - street
     exif: {}
-  - path: street\street2.jpg
+  - path: street/street2.jpg
     meta:
       title: Street2
       description: ''
       collections:
         - street
     exif: {}
-  - path: street\street3.jpg
+  - path: street/street3.jpg
     meta:
       title: Street3
       description: ''
       collections:
         - street
     exif: {}
-  - path: street\street4.jpg
+  - path: street/street4.jpg
     meta:
       title: Street4
       description: ''
       collections:
         - street
     exif: {}
-  - path: street\street5.jpg
+  - path: street/street5.jpg
     meta:
       title: Street5
       description: ''
       collections:
         - street
     exif: {}
-  - path: street\street6.jpg
+  - path: street/street6.jpg
     meta:
       title: Street6
       description: ''
       collections:
         - street
     exif: {}
-  - path: street\street7.jpg
+  - path: street/street7.jpg
     meta:
       title: Street7
       description: ''
       collections:
         - street
     exif: {}
-  - path: street\street8.jpg
+  - path: street/street8.jpg
     meta:
       title: Street8
       description: ''
       collections:
         - street
     exif: {}
-  - path: street\street9.jpg
+  - path: street/street9.jpg
     meta:
       title: Street9
       description: ''
