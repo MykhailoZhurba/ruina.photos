@@ -8,7 +8,7 @@ export interface SocialLink {
 }
 
 export default {
-	title: 'Mz photography portfolio',
+	title: 'Ruina Photos',
 	favicon: 'favicon.png',
 	owner: 'Mykhailo Zhurba',
 	profileImage: 'profile.webp',
