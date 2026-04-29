@@ -73,7 +73,7 @@ images:
         - featured
         - street
     exif: {}
-    path: street/street2.jpg
+  - path: street/street2.jpg
     meta:
       title: Street photography 2 
       description: Urban scene capturing the essence of city life.
@@ -81,7 +81,7 @@ images:
         - featured
         - street
     exif: {}
-    path: street/street3.jpg
+  - path: street/street3.jpg
     meta:
       title: Street photography 3
       description: Urban scene capturing the essence of city life.
@@ -89,7 +89,7 @@ images:
         - featured
         - street
     exif: {}
-    path: street/street4.jpg
+  - path: street/street4.jpg
     meta:
       title: Street photography 4
       description: Urban scene capturing the essence of city life.
@@ -97,7 +97,7 @@ images:
         - featured
         - street
     exif: {}
-    path: street/street5.jpg
+  - path: street/street5.jpg
     meta:
       title: Street photography 5
       description: Urban scene capturing the essence of city life.
@@ -105,7 +105,7 @@ images:
         - featured
         - street
     exif: {}
-    path: street/street6.jpg
+  - path: street/street6.jpg
     meta:
       title: Street photography 6
       description: Urban scene capturing the essence of city life.
@@ -113,7 +113,7 @@ images:
         - featured
         - street
     exif: {}
-    path: street/street7.jpg
+  - path: street/street7.jpg
     meta:
       title: Street photography 7
       description: Urban scene capturing the essence of city life.
@@ -121,7 +121,7 @@ images:
         - featured
         - street
     exif: {}
-    path: street/street8.jpg
+  - path: street/street8.jpg
     meta:
       title: Street photography 8
       description: Urban scene capturing the essence of city life.
@@ -129,7 +129,7 @@ images:
         - featured
         - street
     exif: {}
-    path: street/street9.jpg
+  - path: street/street9.jpg
     meta:
       title: Street photography 9
       description: Urban scene capturing the essence of city life.
