@@ -12,20 +12,16 @@
 
 /* Style the image itself when opened */
 .glightbox-container .gslide-image img {
-	max-width: 90vw !important;
-	max-height: 85vh !important;
-	height: auto !important;
-	width: auto !important;
-	object-fit: contain !important; /* PREVENTS ZOOMING/CROPPING */
-	display: block;
-    margin: auto;
+    /* ... other styles ... */
+
+    /* SWITCH FROM OUTLINE TO BORDER */
+    outline: none !important; 
+    border: 10px solid white !important; /* Side thickness */
+    border-top-width: 20px !important;    /* Thicker Top */
+    border-bottom-width: 20px !important; /* Thicker Bottom */
     
-    /* THE WHITE OUTLINE in the opened view */
-    /* CHANGE THIS LINE: Set to 10px */
-    outline: 20px solid white !important;
-    
-    
-    box-shadow: 0 30px 60px rgba(0,0,0,0.8) !important;
+    background-color: transparent;
+    object-fit: contain !important;
 }
 
 /* Ensure description text stays below the image */
