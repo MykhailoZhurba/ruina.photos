@@ -1,4 +1,5 @@
 ---
+/* src/components/PhotoGrid.astro */
 import 'glightbox/dist/css/glightbox.css';
 import '../styles/glightbox-custom.css';
 import { Image } from 'astro:assets';
@@ -11,30 +12,32 @@ interface Props {
 const { images } = Astro.props;
 ---
 
-<section id="photo-grid" class="relative w-full mx-auto overflow-hidden">
-	{
-		images.map((image) => (
-			<a
-				href={image.src.src}
-				class="photo-item glightbox absolute transition-transform hover:scale-[1.02] hover:z-10"
-				data-gallery="gallery1"
-				data-type="image"
-				data-glightbox={image.description ? `title: ${image.description}` : undefined}
-			>
-				<Image
-					src={image.src}
-					quality={90}
-					format="webp"
-					width={image.src.width}
-					height={image.src.height}
-					class="w-full h-full object-cover rounded-sm shadow-sm hover:shadow-lg transition-shadow"
-					alt={image.title}
-				/>
-			</a>
-		))
-	}
+<section id="photo-grid" class="container-custom py-12">
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
+		{
+			images.map((image) => (
+				<div class="break-inside-avoid">
+					<a
+						href={image.src.src}
+						class="glightbox block transition-transform duration-500 hover:scale-[1.02]"
+						data-gallery="gallery"
+						data-glightbox={image.description ? `title: ${image.description}` : undefined}
+					>
+						<Image
+							src={image.src}
+							quality={85}
+							format="webp"
+							width={800}
+							class="shadow-2xl rounded-sm"
+							alt={image.title}
+						/>
+					</a>
+				</div>
+			))
+		}
+	</div>
 </section>
 
 <script>
 	import '../scripts/photo-grid';
-</script>
+</script>	

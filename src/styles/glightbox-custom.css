@@ -1,20 +1,38 @@
+/* src/styles/glightbox-custom.css */
+
+/* Remove the square framing from the opened view container */
+.glightbox-container .gslide-image {
+    background: transparent !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 95vw !important;
+    max-height: 95vh !important;
+    box-shadow: none !important;
+}
+
+/* Style the image itself when opened */
 .glightbox-container .gslide-image img {
-	max-width: 95%;
-	max-height: 95%;
-	height: auto;
-	width: auto;
-	object-fit: contain;
+	max-width: 90vw !important;
+	max-height: 85vh !important;
+	height: auto !important;
+	width: auto !important;
+	object-fit: contain !important; /* PREVENTS ZOOMING/CROPPING */
 	display: block;
+    margin: auto;
+    
+    /* THE WHITE OUTLINE in the opened view */
+    /* CHANGE THIS LINE: Set to 10px */
+    outline: 20px solid white !important;
+    
+    
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8) !important;
 }
 
-.glightbox-container .gslide {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
+/* Ensure description text stays below the image */
 .glightbox-container .gslide-description {
-	max-width: 90%;
-	color: #ccc;
-	font-size: 0.875rem;
+	background: transparent !important;
+    color: white !important;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    margin-top: 25px;
 }

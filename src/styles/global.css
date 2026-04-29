@@ -49,8 +49,15 @@
 }
 
 @layer components {
+	@layer components {
 	.container-custom {
-		@apply max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8;
+		@apply max-w-[1200px] mx-auto px-4;
+	}
+}
+
+	/* Optional: Make the background behind the square slightly darker to pop the white outline */
+	#photo-grid {
+		background-color: #fcfcfc;
 	}
 
 	.nav-link {
@@ -64,4 +71,5 @@
 	.nav-link:hover::after {
 		@apply w-full;
 	}
+	
 }
