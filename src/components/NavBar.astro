@@ -3,15 +3,14 @@ import siteConfig from '../../site.config.mjs';
 
 const title = siteConfig.title;
 const base = import.meta.env.BASE_URL;
-
-// This ensures we don't get double slashes (like //collections) if the base is just '/'
-const safeBase = base === '/' ? '' : base;
+const safeBase = base.endsWith('/') ? base.slice(0, -1) : base;
 
 const menuItems = [
 	{ name: 'Home', link: base },
 	{ name: 'Gallery', link: `${safeBase}/collections` },
 	{ name: 'About', link: `${safeBase}/about` },
 ];
+
 ---
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />

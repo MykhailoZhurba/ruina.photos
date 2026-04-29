@@ -12,12 +12,13 @@ const collections = [allCollection, ...(await getCollections())];
 const { collection } = Astro.params;
 const images = await getImages(collection ? { collection } : {});
 
-// Helper to prevent "//" in links
+// Helper to prevent "//" double slash bug
 const base = import.meta.env.BASE_URL;
 const safeBase = base.endsWith('/') ? base.slice(0, -1) : base;
 
 export const getStaticPaths = async () => {
 	const cols = await getCollections();
+	// Use 'c' instead of 'collection' to avoid shadowing errors
 	return [{ id: undefined }, ...cols].map((c) => {
 		return {
 			params: { collection: c.id },
