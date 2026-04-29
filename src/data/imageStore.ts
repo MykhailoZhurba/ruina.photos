@@ -132,7 +132,9 @@ function sortImages(images: GalleryImage[], options: GetImagesOptions) {
  */
 const processImages = (images: GalleryImage[], galleryPath: string): Image[] => {
 	return images.reduce<Image[]>((acc, imageEntry) => {
-		const imagePath = path.posix.join('/', path.parse(galleryPath).dir, imageEntry.path);
+        // Normalize entry path to ensure no backslashes exist
+        const normalizedEntryPath = imageEntry.path.replace(/\\/g, '/');
+		const imagePath = path.posix.join('/', path.parse(galleryPath).dir, normalizedEntryPath);
 		try {
 			acc.push(createImageDataFor(imagePath, imageEntry));
 		} catch (error) {
@@ -141,7 +143,6 @@ const processImages = (images: GalleryImage[], galleryPath: string): Image[] => 
 		return acc;
 	}, []);
 };
-
 /**
  * Creates image data for a given image path and entry
  * @param {string} imagePath - Path to the image file
