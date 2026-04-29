@@ -1,154 +1,176 @@
 collections:
-  - id: nature
-    name: Nature
-  - id: travel
-    name: Travel
+  - id: automotive
+    name: Automotive
+  - id: portraits
+    name: Portraits
   - id: street
     name: Street
 images:
-  - path: nature/nature-2.jpg
+  - path: automotive\automotive-1.jpg
     meta:
-      title: Nature scene 2
-      description: Serene natural landscape capturing the essence of wilderness.
-      collections:
-        - nature
-    exif: {}
-  - path: nature/nature-3.jpg
-    meta:
-      title: Nature scene 3
-      description: Breathtaking natural vista showcasing environmental beauty.
-      collections:
-        - featured
-        - nature
-    exif: {}
-  - path: nature/nature-5.jpg
-    meta:
-      title: Nature scene 5
-      description: Natural landscape showing the raw beauty of the environment.
-      collections:
-        - nature
-    exif: {}
-  - path: nature/nature-7.jpg
-    meta:
-      title: Nature scene 7
-      description: Stunning natural landscape capturing environmental beauty.
-      collections:
-        - featured
-        - nature
-    exif: {}
-  - path: nature/nature-8.jpg
-    meta:
-      title: Nature scene 8
-      description: Beautiful natural vista showcasing environmental wonder.
-      collections:
-        - nature
-    exif: {}
-  - path: nature/nature-9.jpg
-    meta:
-      title: Nature scene 9
-      description: Tranquil natural setting showcasing the beauty of the outdoors.
-      collections:
-        - featured
-        - nature
-    exif:
-      captureDate: 2025-03-27T10:35:21.000Z
-      fNumber: 8
-      focalLength: 28
-      iso: 100
-      model: LEICA Q3
-      shutterSpeed: 1250
-      lensModel: SUMMILUX 1:1.7/28 ASPH.
-  - path: nature/nature-10.jpg
-    meta:
-      title: Nature scene 10
-      description: Majestic natural landscape displaying environmental splendor.
-      collections:
-        - nature
-    exif: {}
-  - path: street/street1.jpg
-    meta:
-      title: Street photography 1
-      description: Urban scene capturing the essence of city life.
-      collections:
-        - featured
-        - street
-    exif: {}
-  - path: street/street2.jpg
-    meta:
-      title: Street photography 2 
-      description: Urban scene capturing the essence of city life.
-      collections:
-        - featured
-        - street
-    exif: {}
-  - path: street/street3.jpg
-    meta:
-      title: Street photography 3
-      description: Urban scene capturing the essence of city life.
-      collections:
-        - featured
-        - street
-    exif: {}
-  - path: street/street4.jpg
-    meta:
-      title: Street photography 4
-      description: Urban scene capturing the essence of city life.
-      collections:
-        - featured
-        - street
-    exif: {}
-  - path: street/street5.jpg
-    meta:
-      title: Street photography 5
-      description: Urban scene capturing the essence of city life.
-      collections:
-        - featured
-        - street
-    exif: {}
-  - path: street/street6.jpg
-    meta:
-      title: Street photography 6
-      description: Urban scene capturing the essence of city life.
-      collections:
-        - featured
-        - street
-    exif: {}
-  - path: street/street7.jpg
-    meta:
-      title: Street photography 7
-      description: Urban scene capturing the essence of city life.
-      collections:
-        - featured
-        - street
-    exif: {}
-  - path: street/street8.jpg
-    meta:
-      title: Street photography 8
-      description: Urban scene capturing the essence of city life.
-      collections:
-        - featured
-        - street
-    exif: {}
-  - path: street/street9.jpg
-    meta:
-      title: Street photography 9
-      description: Urban scene capturing the essence of city life.
-      collections:
-        - featured
-        - street
-    exif: {}
-  - path: travel/travel-1.jpg
-    meta:
-      title: Travel scene 1
-      description: Journey through remarkable destinations.
-      collections:
-        - featured
-        - travel
-    exif: {}
-  - path: nature/nature-1.jpg
-    meta:
-      title: Nature 1
+      title: Automotive 1
       description: ''
       collections:
-        - nature
+        - automotive
+    exif: {}
+  - path: automotive\automotive-10.jpg
+    meta:
+      title: Automotive 10
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-11.jpg
+    meta:
+      title: Automotive 11
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-12.jpg
+    meta:
+      title: Automotive 12
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-13.jpg
+    meta:
+      title: Automotive 13
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-14.jpg
+    meta:
+      title: Automotive 14
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-15.jpg
+    meta:
+      title: Automotive 15
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-2.jpg
+    meta:
+      title: Automotive 2
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-3.jpg
+    meta:
+      title: Automotive 3
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-4.jpg
+    meta:
+      title: Automotive 4
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-5.jpg
+    meta:
+      title: Automotive 5
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-6.jpg
+    meta:
+      title: Automotive 6
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-7.jpg
+    meta:
+      title: Automotive 7
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-8.jpg
+    meta:
+      title: Automotive 8
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-9.jpg
+    meta:
+      title: Automotive 9
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: street\street1.jpg
+    meta:
+      title: Street1
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street2.jpg
+    meta:
+      title: Street2
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street3.jpg
+    meta:
+      title: Street3
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street4.jpg
+    meta:
+      title: Street4
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street5.jpg
+    meta:
+      title: Street5
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street6.jpg
+    meta:
+      title: Street6
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street7.jpg
+    meta:
+      title: Street7
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street8.jpg
+    meta:
+      title: Street8
+      description: ''
+      collections:
+        - street
+    exif: {}
+  - path: street\street9.jpg
+    meta:
+      title: Street9
+      description: ''
+      collections:
+        - street
     exif: {}
