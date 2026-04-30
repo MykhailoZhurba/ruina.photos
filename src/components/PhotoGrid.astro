@@ -13,13 +13,13 @@ const { images } = Astro.props;
 ---
 
 <section id="photo-grid" class="container-custom py-12">
-    <div class="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
 		{
 			images.map((image) => (
 				<div class="break-inside-avoid">
 					<a
 						href={image.src.src}
-						class="glightbox block transition-transform duration-500 hover:scale-[1.02]"
+						class="glightbox block transition-transform duration-500 hover:scale-[1.05]"
 						data-gallery="gallery"
 						data-glightbox={image.description ? `title: ${image.description}` : undefined}
 					>
