@@ -404,3 +404,40 @@ images:
         - automotive
         - featured
     exif: {}
+  - path: portraits\portraits-13.jpg
+    meta:
+      title: Portraits 13
+      description: ''
+      collections:
+        - portraits
+        - featured
+    exif: {}
+  - path: portraits\portraits-14.jpg
+    meta:
+      title: Portraits 14
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: portraits\portraits-15.jpg
+    meta:
+      title: Portraits 15
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: portraits\portraits-16.jpg
+    meta:
+      title: Portraits 16
+      description: ''
+      collections:
+        - portraits
+        - featured 
+    exif: {}
+  - path: portraits\portraits-17.jpg
+    meta:
+      title: Portraits 17
+      description: ''
+      collections:
+        - portraits
+    exif: {}
