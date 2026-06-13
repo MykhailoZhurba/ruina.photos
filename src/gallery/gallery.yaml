@@ -12,7 +12,6 @@ images:
       description: ''
       collections:
         - automotive
-      
     exif: {}
   - path: automotive\automotive-10.jpg
     meta:
@@ -34,6 +33,7 @@ images:
       description: ''
       collections:
         - automotive
+        - featured
     exif: {}
   - path: automotive\automotive-13.jpg
     meta:
@@ -284,4 +284,123 @@ images:
       collections:
         - featured
         - street
+    exif: {}
+  - path: automotive\automotive-16.jpg
+    meta:
+      title: Automotive 16
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-17.jpg
+    meta:
+      title: Automotive 17
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-18.jpg
+    meta:
+      title: Automotive 18
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-19.jpg
+    meta:
+      title: Automotive 19
+      description: ''
+      collections:
+        - automotive
+        - featured
+    exif: {}
+  - path: automotive\automotive-20.jpg
+    meta:
+      title: Automotive 20
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-21.jpg
+    meta:
+      title: Automotive 21
+      description: ''
+      collections:
+        - automotive
+        - featured
+    exif: {}
+  - path: automotive\automotive-22.jpg
+    meta:
+      title: Automotive 22
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-23.jpg
+    meta:
+      title: Automotive 23
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-24.jpg
+    meta:
+      title: Automotive 24
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-25.jpg
+    meta:
+      title: Automotive 25
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-26.jpg
+    meta:
+      title: Automotive 26
+      description: ''
+      collections:
+        - featured
+        - automotive
+    exif: {}
+  - path: automotive\automotive-27.jpg
+    meta:
+      title: Automotive 27
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-28.jpg
+    meta:
+      title: Automotive 28
+      description: ''
+      collections:
+        - automotive
+        - featured
+    exif: {}
+  - path: automotive\automotive-29.jpg
+    meta:
+      title: Automotive 29
+      description: ''
+      collections:
+        - automotive
+        - featured
+    exif: {}
+  - path: automotive\automotive-30.jpg
+    meta:
+      title: Automotive 30
+      description: ''
+      collections:
+        - automotive
+        - featured
+    exif: {}
+  - path: automotive\automotive-31.jpg
+    meta:
+      title: Automotive 31
+      description: ''
+      collections:
+        - automotive
+        - featured
     exif: {}
