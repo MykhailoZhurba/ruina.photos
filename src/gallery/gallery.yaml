@@ -11,8 +11,6 @@ collections:
   - id: aviation
     name: Aviation
     enabled: true
-  - id: aviaton
-    name: Aviaton
 images:
   - path: automotive\automotive-1.jpg
     meta:
@@ -561,248 +559,248 @@ images:
       collections:
         - automotive
     exif: {}
-  - path: aviaton\aviation-1.jpg
+  - path: aviation\aviation-1.jpg
     meta:
       title: Aviation 1
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-10.jpg
+  - path: aviation\aviation-10.jpg
     meta:
       title: Aviation 10
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-11.jpg
+  - path: aviation\aviation-11.jpg
     meta:
       title: Aviation 11
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-12.jpg
+  - path: aviation\aviation-12.jpg
     meta:
       title: Aviation 12
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-13.jpg
+  - path: aviation\aviation-13.jpg
     meta:
       title: Aviation 13
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-14.jpg
+  - path: aviation\aviation-14.jpg
     meta:
       title: Aviation 14
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-15.jpg
+  - path: aviation\aviation-15.jpg
     meta:
       title: Aviation 15
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-16.jpg
+  - path: aviation\aviation-16.jpg
     meta:
       title: Aviation 16
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-17.jpg
+  - path: aviation\aviation-17.jpg
     meta:
       title: Aviation 17
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-18.jpg
+  - path: aviation\aviation-18.jpg
     meta:
       title: Aviation 18
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-19.jpg
+  - path: aviation\aviation-19.jpg
     meta:
       title: Aviation 19
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-2.jpg
+  - path: aviation\aviation-2.jpg
     meta:
       title: Aviation 2
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-20.jpg
+  - path: aviation\aviation-20.jpg
     meta:
       title: Aviation 20
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-21.jpg
+  - path: aviation\aviation-21.jpg
     meta:
       title: Aviation 21
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-22.jpg
+  - path: aviation\aviation-22.jpg
     meta:
       title: Aviation 22
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-23.jpg
+  - path: aviation\aviation-23.jpg
     meta:
       title: Aviation 23
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-24.jpg
+  - path: aviation\aviation-24.jpg
     meta:
       title: Aviation 24
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-25.jpg
+  - path: aviation\aviation-25.jpg
     meta:
       title: Aviation 25
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-26.jpg
+  - path: aviation\aviation-26.jpg
     meta:
       title: Aviation 26
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-27.jpg
+  - path: aviation\aviation-27.jpg
     meta:
       title: Aviation 27
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-28.jpg
+  - path: aviation\aviation-28.jpg
     meta:
       title: Aviation 28
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-29.jpg
+  - path: aviation\aviation-29.jpg
     meta:
       title: Aviation 29
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-3.jpg
+  - path: aviation\aviation-3.jpg
     meta:
       title: Aviation 3
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-30.jpg
+  - path: aviation\aviation-30.jpg
     meta:
       title: Aviation 30
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-31.jpg
+  - path: aviation\aviation-31.jpg
     meta:
       title: Aviation 31
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-32.jpg
+  - path: aviation\aviation-32.jpg
     meta:
       title: Aviation 32
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-33.jpg
+  - path: aviation\aviation-33.jpg
     meta:
       title: Aviation 33
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-34.jpg
+  - path: aviation\aviation-34.jpg
     meta:
       title: Aviation 34
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-35.jpg
+  - path: aviation\aviation-35.jpg
     meta:
       title: Aviation 35
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-4.jpg
+  - path: aviation\aviation-4.jpg
     meta:
       title: Aviation 4
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-5.jpg
+  - path: aviation\aviation-5.jpg
     meta:
       title: Aviation 5
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-6.jpg
+  - path: aviation\aviation-6.jpg
     meta:
       title: Aviation 6
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-7.jpg
+  - path: aviation\aviation-7.jpg
     meta:
       title: Aviation 7
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-8.jpg
+  - path: aviation\aviation-8.jpg
     meta:
       title: Aviation 8
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
-  - path: aviaton\aviation-9.jpg
+  - path: aviation\aviation-9.jpg
     meta:
       title: Aviation 9
       description: ''
       collections:
-        - aviaton
+        - aviation
     exif: {}
