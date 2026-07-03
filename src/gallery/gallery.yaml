@@ -5,12 +5,12 @@ collections:
 
   - id: portraits
     name: Portraits
-    enabled: true
+    enabled: false
 
   - id: street
     name: Street
     enabled: true
-    
+
 images:
   - path: automotive\automotive-1.jpg
     meta:
