@@ -20,6 +20,7 @@ export interface GalleryData {
 export interface Collection {
 	id: string;
 	name: string;
+	enabled?: boolean;
 }
 
 /**

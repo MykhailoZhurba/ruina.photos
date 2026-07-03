@@ -56,8 +56,14 @@ interface GetImagesOptions {
 export const getImages = async (options: GetImagesOptions = {}): Promise<Image[]> => {
 	const { galleryPath = defaultGalleryPath, collection } = options;
 	try {
-		let images = (await loadGalleryData(galleryPath)).images;
-		images = filterImagesByCollection(collection, images);
+		const gallery = await loadGalleryData(galleryPath);
+		const enabledCollectionIds = getEnabledCollectionIds(gallery);
+
+		let images = gallery.images.filter((image) =>
+			imageBelongsToEnabledCollection(image, enabledCollectionIds),
+		);
+
+		images = filterImagesByCollection(collection, images);	
 		images = sortImages(images, options);
 		return processImages(images, galleryPath);
 	} catch (error) {
@@ -173,5 +179,21 @@ const createImageDataFor = (imagePath: string, img: GalleryImage): Image => {
 export const getCollections = async (
 	galleryPath: string = defaultGalleryPath,
 ): Promise<Collection[]> => {
-	return (await loadGalleryData(galleryPath)).collections;
+	return (await loadGalleryData(galleryPath)).collections.filter(isCollectionEnabled);
 };
+
+function isCollectionEnabled(collection: Collection): boolean {
+	return collection.enabled !== false;
+}
+
+function getEnabledCollectionIds(gallery: GalleryData): Set<string> {
+	return new Set(gallery.collections.filter(isCollectionEnabled).map((collection) => collection.id));
+}
+
+function imageBelongsToEnabledCollection(image: GalleryImage, enabledCollectionIds: Set<string>): boolean {
+	const regularCollections = image.meta.collections.filter(
+		(collection) => !builtInCollections.includes(collection),
+	);
+
+	return regularCollections.some((collection) => enabledCollectionIds.has(collection));
+}
