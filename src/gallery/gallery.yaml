@@ -2,15 +2,15 @@ collections:
   - id: automotive
     name: Automotive
     enabled: true
-
   - id: portraits
     name: Portraits
     enabled: false
-
   - id: street
     name: Street
     enabled: true
-
+  - id: aviation
+    name: Aviation
+    enabled: true
 images:
   - path: automotive\automotive-1.jpg
     meta:
@@ -438,7 +438,7 @@ images:
       description: ''
       collections:
         - portraits
-        - featured 
+        - featured
     exif: {}
   - path: portraits\portraits-17.jpg
     meta:
