@@ -4,7 +4,7 @@ collections:
     enabled: true
   - id: portraits
     name: Portraits
-    enabled: true
+    enabled: false
   - id: street
     name: Street
     enabled: true
