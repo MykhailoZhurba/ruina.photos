@@ -804,3 +804,71 @@ images:
       collections:
         - aviation
     exif: {}
+  - path: automotive\automotive-48.jpg
+    meta:
+      title: Automotive 48
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-49.jpg
+    meta:
+      title: Automotive 49
+      description: ''
+      collections:
+        - automotive
+        - featured
+
+    exif: {}
+  - path: automotive\automotive-50.jpg
+    meta:
+      title: Automotive 50
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-51.jpg
+    meta:
+      title: Automotive 51
+      description: ''
+      collections:
+        - automotive
+        - featured
+
+    exif: {}
+  - path: automotive\automotive-52.jpg
+    meta:
+      title: Automotive 52
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-53.jpg
+    meta:
+      title: Automotive 53
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-54.jpg
+    meta:
+      title: Automotive 54
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-55.jpg
+    meta:
+      title: Automotive 55
+      description: ''
+      collections:
+        - automotive
+    exif: {}
+  - path: automotive\automotive-56.jpg
+    meta:
+      title: Automotive 56
+      description: ''
+      collections:
+        - automotive
+        - featured
+    exif: {}
