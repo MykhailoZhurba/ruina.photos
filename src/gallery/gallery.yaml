@@ -4,7 +4,7 @@ collections:
     enabled: true
   - id: portraits
     name: Portraits
-    enabled: false
+    enabled: true
   - id: street
     name: Street
     enabled: true
@@ -871,5 +871,211 @@ images:
       collections:
         - automotive
         - featured
-        
+    exif: {}
+  - path: aviation\aviation-36.jpg
+    meta:
+      title: Aviation 36
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: aviation\aviation-37.jpg
+    meta:
+      title: Aviation 37
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: aviation\aviation-38.jpg
+    meta:
+      title: Aviation 38
+      description: ''
+      collections:
+        - aviation
+        - featured
+    exif: {}
+  - path: aviation\aviation-39.jpg
+    meta:
+      title: Aviation 39
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: aviation\aviation-40.jpg
+    meta:
+      title: Aviation 40
+      description: ''
+      collections:
+        - aviation
+        - featured
+    exif: {}
+  - path: aviation\aviation-41.jpg
+    meta:
+      title: Aviation 41
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: aviation\aviation-42.jpg
+    meta:
+      title: Aviation 42
+      description: ''
+      collections:
+        - aviation
+        - featured
+    exif: {}
+  - path: aviation\aviation-43.jpg
+    meta:
+      title: Aviation 43
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: aviation\aviation-44.jpg
+    meta:
+      title: Aviation 44
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: aviation\aviation-45.jpg
+    meta:
+      title: Aviation 45
+      description: ''
+      collections:
+        - aviation
+        - featured
+    exif: {}
+  - path: aviation\aviation-46.jpg
+    meta:
+      title: Aviation 46
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: aviation\aviation-47.jpg
+    meta:
+      title: Aviation 47
+      description: ''
+      collections:
+        - aviation
+        - featured
+    exif: {}
+  - path: aviation\aviation-48.jpg
+    meta:
+      title: Aviation 48
+      description: ''
+      collections:
+        - aviation
+        - featured
+    exif: {}
+  - path: aviation\aviation-49.jpg
+    meta:
+      title: Aviation 49
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: aviation\aviation-50.jpg
+    meta:
+      title: Aviation 50
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: aviation\aviation-51.jpg
+    meta:
+      title: Aviation 51
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: aviation\aviation-52.jpg
+    meta:
+      title: Aviation 52
+      description: ''
+      collections:
+        - aviation
+        - featured
+    exif: {}
+  - path: aviation\aviation-53.jpg
+    meta:
+      title: Aviation 53
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: aviation\aviation-54.jpg
+    meta:
+      title: Aviation 54
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: aviation\aviation-55.jpg
+    meta:
+      title: Aviation 55
+      description: ''
+      collections:
+        - aviation
+        - featured
+    exif: {}
+  - path: aviation\aviation-56.jpg
+    meta:
+      title: Aviation 56
+      description: ''
+      collections:
+        - aviation
+    exif: {}
+  - path: portraits\portraits-18.jpg
+    meta:
+      title: Portraits 18
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: portraits\portraits-19.jpg
+    meta:
+      title: Portraits 19
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: portraits\portraits-20.jpg
+    meta:
+      title: Portraits 20
+      description: ''
+      collections:
+        - portraits
+        - featured
+    exif: {}
+  - path: portraits\portraits-21.jpg
+    meta:
+      title: Portraits 21
+      description: ''
+      collections:
+        - portraits
+    exif: {}
+  - path: portraits\portraits-22.jpg
+    meta:
+      title: Portraits 22
+      description: ''
+      collections:
+        - portraits
+        - featured
+    exif: {}
+  - path: street\street-12.jpg
+    meta:
+      title: Street 12
+      description: ''
+      collections:
+        - street
+        - featured
+    exif: {}
+  - path: street\street-13.jpg
+    meta:
+      title: Street 13
+      description: ''
+      collections:
+        - street
     exif: {}
