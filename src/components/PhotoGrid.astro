@@ -1,8 +1,7 @@
 ---
 /* src/components/PhotoGrid.astro */
-import 'glightbox/dist/css/glightbox.css';
-import '../styles/glightbox-custom.css';
-import { Image } from 'astro:assets';
+import 'photoswipe/style.css';
+import { Image, getImage } from 'astro:assets';
 import type { Image as ImageType } from '../data/galleryData';
 import { featuredCollectionId } from '../data/imageStore';
 import siteConfig from '../../site.config.mjs';
@@ -12,6 +11,28 @@ interface Props {
 }
 
 const { images } = Astro.props;
+
+// The photo viewer shows a resized copy (long edge 2560px) instead of the multi-megabyte original,
+// so photos open and zoom quickly, including on phones. Small originals are never enlarged.
+const VIEWER_MAX_EDGE = 2560;
+
+const viewerImage = async (image: ImageType) => {
+	const { width, height } = image.src;
+	const isLandscape = width >= height;
+	const viewer = await getImage({
+		src: image.src,
+		format: 'webp',
+		quality: 82,
+		...(isLandscape
+			? { width: Math.min(width, VIEWER_MAX_EDGE) }
+			: { height: Math.min(height, VIEWER_MAX_EDGE) }),
+	});
+	return {
+		src: viewer.src,
+		width: Number(viewer.attributes.width),
+		height: Number(viewer.attributes.height),
+	};
+};
 
 /**
  * Alt text: use the photo's own description from gallery.yaml when there is one (best for
@@ -27,28 +48,38 @@ const altFor = (image: ImageType): string => {
 };
 ---
 
-<section id="photo-grid" class="container-custom py-12">
-    <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+<!--
+	The grid spans the page. Side margins scale with the screen (16px on a phone, up to 80px on a
+	large monitor) and the grid stops growing at 2800px so it never becomes absurdly wide.
+	`columns-[18rem]` means "columns at least 18rem (288px) wide": the browser fits as many as it
+	can, so bigger screens automatically get more columns and photos stay a similar size.
+-->
+<section id="photo-grid" class="mx-auto w-full max-w-[2800px] px-[clamp(1rem,4vw,5rem)] py-12">
+	<div class="columns-[18rem] gap-6 space-y-6">
 		{
-			images.map((image) => (
-				<div class="break-inside-avoid">
-					<a
-						href={image.src.src}
-						class="glightbox block transition-transform duration-500 hover:scale-[1.05]"
-						data-gallery="gallery"
-						data-glightbox={image.description ? `title: ${image.description}` : undefined}
-					>
-						<Image
-							src={image.src}
-							quality={85}
-							format="webp"
-							width={800}
-							class="shadow-2xl rounded-sm"
-							alt={altFor(image)}
-						/>
-					</a>
-				</div>
-			))
+			images.map(async (image) => {
+				const viewer = await viewerImage(image);
+				return (
+					<div class="break-inside-avoid">
+						<a
+							href={viewer.src}
+							class="pswp-item block transition-transform duration-500 hover:scale-[1.05]"
+							data-pswp-width={viewer.width}
+							data-pswp-height={viewer.height}
+							data-caption={image.description?.trim() || undefined}
+						>
+							<Image
+								src={image.src}
+								quality={85}
+								format="webp"
+								width={800}
+								class="shadow-2xl rounded-sm"
+								alt={altFor(image)}
+							/>
+						</a>
+					</div>
+				);
+			})
 		}
 	</div>
 </section>
@@ -56,3 +87,20 @@ const altFor = (image: ImageType): string => {
 <script>
 	import '../scripts/photo-grid';
 </script>
+
+<style is:global>
+	/* Caption shown under a photo in the viewer (only when the photo has a description). */
+	.pswp__custom-caption {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 2.5rem 1rem 1rem;
+		text-align: center;
+		font-family: 'Inter', sans-serif;
+		font-size: 0.9rem;
+		color: #fff;
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+		pointer-events: none;
+	}
+</style>
