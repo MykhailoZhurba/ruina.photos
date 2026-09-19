@@ -818,7 +818,6 @@ images:
       collections:
         - automotive
         - featured
-
     exif: {}
   - path: automotive\automotive-50.jpg
     meta:
@@ -834,7 +833,6 @@ images:
       collections:
         - automotive
         - featured
-
     exif: {}
   - path: automotive\automotive-52.jpg
     meta:
@@ -1014,7 +1012,7 @@ images:
     exif: {}
   - path: aviation\aviation-55.jpg
     meta:
-      title: Aviation 55  
+      title: Aviation 55
       description: ''
       collections:
         - aviation
@@ -1079,3 +1077,27 @@ images:
       collections:
         - street
     exif: {}
+  - path: street\street-14.jpg
+    meta:
+      title: Street 14
+      description: ''
+      collections:
+        - street
+    exif:
+      shutterSpeed: .nan
+  - path: street\street-15.jpg
+    meta:
+      title: Street 15
+      description: ''
+      collections:
+        - street
+    exif:
+      shutterSpeed: .nan
+  - path: street\street-16.jpg
+    meta:
+      title: Street 16
+      description: ''
+      collections:
+        - street
+    exif:
+      shutterSpeed: .nan
