@@ -4,12 +4,27 @@ import 'glightbox/dist/css/glightbox.css';
 import '../styles/glightbox-custom.css';
 import { Image } from 'astro:assets';
 import type { Image as ImageType } from '../data/galleryData';
+import { featuredCollectionId } from '../data/imageStore';
+import siteConfig from '../../site.config.mjs';
 
 interface Props {
 	images: ImageType[];
 }
 
 const { images } = Astro.props;
+
+/**
+ * Alt text: use the photo's own description from gallery.yaml when there is one (best for
+ * Google Images), otherwise fall back to a plain description of the category.
+ */
+const altFor = (image: ImageType): string => {
+	if (image.description?.trim()) return image.description.trim();
+	const categoryId = image.collections.find((id) => id !== featuredCollectionId);
+	const label =
+		(categoryId && siteConfig.seo.categoryLabels[categoryId]) || 'Photography';
+	const number = image.title.match(/(\d+)\s*$/)?.[1];
+	return `${label} by ${siteConfig.title}${number ? `, image ${number}` : ''}`;
+};
 ---
 
 <section id="photo-grid" class="container-custom py-12">
@@ -29,7 +44,7 @@ const { images } = Astro.props;
 							format="webp"
 							width={800}
 							class="shadow-2xl rounded-sm"
-							alt={image.title}
+							alt={altFor(image)}
 						/>
 					</a>
 				</div>

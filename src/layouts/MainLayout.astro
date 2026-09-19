@@ -1,27 +1,66 @@
 ---
 import '../styles/global.css';
+// Fonts are bundled with the site (no requests to Google Fonts, so visitors' IP addresses stay private).
+import '@fontsource/inter/300.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/playfair-display/400.css';
+import '@fontsource/playfair-display/500.css';
+import '@fontsource/playfair-display/600.css';
+import '@fontsource/playfair-display/700.css';
+import '@fontsource/dancing-script/400.css';
+import '@fontsource/dancing-script/500.css';
+import '@fontsource/dancing-script/600.css';
+import '@fontsource/dancing-script/700.css';
+import type { ImageMetadata } from 'astro';
 import siteConfig from '../../site.config.mjs';
 import Footer from '../components/Footer.astro';
 import NavBar from '../components/NavBar.astro';
+import SEO from '../components/SEO.astro';
+import { featuredCollectionId, getImages } from '../data/imageStore';
 
-const owner = siteConfig.owner;
+interface Props {
+	title?: string;
+	description?: string;
+	/** Picture for link previews. Defaults to a landscape photo from the featured collection. */
+	image?: ImageMetadata;
+	imageAlt?: string;
+	noindex?: boolean;
+	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+	title = siteConfig.seo.home.title,
+	description = siteConfig.seo.home.description,
+	image,
+	imageAlt,
+	noindex,
+	jsonLd,
+} = Astro.props;
+
 const favicon = siteConfig.favicon;
 const base = import.meta.env.BASE_URL;
 const safeBase = base.endsWith('/') ? base.slice(0, -1) : base;
+
+const featured = await getImages({ collection: featuredCollectionId });
+const defaultImage = (featured.find((img) => img.src.width > img.src.height) ?? featured[0])?.src;
 ---
+
 <html lang="en" class="h-full">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/x-icon" href={`${safeBase}/${favicon}`} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
-			rel="stylesheet"
-		/>
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/png" href={`${safeBase}/${favicon}`} />
 		<meta name="generator" content={Astro.generator} />
-		<title>{owner}</title>
+		<SEO
+			title={title}
+			description={description}
+			image={image ?? defaultImage}
+			imageAlt={imageAlt}
+			noindex={noindex}
+			jsonLd={jsonLd}
+		/>
 	</head>
 	<body>
 		<NavBar />
@@ -29,7 +68,19 @@ const safeBase = base.endsWith('/') ? base.slice(0, -1) : base;
 			<slot />
 		</main>
 		<Footer />
+
+		<script>
+			// Alpine.js (drives the mobile menu) is bundled instead of loaded from a third-party CDN.
+			import Alpine from 'alpinejs';
+
+			declare global {
+				interface Window {
+					Alpine: typeof Alpine;
+				}
+			}
+
+			window.Alpine = Alpine;
+			Alpine.start();
+		</script>
 	</body>
 </html>
-
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>

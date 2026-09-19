@@ -1,0 +1,84 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import siteConfig from '../../site.config.mjs';
+
+const { privacy, contactEmail } = siteConfig.seo;
+const instagram = siteConfig.socialLinks.find((link) => link.name === 'Instagram');
+const facebook = siteConfig.socialLinks.find((link) => link.name === 'Facebook');
+---
+
+<MainLayout title={privacy.title} description={privacy.description}>
+	<section class="pt-32 pb-20">
+		<div class="container-custom">
+			<div class="max-w-2xl mx-auto">
+				<h1 class="text-4xl md:text-5xl font-bold mb-10 text-center">Privacy</h1>
+
+				<div class="prose text-gray-700">
+					<p>
+						This website is the photography portfolio of {siteConfig.owner} (Ruina Photos). This page
+						explains, in plain language, what happens to your data when you visit it.
+					</p>
+
+					<h2>What this website collects</h2>
+					<p>
+						Nothing that identifies you. The site does not use cookies, analytics, advertising or
+						tracking tools, and it has no forms, accounts or comments. Fonts and scripts are served
+						from the site itself, so your browser does not contact other companies just to display
+						it.
+					</p>
+
+					<h2>Hosting</h2>
+					<p>
+						Like any website, the web host that serves these pages may keep technical server logs,
+						such as your IP address, the page you requested and the time. This is handled by the
+						hosting provider under its own privacy policy, and I do not receive or use this
+						information.
+					</p>
+
+					<h2>Links to other sites</h2>
+					<p>
+						The Instagram and Facebook icons are ordinary links. Those services only receive
+						information about you if you choose to click them, and their own privacy policies then
+						apply.
+					</p>
+
+					<h2>Photos of people</h2>
+					<p>
+						If you appear in a photo on this site and would like it removed, message me and I will
+						take care of it. All photographs are © {siteConfig.owner}; please ask before using
+						them.
+					</p>
+
+					<h2>Contact</h2>
+					<p>
+						Message me on
+						{
+							instagram && (
+								<a href={instagram.url} rel="noopener">
+									Instagram
+								</a>
+							)
+						}
+						or
+						{
+							facebook && (
+								<a href={facebook.url} rel="noopener">
+									Facebook
+								</a>
+							)
+						}
+						{
+							contactEmail && (
+								<>
+									, or email <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+								</>
+							)
+						}.
+					</p>
+
+					<p class="text-sm text-gray-500">Last updated: September 2026</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</MainLayout>

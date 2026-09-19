@@ -4,6 +4,8 @@ import SocialIcon from './SocialIcon.astro';
 
 const year = new Date().getFullYear();
 const owner = siteConfig.owner;
+const base = import.meta.env.BASE_URL;
+const safeBase = base.endsWith('/') ? base.slice(0, -1) : base;
 const socialLinks = siteConfig.socialLinks;
 ---
 
@@ -13,6 +15,7 @@ const socialLinks = siteConfig.socialLinks;
 			<div class="text-sm font-sans text-gray-500 mb-4 md:mb-0">
 				© {year}
 				{owner}. All rights reserved.
+				<a href={`${safeBase}/privacy/`} class="ml-2 underline hover:text-gray-800">Privacy</a>
 			</div>
 
 			<div class="flex space-x-6">

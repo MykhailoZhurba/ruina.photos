@@ -1014,7 +1014,7 @@ images:
     exif: {}
   - path: aviation\aviation-55.jpg
     meta:
-      title: Aviation 55
+      title: Aviation 55  
       description: ''
       collections:
         - aviation
