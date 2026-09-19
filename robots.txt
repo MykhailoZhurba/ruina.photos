@@ -1,0 +1,5 @@
+# Everything on this site is meant to be found by search engines.
+User-agent: *
+Allow: /
+
+Sitemap: https://ruina.photos/sitemap-index.xml
