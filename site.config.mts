@@ -90,10 +90,10 @@ const seo: SiteSeo = {
 		aviation: {
 			title: 'Aviation & Airshow Photography | Ruina Photos',
 			description:
-				'Aviation photography by Mykhailo Zhurba: fighter jets and aerobatic displays at airshows. Aerial photography also available for paid projects.',
+				'Aviation photography by Mykhailo Zhurba: fighter jets and aerobatic displays at airshows.',
 			heading: 'Aviation Photography',
 			intro:
-				'Jets and aircraft photographed at airshows. Aerial photography is also available for paid projects.',
+				'Jets and aircraft photographed at airshows.',
 		},
 	},
 
