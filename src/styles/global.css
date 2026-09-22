@@ -3,6 +3,12 @@
 
 @config "../../tailwind.config";
 
+/* Alpine has not initialised yet: keep x-show elements hidden to avoid a flash
+   of the booking modal on first paint. */
+[x-cloak] {
+	display: none !important;
+}
+
 @layer base {
 	:root {
 		--background: 0 0% 100%;
@@ -48,10 +54,10 @@
 
 @layer components {
 	@layer components {
-	.container-custom {
-		@apply max-w-[1200px] mx-auto px-4;
+		.container-custom {
+			@apply max-w-[1200px] mx-auto px-4;
+		}
 	}
-}
 
 	/* Optional: Make the background behind the square slightly darker to pop the white outline */
 	#photo-grid {
@@ -69,5 +75,4 @@
 	.nav-link:hover::after {
 		@apply w-full;
 	}
-	
 }

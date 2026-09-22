@@ -17,6 +17,7 @@ import type { ImageMetadata } from 'astro';
 import siteConfig from '../../site.config.mjs';
 import Footer from '../components/Footer.astro';
 import NavBar from '../components/NavBar.astro';
+import BookingModal from '../components/BookingModal.astro';
 import SEO from '../components/SEO.astro';
 import { featuredCollectionId, getImages } from '../data/imageStore';
 
@@ -68,6 +69,7 @@ const defaultImage = (featured.find((img) => img.src.width > img.src.height) ?? 
 			<slot />
 		</main>
 		<Footer />
+		<BookingModal />
 
 		<script>
 			// Alpine.js (drives the mobile menu) is bundled instead of loaded from a third-party CDN.

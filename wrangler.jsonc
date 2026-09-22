@@ -1,0 +1,44 @@
+// LOCAL DEVELOPMENT ONLY.
+//
+// Production runs on the Cloudflare Pages project "ruina-photos", and Pages
+// ignores this file: it has no "pages_build_output_dir", and Pages says so in
+// its build log. The production D1 binding, variables and secrets live in the
+// Pages dashboard (Settings > Bindings / Variables and secrets). Changing a
+// value here does NOT change production. See docs/BOOKING_SYSTEM.md, 2.1.
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "ruina-photos",
+	"compatibility_date": "2026-09-22",
+	"compatibility_flags": ["nodejs_compat"],
+
+	// Built by `npm run build` via @astrojs/cloudflare. Handles only the routes
+	// that opt out of prerendering (/api/*, /admin); everything else is a static
+	// asset served straight from the edge.
+	"main": "./dist/_worker.js/index.js",
+
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS",
+	},
+
+	"observability": { "enabled": true },
+	"upload_source_maps": true,
+
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "ruina-bookings",
+			"database_id": "488573ac-6cfc-4b96-ad9a-6c3420f93ef0",
+		},
+	],
+
+	// Mirrors the production Text variables for `npm run dev`. Local secrets go in
+	// .dev.vars (gitignored); production secrets are set in the Pages dashboard.
+	"vars": {
+		"OWNER_EMAIL": "vitoruina@gmail.com",
+		"FROM_EMAIL": "bookings@ruina.photos",
+		"FROM_NAME": "Ruina Photos",
+		"GOOGLE_CALENDAR_ID": "primary",
+		"SITE_URL": "https://ruina.photos",
+	},
+}

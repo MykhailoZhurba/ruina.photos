@@ -2,6 +2,8 @@
 const { socialLink } = Astro.props;
 
 const Icon = socialLink.icon;
+// Two entries share the Instagram glyph, so prefer the descriptive label.
+const accessibleName = socialLink.label ?? socialLink.name;
 ---
 
 <a
@@ -9,7 +11,8 @@ const Icon = socialLink.icon;
 	target="_blank"
 	rel="noopener noreferrer"
 	class="text-gray-500 hover:text-gray-800 transition-colors duration-200"
-	aria-label={socialLink.name}
+	aria-label={accessibleName}
+	title={accessibleName}
 >
 	<Icon size={20} />
 </a>

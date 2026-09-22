@@ -63,7 +63,7 @@ export const getImages = async (options: GetImagesOptions = {}): Promise<Image[]
 			imageBelongsToEnabledCollection(image, enabledCollectionIds),
 		);
 
-		images = filterImagesByCollection(collection, images);	
+		images = filterImagesByCollection(collection, images);
 		images = sortImages(images, options);
 		return processImages(images, galleryPath);
 	} catch (error) {
@@ -138,8 +138,8 @@ function sortImages(images: GalleryImage[], options: GetImagesOptions) {
  */
 const processImages = (images: GalleryImage[], galleryPath: string): Image[] => {
 	return images.reduce<Image[]>((acc, imageEntry) => {
-        // Normalize entry path to ensure no backslashes exist
-        const normalizedEntryPath = imageEntry.path.replace(/\\/g, '/');
+		// Normalize entry path to ensure no backslashes exist
+		const normalizedEntryPath = imageEntry.path.replace(/\\/g, '/');
 		const imagePath = path.posix.join('/', path.parse(galleryPath).dir, normalizedEntryPath);
 		try {
 			acc.push(createImageDataFor(imagePath, imageEntry));
@@ -187,10 +187,15 @@ function isCollectionEnabled(collection: Collection): boolean {
 }
 
 function getEnabledCollectionIds(gallery: GalleryData): Set<string> {
-	return new Set(gallery.collections.filter(isCollectionEnabled).map((collection) => collection.id));
+	return new Set(
+		gallery.collections.filter(isCollectionEnabled).map((collection) => collection.id),
+	);
 }
 
-function imageBelongsToEnabledCollection(image: GalleryImage, enabledCollectionIds: Set<string>): boolean {
+function imageBelongsToEnabledCollection(
+	image: GalleryImage,
+	enabledCollectionIds: Set<string>,
+): boolean {
 	const regularCollections = image.meta.collections.filter(
 		(collection) => !builtInCollections.includes(collection),
 	);
