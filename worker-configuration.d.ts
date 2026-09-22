@@ -6,7 +6,7 @@ interface __BaseEnv_Env {
 	ASSETS: Fetcher;
 	OWNER_EMAIL: "vitoruina@gmail.com";
 	FROM_EMAIL: "bookings@ruina.photos";
-	FROM_NAME: "ruina.photos";
+	FROM_NAME: "Ruina Photos";
 	GOOGLE_CALENDAR_ID: "primary";
 	SITE_URL: "https://ruina.photos";
 }

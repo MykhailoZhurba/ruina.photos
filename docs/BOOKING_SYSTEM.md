@@ -24,10 +24,11 @@ deploy it.
 | Admin dashboard                   | `src/pages/admin/index.astro`, `src/layouts/AdminLayout.astro`                      |
 | Admin APIs                        | `src/pages/api/admin/leads.ts`, `calendar.ts`                                       |
 | Schema                            | `migrations/0001_init.sql`                                                          |
-| Worker + bindings                 | `wrangler.jsonc`                                                                    |
+| Local-dev bindings and vars       | `wrangler.jsonc` (ignored by Pages; see 2.1)                                        |
 
-The gallery, About and collections pages are still prerendered static HTML. Only
-`/admin` and `/api/*` run on the Worker, via `export const prerender = false`.
+The gallery, About, privacy and collections pages are prerendered static HTML.
+Only `/admin` and `/api/*` run server-side, as Pages Functions, via
+`export const prerender = false`.
 
 ### Request flow
 
@@ -53,37 +54,58 @@ loses an enquiry. Failures are recorded on the row (`email_status`,
 
 ### 2.1 Cloudflare
 
-```bash
-npx wrangler login
-```
+Production runs on the Cloudflare **Pages** project `ruina-photos`. It builds
+every push to `main` (`npm run build` → `dist`) and serves `ruina.photos`, whose
+DNS is already on Cloudflare.
 
-```bash
-npx wrangler d1 create ruina-bookings
-```
+> **Pages ignores `wrangler.jsonc`.** The file has no `pages_build_output_dir`,
+> so Pages skips it and says so in the build log. Everything production needs —
+> the D1 binding, the variables and the secrets — is set in the **Pages
+> dashboard**. `wrangler.jsonc` only drives local development.
 
-Copy the printed `database_id` into `wrangler.jsonc`, replacing
-`PLACEHOLDER_RUN_WRANGLER_D1_CREATE`.
+1. Create the database (once):
 
-Apply the schema to both the local and the remote database:
+   ```bash
+   npx wrangler login
+   ```
 
-```bash
-npm run db:migrate:local
-```
+   ```bash
+   npx wrangler d1 create ruina-bookings
+   ```
 
-```bash
-npm run db:migrate:remote
-```
+   Put the printed `database_id` in `wrangler.jsonc` for local development.
+
+2. Bind it to production: Pages → `ruina-photos` → Settings → **Bindings** →
+   Add → D1 database. The variable name must be **`DB`** exactly, because the
+   code reads `env.DB`. Naming it after the database (`ruina-bookings`) leaves
+   `env.DB` undefined and every booking returns 500.
+
+3. Apply the schema, to production and to your local copy:
+
+   ```bash
+   npm run db:migrate:remote
+   ```
+
+   ```bash
+   npm run db:migrate:local
+   ```
+
+   Skipping the remote one also makes every booking return 500, with
+   `no such table` in the Pages Functions log.
 
 ### 2.2 Resend (email)
 
 1. Create an account at [resend.com](https://resend.com).
 2. **Add and verify the domain `ruina.photos`.** Resend shows the exact DNS
    records to add (an MX and TXT pair on a `send.` subdomain, plus a DKIM TXT
-   record). Until the domain is verified, Resend will only deliver to your own
-   account address — fine for testing, not for real visitors.
+   record at `resend._domainkey`). Add them in the Cloudflare DNS dashboard.
+   **Until the domain is verified, every email from `bookings@ruina.photos` is
+   rejected** — the visitor's auto-reply and your notification alike. Enquiries
+   are still stored and shown in `/admin` with an amber _auto-reply not
+   delivered_ flag, so nothing is lost; you just are not emailed about them.
 3. Create an API key and keep it for the next step.
 
-`FROM_EMAIL` in `wrangler.jsonc` must be on the verified domain
+`FROM_EMAIL` must be on the verified domain
 (`bookings@ruina.photos`). `OWNER_EMAIL` is where notifications and visitor
 replies go and can be any address.
 
@@ -102,17 +124,35 @@ Full walkthrough: **[GOOGLE_OAUTH_SETUP.md](GOOGLE_OAUTH_SETUP.md)**. In short:
 5. Copy the client ID and secret immediately — newer consoles show the secret
    only once.
 
-### 2.4 Secrets
+### 2.4 Variables and secrets
 
-Set each one in Cloudflare (you are prompted for the value; nothing is written
-to the repository):
+Pages → `ruina-photos` → Settings → **Variables and secrets**, **Production**
+environment:
+
+| Type   | Name                   | Value                                              |
+| ------ | ---------------------- | -------------------------------------------------- |
+| Secret | `RESEND_API_KEY`       | from resend.com/api-keys                           |
+| Secret | `SESSION_SECRET`       | long random string (see below)                     |
+| Secret | `ADMIN_EMAILS`         | Google account(s) allowed into `/admin`            |
+| Secret | `GOOGLE_CLIENT_ID`     | see [GOOGLE_OAUTH_SETUP.md](GOOGLE_OAUTH_SETUP.md) |
+| Secret | `GOOGLE_CLIENT_SECRET` | see [GOOGLE_OAUTH_SETUP.md](GOOGLE_OAUTH_SETUP.md) |
+| Text   | `OWNER_EMAIL`          | where notifications and replies go                 |
+| Text   | `FROM_EMAIL`           | `bookings@ruina.photos`                            |
+| Text   | `FROM_NAME`            | `Ruina Photos`                                     |
+| Text   | `GOOGLE_CALENDAR_ID`   | `primary`                                          |
+| Text   | `SITE_URL`             | `https://ruina.photos`                             |
+
+Set these on **Production only**. Previews then have no database or mail
+access, so a branch build can never write to the live bookings or send real
+email.
+
+Secrets can also be set from the command line:
 
 ```bash
-npx wrangler secret put RESEND_API_KEY
+npx wrangler pages secret put RESEND_API_KEY --project-name ruina-photos
 ```
 
-Repeat for `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `SESSION_SECRET` and
-`ADMIN_EMAILS`.
+**Changes apply on the next deployment**, not immediately.
 
 - `SESSION_SECRET` — any long random string. Generate one with:
   ```bash
@@ -121,8 +161,8 @@ Repeat for `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `SESSION_SECRET` and
 - `ADMIN_EMAILS` — comma-separated Google accounts allowed into `/admin`.
   **Adding an admin later means updating this secret and nothing else.**
 
-Non-secret settings (`OWNER_EMAIL`, `FROM_EMAIL`, `FROM_NAME`,
-`GOOGLE_CALENDAR_ID`, `SITE_URL`) live in the `vars` block of `wrangler.jsonc`.
+The `vars` block in `wrangler.jsonc` mirrors the Text rows above for local
+development only; editing it does not change production.
 
 ---
 
@@ -158,32 +198,29 @@ npm run prettier && npm run lint && npx tsc --noEmit && npm run build
 
 ## 4. Deploying
 
+**Merge to `main`.** The Pages Git integration builds it and deploys it to
+`ruina.photos` automatically. Every other branch gets a preview at
+`https://<branch>.ruina-photos.pages.dev`.
+
+Previews carry no bindings or secrets (they are Production-only), so `/api/*`
+returns 500 on a preview. That is intended.
+
+To apply a changed variable or binding without a code change: Pages →
+Deployments → the latest production deployment → **Retry deployment**.
+
+`.github/workflows/deploy.yml` still publishes to the `gh-pages` branch, left
+over from before the move to Cloudflare. `ruina.photos` is not served from it,
+so it is redundant and can be removed.
+
+### Checking a deploy
+
 ```bash
-npm run deploy
+curl -s -X POST https://ruina.photos/api/booking -H "Content-Type: application/json" -d "{}"
 ```
 
-That builds and runs `wrangler deploy`, publishing to
-`https://ruina-photos.<your-subdomain>.workers.dev`.
-
-Pushing to `main` does the same through
-`.github/workflows/deploy.yml`, which needs a `CLOUDFLARE_API_TOKEN` repository
-secret (GitHub → Settings → Secrets and variables → Actions). Create the token
-in Cloudflare from the **Edit Cloudflare Workers** template.
-
-### Custom domain
-
-A Worker can only take a custom domain whose zone is on Cloudflare.
-
-1. Cloudflare dashboard → **Add a site** → `ruina.photos` → Free plan.
-2. Repoint the nameservers at your registrar to the two Cloudflare gives you.
-   Check the imported DNS records against your registrar's first — anything
-   Cloudflare missed (mail records especially) must be re-added before the
-   switch.
-3. Workers & Pages → `ruina-photos` → Settings → **Domains & Routes** → Add →
-   Custom domain → `ruina.photos`.
-
-Only after the domain resolves should you verify it in Resend and add the
-production redirect URI in Google.
+Expect status 400 with `"error":"Please enter your email address."`. That proves
+the Function runs and validates. A 500 means the binding or schema is missing
+(see 2.1); a 405 or an HTML page means the deployment has no Functions at all.
 
 ---
 
@@ -203,15 +240,17 @@ production redirect URI in Google.
 
 ## 6. Troubleshooting
 
-| Symptom                                             | Cause and fix                                                                                                                                                                                   |
-| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Google Calendar is not connected` in /admin        | No refresh token stored. Click **Reconnect Google**; make sure the OAuth consent granted the calendar scope.                                                                                    |
-| `Google access expired. Please sign in again.`      | The refresh token was revoked (password change, consent withdrawn, or the app is in "testing" and the 7-day token expiry hit). Sign in again; publishing the consent screen stops it recurring. |
-| Auto-replies marked failed with `Resend 401`        | `RESEND_API_KEY` is wrong or unset.                                                                                                                                                             |
-| Auto-replies fail only for other people's addresses | The Resend domain is not verified yet.                                                                                                                                                          |
-| `403 Not authorised` after Google sign-in           | The account is not in `ADMIN_EMAILS`.                                                                                                                                                           |
-| Sign-in loops back to Google                        | Cookies blocked, or the redirect URI in Google does not exactly match the site's origin.                                                                                                        |
-| `Invalid binding SESSION` at build                  | Astro sessions want a KV namespace. This project does not use them; ignore, or add a `SESSION` KV binding.                                                                                      |
+| Symptom                                        | Cause and fix                                                                                                                                                                                   |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Google Calendar is not connected` in /admin   | No refresh token stored. Click **Reconnect Google**; make sure the OAuth consent granted the calendar scope.                                                                                    |
+| `Google access expired. Please sign in again.` | The refresh token was revoked (password change, consent withdrawn, or the app is in "testing" and the 7-day token expiry hit). Sign in again; publishing the consent screen stops it recurring. |
+| Auto-replies marked failed with `Resend 401`   | `RESEND_API_KEY` is wrong or unset.                                                                                                                                                             |
+| Every email marked failed with `Resend 403`    | `ruina.photos` is not verified in Resend; see 2.2.                                                                                                                                              |
+| Every booking returns 500                      | The D1 binding is not named `DB`, or the schema was never applied remotely; see 2.1.                                                                                                            |
+| A variable change has no effect                | Variables apply on the next deployment; retry the latest one (see 4).                                                                                                                           |
+| `403 Not authorised` after Google sign-in      | The account is not in `ADMIN_EMAILS`.                                                                                                                                                           |
+| Sign-in loops back to Google                   | Cookies blocked, or the redirect URI in Google does not exactly match the site's origin.                                                                                                        |
+| `Invalid binding SESSION` at build             | Astro sessions want a KV namespace. This project does not use them; ignore, or add a `SESSION` KV binding.                                                                                      |
 
 ---
 
