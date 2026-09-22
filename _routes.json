@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/",
+    "/_astro/*",
+    "/.assetsignore",
+    "/favicon.png",
+    "/robots.txt",
+    "/images/*",
+    "/about",
+    "/collections/*",
+    "/privacy"
+  ]
+}

@@ -1,5 +1,8 @@
-# Everything on this site is meant to be found by search engines.
+# The public site is meant to be found by search engines. The booking dashboard
+# and the API are not.
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
 Sitemap: https://ruina.photos/sitemap-index.xml
