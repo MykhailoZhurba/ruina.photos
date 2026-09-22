@@ -89,16 +89,18 @@ replies go and can be any address.
 
 ### 2.3 Google (admin sign-in + Calendar)
 
-1. In the [Google Cloud console](https://console.cloud.google.com), create a
-   project.
-2. **Enable the Google Calendar API** for it.
-3. Configure the OAuth consent screen (External). Add your own Google account as
-   a test user, or publish the app.
-4. Create credentials → **OAuth client ID** → **Web application**.
-5. Add these authorised redirect URIs:
+Full walkthrough: **[GOOGLE_OAUTH_SETUP.md](GOOGLE_OAUTH_SETUP.md)**. In short:
+
+1. Create a Google Cloud project and **enable the Google Calendar API**.
+2. Google Auth Platform → Branding, then Audience → **External**.
+3. **Publish to production without submitting for verification.** In Testing,
+   Google expires refresh tokens after 7 days because the app requests the
+   Calendar scope, so the calendar would disconnect weekly.
+4. Clients → **Web application**, with exactly these redirect URIs:
    - `https://ruina.photos/api/auth/google/callback`
    - `http://localhost:4321/api/auth/google/callback` (local development)
-6. Keep the client ID and client secret.
+5. Copy the client ID and secret immediately — newer consoles show the secret
+   only once.
 
 ### 2.4 Secrets
 
