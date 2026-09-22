@@ -1,0 +1,323 @@
+---
+import siteConfig from '../../site.config.mjs';
+
+const shootTypes: string[] = siteConfig.shootTypes;
+---
+
+{
+	/*
+  Opened from anywhere on the site with `$dispatch('open-booking')` (see NavBar).
+
+  The behaviour lives in the `is:inline` script below rather than in a big inline
+  `x-data` object: Astro strips backslashes when it emits attribute values, which
+  silently turns a regex like /\s/ into /s/. Real JavaScript belongs in a script
+  tag. The script is a classic inline script in the body, so it always runs
+  before the deferred Alpine CDN bundle in MainLayout and the `alpine:init`
+  listener is guaranteed to be attached in time.
+*/
+}
+<div
+	x-data="bookingModal"
+	x-on:open-booking.window="open()"
+	x-on:keydown.escape.window="close()"
+	x-show="isOpen"
+	x-cloak
+	class="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto p-4 sm:items-center sm:p-6"
+>
+	{/* Backdrop. Sits behind the panel and closes on click. */}
+	<div
+		x-show="isOpen"
+		x-transition:enter="transition ease-out duration-200"
+		x-transition:enter-start="opacity-0"
+		x-transition:enter-end="opacity-100"
+		x-transition:leave="transition ease-in duration-150"
+		x-transition:leave-start="opacity-100"
+		x-transition:leave-end="opacity-0"
+		@click="close()"
+		class="fixed inset-0 bg-black/50"
+		aria-hidden="true"
+	>
+	</div>
+
+	<div
+		x-ref="dialog"
+		x-show="isOpen"
+		x-transition:enter="transition ease-out duration-200"
+		x-transition:enter-start="opacity-0 translate-y-3"
+		x-transition:enter-end="opacity-100 translate-y-0"
+		x-transition:leave="transition ease-in duration-150"
+		x-transition:leave-start="opacity-100 translate-y-0"
+		x-transition:leave-end="opacity-0 translate-y-3"
+		@keydown.tab="trapFocus($event)"
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="booking-title"
+		class="relative my-auto w-full max-w-lg border border-gray-200 bg-white p-6 shadow-xl sm:p-8"
+	>
+		<button
+			@click="close()"
+			type="button"
+			aria-label="Close booking form"
+			class="absolute top-4 right-4 text-gray-400 transition-colors hover:text-black"
+		>
+			<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M6 18L18 6M6 6l12 12"></path>
+			</svg>
+		</button>
+
+		{/* Enquiry form */}
+		<div x-show="!done">
+			<h2 id="booking-title" class="text-2xl">Book a shoot</h2>
+			<p class="mt-2 text-sm text-gray-600">
+				Leave your email and I will write back with the details. Everything below the email is
+				optional — fill in what you already know.
+			</p>
+
+			<form @submit.prevent="submit()" class="mt-6 space-y-4" novalidate>
+				{
+					/*
+				  Honeypot. Hidden from sight and from assistive tech, and skipped in the
+				  tab order, so only an indiscriminate bot ever fills it in.
+				*/
+				}
+				<div class="absolute left-[-9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+					<label for="booking-website">Leave this field empty</label>
+					<input
+						id="booking-website"
+						type="text"
+						x-model="form.website"
+						tabindex="-1"
+						autocomplete="off"
+					/>
+				</div>
+
+				<div>
+					<label for="booking-email" class="block text-sm font-medium">
+						Email <span class="text-red-600" aria-hidden="true">*</span>
+					</label>
+					<input
+						id="booking-email"
+						x-ref="emailInput"
+						type="email"
+						x-model="form.email"
+						required
+						autocomplete="email"
+						placeholder="you@example.com"
+						:aria-invalid="errorField === 'email' ? 'true' : 'false'"
+						aria-describedby="booking-error"
+						class="mt-1 w-full border border-gray-300 px-3 py-2 transition-colors focus:border-black focus:outline-none"
+						:class="errorField === 'email' ? 'border-red-500' : ''"
+					/>
+				</div>
+
+				<div class="grid gap-4 sm:grid-cols-2">
+					<div>
+						<label for="booking-name" class="block text-sm font-medium">Name</label>
+						<input
+							id="booking-name"
+							type="text"
+							x-model="form.name"
+							autocomplete="name"
+							class="mt-1 w-full border border-gray-300 px-3 py-2 transition-colors focus:border-black focus:outline-none"
+						/>
+					</div>
+					<div>
+						<label for="booking-date" class="block text-sm font-medium">Preferred date</label>
+						<input
+							id="booking-date"
+							x-ref="dateInput"
+							type="date"
+							x-model="form.preferredDate"
+							:aria-invalid="errorField === 'preferredDate' ? 'true' : 'false'"
+							class="mt-1 w-full border border-gray-300 px-3 py-2 transition-colors focus:border-black focus:outline-none"
+							:class="errorField === 'preferredDate' ? 'border-red-500' : ''"
+						/>
+					</div>
+				</div>
+
+				<div>
+					<label for="booking-type" class="block text-sm font-medium">Type of shoot</label>
+					<select
+						id="booking-type"
+						x-model="form.shootType"
+						class="mt-1 w-full border border-gray-300 bg-white px-3 py-2 transition-colors focus:border-black focus:outline-none"
+					>
+						<option value="">Not sure yet</option>
+						{shootTypes.map((type) => <option value={type}>{type}</option>)}
+					</select>
+				</div>
+
+				<div>
+					<label for="booking-message" class="block text-sm font-medium">Anything else?</label>
+					<textarea
+						id="booking-message"
+						x-model="form.message"
+						rows="3"
+						maxlength="2000"
+						placeholder="Location, mood, how many people…"
+						class="mt-1 w-full resize-y border border-gray-300 px-3 py-2 transition-colors focus:border-black focus:outline-none"
+					></textarea>
+				</div>
+
+				<p
+					id="booking-error"
+					x-show="errorMessage"
+					x-text="errorMessage"
+					role="alert"
+					class="text-sm text-red-600"
+				>
+				</p>
+
+				{
+					/*
+				  A single x-text span keeps the button's accessible name correct in both
+				  states; two x-show spans left it nameless for screen readers.
+				*/
+				}
+				<button
+					type="submit"
+					:disabled="sending"
+					class="mt-2 w-full transform rounded-md border-2 border-black px-6 py-3 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-black hover:text-white active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-white disabled:hover:text-black md:text-base"
+				>
+					<span x-text="sending ? 'Sending…' : 'Send enquiry'">Send enquiry</span>
+				</button>
+
+				<p class="text-center text-xs text-gray-500">
+					Your email is used only to reply about your shoot.
+				</p>
+			</form>
+		</div>
+
+		{/* Success state */}
+		<div x-show="done" class="py-6 text-center">
+			<h2 x-ref="successHeading" tabindex="-1" class="text-2xl focus:outline-none">Thank you</h2>
+			<p x-text="successMessage" class="mt-3 text-gray-600"></p>
+			<button
+				@click="close()"
+				type="button"
+				class="mt-6 rounded-md border-2 border-black px-6 py-2 text-sm font-medium transition-all duration-300 hover:bg-black hover:text-white"
+			>
+				Close
+			</button>
+		</div>
+	</div>
+</div>
+
+<script is:inline>
+	document.addEventListener('alpine:init', () => {
+		const emptyForm = () => ({
+			email: '',
+			name: '',
+			preferredDate: '',
+			shootType: '',
+			message: '',
+			website: '',
+		});
+
+		window.Alpine.data('bookingModal', () => ({
+			isOpen: false,
+			sending: false,
+			done: false,
+			errorMessage: '',
+			errorField: '',
+			successMessage: '',
+			returnFocusTo: null,
+			form: emptyForm(),
+
+			open() {
+				// Remember where focus came from so closing can put it back.
+				this.returnFocusTo = document.activeElement;
+				this.isOpen = true;
+				this.done = false;
+				this.errorMessage = '';
+				this.errorField = '';
+				document.body.style.overflow = 'hidden';
+				this.$nextTick(() => {
+					if (this.$refs.dateInput) {
+						this.$refs.dateInput.min = new Date().toISOString().slice(0, 10);
+					}
+					if (this.$refs.emailInput) this.$refs.emailInput.focus();
+				});
+			},
+
+			close() {
+				if (!this.isOpen) return;
+				this.isOpen = false;
+				document.body.style.overflow = '';
+				if (this.returnFocusTo && typeof this.returnFocusTo.focus === 'function') {
+					this.returnFocusTo.focus();
+				}
+			},
+
+			/** Keeps Tab inside the dialog while it is open. */
+			trapFocus(event) {
+				const candidates = this.$refs.dialog.querySelectorAll(
+					'a[href], button:not([disabled]), input:not([type="hidden"]), select, textarea',
+				);
+				const visible = Array.prototype.filter.call(
+					candidates,
+					(el) => el.offsetParent !== null && el.tabIndex !== -1,
+				);
+				if (visible.length === 0) return;
+				const first = visible[0];
+				const last = visible[visible.length - 1];
+				if (event.shiftKey && document.activeElement === first) {
+					event.preventDefault();
+					last.focus();
+				} else if (!event.shiftKey && document.activeElement === last) {
+					event.preventDefault();
+					first.focus();
+				}
+			},
+
+			async submit() {
+				if (this.sending) return;
+				this.errorMessage = '';
+				this.errorField = '';
+
+				const email = this.form.email.trim();
+				if (email === '' || email.indexOf('@') < 1 || /\s/.test(email)) {
+					this.errorMessage = 'Please enter a valid email address.';
+					this.errorField = 'email';
+					this.$nextTick(() => this.$refs.emailInput.focus());
+					return;
+				}
+
+				this.sending = true;
+				try {
+					const response = await fetch('/api/booking', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify(this.form),
+					});
+					const payload = await response.json().catch(() => ({}));
+
+					if (!response.ok || !payload.ok) {
+						this.errorMessage = payload.error || 'Something went wrong. Please try again.';
+						this.errorField = payload.field || '';
+						if (this.errorField === 'email') {
+							this.$nextTick(() => this.$refs.emailInput.focus());
+						}
+						return;
+					}
+
+					this.successMessage = payload.message || 'Thank you — check your inbox.';
+					this.done = true;
+					this.form = emptyForm();
+					// Move focus to the confirmation so screen readers announce it.
+					this.$nextTick(() => {
+						if (this.$refs.successHeading) this.$refs.successHeading.focus();
+					});
+				} catch {
+					this.errorMessage = 'Could not reach the server. Please check your connection.';
+				} finally {
+					this.sending = false;
+				}
+			},
+		}));
+	});
+</script>

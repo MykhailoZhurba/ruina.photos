@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # app
 src/data/__tests__/gallery/gallery.yaml
+
+# Cloudflare
+.dev.vars
+.wrangler/

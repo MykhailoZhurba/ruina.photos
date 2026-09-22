@@ -1,7 +1,8 @@
-name: Deploy Astro Site
+name: Deploy to Cloudflare Workers
 
+# The Worker needs no write access to the repository; it only reads the source.
 permissions:
-  contents: write
+  contents: read
 
 on:
   push:
@@ -19,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 23
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -28,7 +29,10 @@ jobs:
       - name: Build the Astro site
         run: npm run build
 
-      - name: Deploy to photography-portfolio repository
-        uses: JamesIves/github-pages-deploy-action@v4
+      # Requires a CLOUDFLARE_API_TOKEN repository secret, created from the
+      # "Edit Cloudflare Workers" template. Secrets set with `wrangler secret
+      # put` live in Cloudflare and are not touched by this deploy.
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
         with:
-          folder: dist
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

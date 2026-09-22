@@ -48,6 +48,12 @@
 	}
 }
 
+/* Alpine has not initialised yet: keep x-show elements hidden to avoid a flash
+   of the booking modal on first paint. */
+[x-cloak] {
+	display: none !important;
+}
+
 @layer components {
 	.container-custom {
 		@apply max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8;

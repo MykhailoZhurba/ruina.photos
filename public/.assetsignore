@@ -1,0 +1,5 @@
+# Keep the server bundle and routing manifest out of the public asset store.
+# Astro emits these into dist/; they are code, not assets, and must never be
+# fetchable over HTTP.
+_worker.js
+_routes.json

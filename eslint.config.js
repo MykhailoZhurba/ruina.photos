@@ -8,7 +8,7 @@ import globals from 'globals';
 export default [
 	js.configs.recommended,
 	{
-		ignores: ['dist/**', '.astro/**', 'node_modules/**', '.cache/**'],
+		ignores: ['dist/**', '.astro/**', 'node_modules/**', '.cache/**', 'worker-configuration.d.ts'],
 	},
 	{
 		files: ['**/*.ts'],
@@ -28,6 +28,10 @@ export default [
 		},
 		rules: {
 			...ts.configs.recommended.rules,
+			// TypeScript resolves ambient globals (D1Database, Env, ExecutionContext
+			// from wrangler's generated types); ESLint's no-undef cannot, and tsc
+			// already fails the build on genuinely undefined identifiers.
+			'no-undef': 'off',
 		},
 	},
 
@@ -38,12 +42,19 @@ export default [
 			parserOptions: {
 				parser: tsParser,
 			},
+			globals: {
+				...globals.node,
+				...globals.browser,
+			},
 		},
 		plugins: {
 			astro: astroPlugin,
 		},
 		rules: {
 			...astroPlugin.configs.recommended.rules,
+			// Astro frontmatter is TypeScript and is covered by `tsc --noEmit`;
+			// no-undef cannot see ambient globals there either.
+			'no-undef': 'off',
 		},
 	},
 ];

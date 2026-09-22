@@ -3,11 +3,10 @@ import siteConfig from '../../site.config.mjs';
 
 const title = siteConfig.title;
 
-const base = import.meta.env.BASE_URL;
 const menuItems = [
-	{ name: 'Home', link: `${base}` },
-	{ name: 'Gallery', link: `${base}/collections` },
-	{ name: 'About', link: `${base}/about` },
+	{ name: 'Home', link: '/' },
+	{ name: 'Gallery', link: '/collections' },
+	{ name: 'About', link: '/about' },
 ];
 ---
 
@@ -25,12 +24,12 @@ const menuItems = [
 	:class="scrolled ? 'py-3 bg-white shadow-sm' : 'py-5 bg-transparent'"
 >
 	<div class="container mx-auto flex justify-between items-center">
-		<a href={base} id="logo" class="text-2xl md:text-4xl font-semibold tracking-tight">
+		<a href="/" id="logo" class="text-2xl md:text-4xl font-semibold tracking-tight">
 			{title}
 		</a>
 
 		<!-- Desktop Menu -->
-		<div class="hidden md:flex space-x-8">
+		<div class="hidden md:flex items-center space-x-8">
 			{
 				menuItems.map((item) => (
 					<a
@@ -41,18 +40,48 @@ const menuItems = [
 					</a>
 				))
 			}
+
+			<!-- Opens BookingModal, which listens for this event on the window. -->
+			<button
+				type="button"
+				@click="$dispatch('open-booking')"
+				class="px-5 py-2 border-2 border-black rounded-md hover:bg-black hover:text-white transition-all duration-300 text-sm font-medium transform hover:scale-105 active:scale-95"
+			>
+				Book
+			</button>
 		</div>
 
 		<!-- Mobile Menu Button -->
-		<button @click="isOpen = !isOpen" class="md:hidden text-gray-800 focus:outline-none">
-			<svg x-show="!isOpen" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+		<button
+			@click="isOpen = !isOpen"
+			type="button"
+			aria-label="Menu"
+			aria-controls="mobile-menu"
+			:aria-expanded="isOpen ? 'true' : 'false'"
+			class="md:hidden text-gray-800 focus:outline-none"
+		>
+			<svg
+				x-show="!isOpen"
+				aria-hidden="true"
+				class="h-6 w-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+			>
 				<path
 					stroke-linecap="round"
 					stroke-linejoin="round"
 					stroke-width="2"
 					d="M4 6h16M4 12h16M4 18h16"></path>
 			</svg>
-			<svg x-show="isOpen" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<svg
+				x-show="isOpen"
+				aria-hidden="true"
+				class="h-6 w-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+			>
 				<path
 					stroke-linecap="round"
 					stroke-linejoin="round"
@@ -63,7 +92,11 @@ const menuItems = [
 	</div>
 
 	<!-- Mobile Menu -->
-	<div x-show="isOpen" class="md:hidden absolute top-full left-0 w-full bg-white shadow-md">
+	<div
+		id="mobile-menu"
+		x-show="isOpen"
+		class="md:hidden absolute top-full left-0 w-full bg-white shadow-md"
+	>
 		<div class="flex flex-col py-4 px-6 space-y-4">
 			{
 				menuItems.map((item) => (
@@ -72,6 +105,14 @@ const menuItems = [
 					</a>
 				))
 			}
+
+			<button
+				type="button"
+				@click="isOpen = false; $dispatch('open-booking')"
+				class="mt-2 w-full px-5 py-3 border-2 border-black rounded-md hover:bg-black hover:text-white transition-all duration-300 text-base font-medium"
+			>
+				Book a shoot
+			</button>
 		</div>
 	</div>
 </nav>

@@ -1,0 +1,17 @@
+# Copy to `.dev.vars` (gitignored) for local development with `npm run dev`.
+# In production these are set with `npx wrangler secret put <NAME>` instead.
+
+# Resend API key — https://resend.com/api-keys
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
+
+# Google Cloud → APIs & Services → Credentials → OAuth 2.0 Client ID (Web application).
+# Authorised redirect URI for local dev: http://localhost:4321/api/auth/google/callback
+GOOGLE_CLIENT_ID=xxxxxxxxxxxx.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=GOCSPX-xxxxxxxxxxxxxxxx
+
+# Any long random string. Generate one with:
+#   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+SESSION_SECRET=replace-me-with-32-random-bytes
+
+# Comma-separated Google accounts allowed into /admin.
+ADMIN_EMAILS=vitoruina@gmail.com

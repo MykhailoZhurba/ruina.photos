@@ -1,0 +1,53 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	adminEmail: string;
+}
+
+const { title, adminEmail } = Astro.props;
+
+// Belt and braces alongside robots.txt: this page lists visitors' email
+// addresses and should never be indexed, even if a link to it leaks.
+Astro.response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+Astro.response.headers.set('Cache-Control', 'no-store');
+---
+
+<html lang="en" class="h-full">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex,nofollow" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<title>{title}</title>
+	</head>
+	<body class="bg-gray-50 text-gray-900">
+		<header class="border-b border-gray-200 bg-white">
+			<div class="container-custom flex flex-wrap items-center justify-between gap-3 py-4">
+				<div>
+					<h1 class="text-xl font-semibold">Bookings</h1>
+					<p class="text-sm text-gray-500">ruina.photos admin</p>
+				</div>
+				<div class="flex items-center gap-4">
+					<span class="hidden text-sm text-gray-500 sm:inline">{adminEmail}</span>
+					<a href="/" class="text-sm text-gray-600 underline hover:text-black">View site</a>
+					<form method="POST" action="/api/auth/logout">
+						<button
+							type="submit"
+							class="rounded-md border border-gray-300 px-3 py-1.5 text-sm transition-colors hover:border-black hover:bg-black hover:text-white"
+						>
+							Sign out
+						</button>
+					</form>
+				</div>
+			</div>
+		</header>
+
+		<main class="container-custom py-8">
+			<slot />
+		</main>
+
+		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	</body>
+</html>
