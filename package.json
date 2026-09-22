@@ -8,7 +8,7 @@
 		"preview": "astro preview",
 		"astro": "astro",
 		"prettier": "prettier . --write",
-		"test": "vitest",
+		"test": "vitest run --passWithNoTests",
 		"lint": "eslint .",
 		"generate": "npx tsx src/data/gallery-generator.ts src/gallery",
 		"deploy": "npm run build && wrangler deploy",
