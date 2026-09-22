@@ -30,8 +30,11 @@ export function buildAuthUrl(env: GoogleEnv, redirectUri: string, state: string)
 		response_type: 'code',
 		scope: SCOPES.join(' '),
 		// `offline` + `consent` guarantee a refresh token, including on re-consent.
+		// `select_account` always shows Google's account picker: without it, a
+		// browser signed in to several Google accounts silently uses the default
+		// one, which may not be the admin account.
 		access_type: 'offline',
-		prompt: 'consent',
+		prompt: 'consent select_account',
 		include_granted_scopes: 'true',
 		state,
 	});

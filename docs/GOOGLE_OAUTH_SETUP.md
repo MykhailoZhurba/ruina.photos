@@ -13,14 +13,14 @@ into Cloudflare as the `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` secrets.
 These are fixed in `src/lib/google.ts`. Every setting below exists to make
 Google accept exactly this request.
 
-| Setting       | Value                                                                    | Why                                                           |
-| ------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------- |
-| Flow          | Authorization code, server-side                                          | The Worker exchanges the code; the browser never sees a token |
-| Client type   | Web application                                                          | Required for a server-side redirect flow                      |
-| Redirect URI  | `https://ruina.photos/api/auth/google/callback`                          | Where Google sends you back after sign-in                     |
-| Scopes        | `openid`, `email`, `profile`, `https://www.googleapis.com/auth/calendar` | Identity for the admin allowlist, plus read/write calendar    |
-| `access_type` | `offline`                                                                | Makes Google issue a refresh token                            |
-| `prompt`      | `consent`                                                                | Guarantees a fresh refresh token on every sign-in             |
+| Setting       | Value                                                                    | Why                                                               |
+| ------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| Flow          | Authorization code, server-side                                          | The Worker exchanges the code; the browser never sees a token     |
+| Client type   | Web application                                                          | Required for a server-side redirect flow                          |
+| Redirect URI  | `https://ruina.photos/api/auth/google/callback`                          | Where Google sends you back after sign-in                         |
+| Scopes        | `openid`, `email`, `profile`, `https://www.googleapis.com/auth/calendar` | Identity for the admin allowlist, plus read/write calendar        |
+| `access_type` | `offline`                                                                | Makes Google issue a refresh token                                |
+| `prompt`      | `consent select_account`                                                 | Fresh refresh token each sign-in; always shows the account picker |
 
 The site then checks the returned identity against `ADMIN_EMAILS`. Signing in
 with any other Google account is refused with a 403, even if Google lets you
