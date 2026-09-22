@@ -41,8 +41,7 @@ const viewerImage = async (image: ImageType) => {
 const altFor = (image: ImageType): string => {
 	if (image.description?.trim()) return image.description.trim();
 	const categoryId = image.collections.find((id) => id !== featuredCollectionId);
-	const label =
-		(categoryId && siteConfig.seo.categoryLabels[categoryId]) || 'Photography';
+	const label = (categoryId && siteConfig.seo.categoryLabels[categoryId]) || 'Photography';
 	const number = image.title.match(/(\d+)\s*$/)?.[1];
 	return `${label} by ${siteConfig.title}${number ? `, image ${number}` : ''}`;
 };
