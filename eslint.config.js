@@ -8,7 +8,7 @@ import globals from 'globals';
 export default [
 	js.configs.recommended,
 	{
-		ignores: ['dist/**', '.astro/**', 'node_modules/**', '.cache/**'],
+		ignores: ['dist/**', '.astro/**', 'node_modules/**', '.cache/**', 'worker-configuration.d.ts'],
 	},
 	{
 		files: ['**/*.ts'],
@@ -27,6 +27,10 @@ export default [
 			'@typescript-eslint': ts,
 		},
 		rules: {
+			// TypeScript resolves ambient globals (D1Database, Env, ExecutionContext
+			// from wrangler's generated types); ESLint's no-undef cannot, and tsc
+			// already fails on genuinely undefined identifiers.
+			'no-undef': 'off',
 			...ts.configs.recommended.rules,
 		},
 	},
@@ -43,6 +47,10 @@ export default [
 			astro: astroPlugin,
 		},
 		rules: {
+			// TypeScript resolves ambient globals (D1Database, Env, ExecutionContext
+			// from wrangler's generated types); ESLint's no-undef cannot, and tsc
+			// already fails on genuinely undefined identifiers.
+			'no-undef': 'off',
 			...astroPlugin.configs.recommended.rules,
 		},
 	},

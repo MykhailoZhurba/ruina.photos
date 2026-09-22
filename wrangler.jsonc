@@ -1,0 +1,39 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "ruina-photos",
+	"compatibility_date": "2026-09-22",
+	"compatibility_flags": ["nodejs_compat"],
+
+	// Built by `npm run build` via @astrojs/cloudflare. Handles only the routes
+	// that opt out of prerendering (/api/*, /admin); everything else is a static
+	// asset served straight from the edge.
+	"main": "./dist/_worker.js/index.js",
+
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS",
+	},
+
+	"observability": { "enabled": true },
+	"upload_source_maps": true,
+
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "ruina-bookings",
+			// Replace with the id printed by: npx wrangler d1 create ruina-bookings
+			"database_id": "PLACEHOLDER_RUN_WRANGLER_D1_CREATE",
+		},
+	],
+
+	// Non-secret configuration. Secrets (RESEND_API_KEY, GOOGLE_CLIENT_ID,
+	// GOOGLE_CLIENT_SECRET, SESSION_SECRET, ADMIN_EMAILS) are set with
+	// `npx wrangler secret put <NAME>` and never live in this file.
+	"vars": {
+		"OWNER_EMAIL": "vitoruina@gmail.com",
+		"FROM_EMAIL": "bookings@ruina.photos",
+		"FROM_NAME": "ruina.photos",
+		"GOOGLE_CALENDAR_ID": "primary",
+		"SITE_URL": "https://ruina.photos",
+	},
+}

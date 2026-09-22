@@ -2,7 +2,13 @@ import type { AstroInstance } from 'astro';
 import { Facebook, Instagram } from 'lucide-astro';
 
 export interface SocialLink {
+	/** Stable key. `privacy.astro` looks entries up by this exact value. */
 	name: string;
+	/**
+	 * Accessible name and hover tooltip. Needed where two entries share an icon
+	 * (both Instagram accounts) so they are distinguishable. Falls back to `name`.
+	 */
+	label?: string;
 	url: string;
 	icon: AstroInstance;
 }
@@ -92,8 +98,7 @@ const seo: SiteSeo = {
 			description:
 				'Aviation photography by Mykhailo Zhurba: fighter jets and aerobatic displays at airshows.',
 			heading: 'Aviation Photography',
-			intro:
-				'Jets and aircraft photographed at airshows.',
+			intro: 'Jets and aircraft photographed at airshows.',
 		},
 	},
 
@@ -107,6 +112,24 @@ const seo: SiteSeo = {
 
 export default {
 	title: 'Ruina Photos',
+
+	/**
+	 * Booking enquiries are forwarded to this address, and the auto-reply carries
+	 * it as Reply-To. Keep it in sync with OWNER_EMAIL in wrangler.jsonc.
+	 */
+	ownerEmail: 'vitoruina@gmail.com',
+
+	/** Options offered in the booking popup's "type of shoot" dropdown. */
+	shootTypes: [
+		'Automotive',
+		'Portrait',
+		'Cosplay',
+		'Aviation',
+		'Event',
+		'Street',
+		'Something else',
+	],
+
 	favicon: 'favicon.png',
 	owner: 'Mykhailo Zhurba',
 	profileImage: 'profile.webp',
@@ -115,12 +138,20 @@ export default {
 	socialLinks: [
 		{
 			name: 'Facebook',
-			url: 'https://www.facebook.com/ruina.photos',
+			label: 'Ruina Photos on Facebook',
+			url: 'https://www.facebook.com/ruina.photos/',
 			icon: Facebook,
 		} as SocialLink,
 		{
 			name: 'Instagram',
+			label: 'Ruina Photos on Instagram',
 			url: 'https://www.instagram.com/ruina.photos/',
+			icon: Instagram,
+		} as SocialLink,
+		{
+			name: 'Instagram (personal)',
+			label: 'Mykhailo Zhurba on Instagram',
+			url: 'https://www.instagram.com/mikelino1370/',
 			icon: Instagram,
 		} as SocialLink,
 	],
