@@ -29,7 +29,7 @@ const en = {
 	'hero.featuredWork': 'Featured Work',
 	'hero.scroll': 'Scroll down to see featured work',
 	'featured.heading': 'Featured Works',
-	'featured.intro': 'A selection of my best automotive, portrait, aviation and street photography',
+	'featured.intro': 'A selection of my best photography',
 
 	// Gallery
 	'gallery.all': 'All',
@@ -99,7 +99,6 @@ const en = {
 	'shoot.automotive': 'Automotive',
 	'shoot.portrait': 'Portrait',
 	'shoot.cosplay': 'Cosplay',
-	'shoot.aviation': 'Aviation',
 	'shoot.event': 'Event',
 	'shoot.street': 'Street',
 	'shoot.something_else': 'Something else',
@@ -123,7 +122,7 @@ const lv: Dictionary = {
 	'hero.featuredWork': 'Izvēlētie darbi',
 	'hero.scroll': 'Ritiniet uz leju, lai redzētu izvēlētos darbus',
 	'featured.heading': 'Izvēlētie darbi',
-	'featured.intro': 'Mani labākie auto, portretu, aviācijas un ielu fotoattēli',
+	'featured.intro': 'Mani labākie fotoattēli',
 
 	'gallery.all': 'Visi',
 	'collection.automotive': 'Auto',
@@ -189,7 +188,6 @@ const lv: Dictionary = {
 	'shoot.automotive': 'Auto',
 	'shoot.portrait': 'Portrets',
 	'shoot.cosplay': 'Kosplejs',
-	'shoot.aviation': 'Aviācija',
 	'shoot.event': 'Pasākums',
 	'shoot.street': 'Ielu foto',
 	'shoot.something_else': 'Kaut kas cits',
@@ -210,7 +208,7 @@ const ru: Dictionary = {
 	'hero.featuredWork': 'Избранные работы',
 	'hero.scroll': 'Прокрутите вниз к избранным работам',
 	'featured.heading': 'Избранные работы',
-	'featured.intro': 'Лучшие из моих автомобильных, портретных, авиационных и уличных фотографий',
+	'featured.intro': 'Лучшие из моих фотографий',
 
 	'gallery.all': 'Все',
 	'collection.automotive': 'Авто',
@@ -274,7 +272,6 @@ const ru: Dictionary = {
 	'shoot.automotive': 'Автомобили',
 	'shoot.portrait': 'Портрет',
 	'shoot.cosplay': 'Косплей',
-	'shoot.aviation': 'Авиация',
 	'shoot.event': 'Мероприятие',
 	'shoot.street': 'Уличная съёмка',
 	'shoot.something_else': 'Другое',
@@ -295,7 +292,7 @@ const uk: Dictionary = {
 	'hero.featuredWork': 'Вибрані роботи',
 	'hero.scroll': 'Прокрутіть униз до вибраних робіт',
 	'featured.heading': 'Вибрані роботи',
-	'featured.intro': 'Найкращі з моїх автомобільних, портретних, авіаційних і вуличних фотографій',
+	'featured.intro': 'Найкращі з моїх фотографій',
 
 	'gallery.all': 'Усі',
 	'collection.automotive': 'Авто',
@@ -359,7 +356,6 @@ const uk: Dictionary = {
 	'shoot.automotive': 'Автомобілі',
 	'shoot.portrait': 'Портрет',
 	'shoot.cosplay': 'Косплей',
-	'shoot.aviation': 'Авіація',
 	'shoot.event': 'Захід',
 	'shoot.street': 'Вулична зйомка',
 	'shoot.something_else': 'Інше',

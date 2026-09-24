@@ -122,15 +122,7 @@ export default {
 	ownerEmail: 'vitoruina@gmail.com',
 
 	/** Options offered in the booking popup's "type of shoot" dropdown. */
-	shootTypes: [
-		'Automotive',
-		'Portrait',
-		'Cosplay',
-		'Aviation',
-		'Event',
-		'Street',
-		'Something else',
-	],
+	shootTypes: ['Automotive', 'Portrait', 'Cosplay', 'Event', 'Street', 'Something else'],
 
 	favicon: 'favicon.png',
 	owner: 'Mykhailo Zhurba',
