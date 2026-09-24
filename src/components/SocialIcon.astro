@@ -1,16 +1,29 @@
 ---
+import { getLocale } from '../i18n/locales';
+import { useTranslations } from '../i18n/ui';
+
 const { socialLink } = Astro.props;
 
 const Icon = socialLink.icon;
-// Two entries share the Instagram glyph, so prefer the descriptive label.
-const accessibleName = socialLink.label ?? socialLink.name;
+
+// Two entries share the Instagram glyph, so each needs its own name. Translated
+// by the entry's stable `name`; falls back to its English `label`.
+const labelKeys: Record<string, string> = {
+	Facebook: 'social.facebook',
+	Instagram: 'social.instagram',
+	'Instagram (personal)': 'social.instagramPersonal',
+};
+const { tOr } = useTranslations(getLocale(Astro.url));
+const fallback = socialLink.label ?? socialLink.name;
+const key = labelKeys[socialLink.name];
+const accessibleName = key ? tOr(key, fallback) : fallback;
 ---
 
 <a
 	href={socialLink.url}
 	target="_blank"
 	rel="noopener noreferrer"
-	class="text-gray-500 hover:text-gray-800 transition-colors duration-200"
+	class="text-gray-500 hover:text-gray-800 transition-colors duration-200 dark:text-gray-400 dark:hover:text-gray-200"
 	aria-label={accessibleName}
 	title={accessibleName}
 >

@@ -1,0 +1,56 @@
+---
+/** About page body, shared by every language. The bio is one Markdown file per language. */
+import MainLayout from '../layouts/MainLayout.astro';
+import { Content as AboutEn } from '../content/about.md';
+import { Content as AboutLv } from '../content/about.lv.md';
+import { Content as AboutRu } from '../content/about.ru.md';
+import { Content as AboutUk } from '../content/about.uk.md';
+import siteConfig from '../../site.config.mjs';
+import { personSchema, schemaGraph } from '../data/structuredData';
+import { DEFAULT_LOCALE, getLocale } from '../i18n/locales';
+import { seoFor } from '../i18n/seo';
+import { useTranslations } from '../i18n/ui';
+
+const locale = getLocale(Astro.url);
+const { t } = useTranslations(locale);
+const Bio = { en: AboutEn, lv: AboutLv, ru: AboutRu, uk: AboutUk }[locale];
+
+const { profileImage, profileImageAlt, owner } = siteConfig;
+const { about, contactEmail } = seoFor(locale);
+// English alt text stays in site.config.mts; the other languages come from ui.ts.
+const photoAlt = locale === DEFAULT_LOCALE ? profileImageAlt : t('about.photoAlt');
+const jsonLd = schemaGraph(personSchema(Astro.site!, { withImage: true }));
+---
+
+<MainLayout title={about.title} description={about.description} jsonLd={jsonLd}>
+	<section class="pt-32 pb-20">
+		<div class="container-custom">
+			<div class="max-w-2xl mx-auto text-center mb-16">
+				<h1 class="text-4xl md:text-5xl font-bold mb-4">{t('about.heading', { owner })}</h1>
+			</div>
+
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+				<div>
+					<img
+						src={`/images/${profileImage}`}
+						alt={photoAlt}
+						class="w-full h-auto rounded-lg shadow-lg border-8 my-4 border-white md:p-4 dark:border-neutral-800"
+						width="720"
+						height="720"
+					/>
+				</div>
+
+				<div class="prose text-gray-700 mb-6 dark:prose-invert dark:text-gray-300">
+					<Bio />
+					{
+						contactEmail && (
+							<p>
+								{t('about.email')}: <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+							</p>
+						)
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+</MainLayout>

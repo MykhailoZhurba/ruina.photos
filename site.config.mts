@@ -2,11 +2,12 @@ import type { AstroInstance } from 'astro';
 import { Facebook, Instagram } from 'lucide-astro';
 
 export interface SocialLink {
-	/** Stable key. `privacy.astro` looks entries up by this exact value. */
+	/** Stable key. SocialIcon maps it to a translated label (src/i18n/ui.ts). */
 	name: string;
 	/**
-	 * Accessible name and hover tooltip. Needed where two entries share an icon
-	 * (both Instagram accounts) so they are distinguishable. Falls back to `name`.
+	 * English accessible name and hover tooltip, used when no translation exists.
+	 * Needed where two entries share an icon (both Instagram accounts) so they
+	 * are distinguishable. Falls back to `name`.
 	 */
 	label?: string;
 	url: string;
@@ -58,7 +59,8 @@ const seo: SiteSeo = {
 
 	privacy: {
 		title: 'Privacy | Ruina Photos',
-		description: 'How Ruina Photos handles your data: no cookies, no analytics and no tracking.',
+		description:
+			'How Ruina Photos handles your data: no cookies, analytics or tracking, and booking enquiries used only to reply.',
 	},
 
 	gallery: {

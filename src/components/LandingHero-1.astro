@@ -1,28 +1,33 @@
 ---
 import siteConfig from '../../site.config.mjs';
+import { getLocale, localizePath } from '../i18n/locales';
+import { seoFor } from '../i18n/seo';
+import { useTranslations } from '../i18n/ui';
 
 const owner = siteConfig.owner;
-const tagline = siteConfig.seo.tagline;
-const base = import.meta.env.BASE_URL;
-// FIXED: Prevents double slash (//) when base is "/"
-const safeBase = base.endsWith('/') ? base.slice(0, -1) : base;
+const locale = getLocale(Astro.url);
+const { t } = useTranslations(locale);
+const { tagline } = seoFor(locale);
 ---
 
 <div class="absolute left-0 right-0 z-0">
 	<div class="text-center mb-12 relative z-10">
 		<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
 			Ruina Photos
-			<span class="block text-2xl md:text-3xl mt-2 text-gray-600">by {owner}</span>
+			<span class="block text-2xl md:text-3xl mt-2 text-gray-600 dark:text-gray-400">
+				{t('hero.by', { owner })}
+			</span>
 		</h1>
-		<p class="mt-4 text-base md:text-lg text-gray-700">{tagline}</p>
+		<p class="mt-4 text-base md:text-lg text-gray-700 dark:text-gray-300">{tagline}</p>
 		<a
-			href={`${safeBase}/collections`}
+			href={localizePath('/collections/', locale)}
 			class="mt-8 inline-block px-6 py-3 border-2 border-black rounded-md
                       hover:bg-black hover:text-white transition-all duration-300
+                      dark:border-white dark:hover:bg-white dark:hover:text-black
                       text-sm md:text-base font-medium
                       transform hover:scale-105 active:scale-95"
 		>
-			View Gallery
+			{t('hero.viewGallery')}
 		</a>
 	</div>
 </div>

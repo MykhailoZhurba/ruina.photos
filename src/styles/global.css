@@ -3,6 +3,11 @@
 
 @config "../../tailwind.config";
 
+/* Dark mode is driven by a class on <html> (set before first paint by the
+   script in MainLayout), so the visitor's switch can override the system
+   setting. Without this, `dark:` would only follow prefers-color-scheme. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Alpine has not initialised yet: keep x-show elements hidden to avoid a flash
    of the booking modal on first paint. */
 [x-cloak] {
@@ -31,6 +36,30 @@
 		--input: 240 5.9% 90%;
 		--ring: 240 10% 3.9%;
 		--radius: 0.5rem;
+	}
+
+	/* The body colours come from these variables, so the page background and
+	   text switch here; components add `dark:` variants for their own colours. */
+	.dark {
+		--background: 0 0% 4%;
+		--foreground: 0 0% 93%;
+		--card: 0 0% 7%;
+		--card-foreground: 0 0% 93%;
+		--popover: 0 0% 7%;
+		--popover-foreground: 0 0% 93%;
+		--primary: 0 0% 93%;
+		--primary-foreground: 0 0% 7%;
+		--secondary: 0 0% 12%;
+		--secondary-foreground: 0 0% 93%;
+		--muted: 0 0% 12%;
+		--muted-foreground: 0 0% 64%;
+		--accent: 0 0% 12%;
+		--accent-foreground: 0 0% 93%;
+		--destructive: 0 63% 45%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 0 0% 16%;
+		--input: 0 0% 16%;
+		--ring: 0 0% 83%;
 	}
 
 	body {
@@ -64,12 +93,23 @@
 		background-color: #fcfcfc;
 	}
 
+	.dark #photo-grid {
+		background-color: #0f0f0f;
+	}
+
 	.nav-link {
-		@apply relative text-base font-medium text-gray-800 transition-all duration-300 hover:text-black;
+		@apply relative text-base font-medium text-gray-800 transition-all duration-300 hover:text-black dark:text-gray-200 dark:hover:text-white;
 	}
 
 	.nav-link::after {
 		@apply content-[''] absolute w-0 h-[1px] bg-black bottom-[-2px] left-0 transition-all duration-300 ease-in-out;
+	}
+
+	/* Not `dark:bg-white` in the rule above: the dark variant appends
+	   :where(.dark …) after ::after, which is invalid CSS and gets dropped. The
+	   .dark ancestor has to come first. */
+	.dark .nav-link::after {
+		@apply bg-white;
 	}
 
 	.nav-link:hover::after {

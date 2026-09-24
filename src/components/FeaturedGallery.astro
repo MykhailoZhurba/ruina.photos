@@ -1,14 +1,15 @@
 ---
 import PhotoGrid from './PhotoGrid.astro';
 import { featuredCollectionId, getImages } from '../data/imageStore';
+import { getLocale } from '../i18n/locales';
+import { useTranslations } from '../i18n/ui';
 
 const images = await getImages({ collection: featuredCollectionId });
+const { t } = useTranslations(getLocale(Astro.url));
 ---
 
 <div class="max-w-2xl mx-auto text-center mb-16">
-	<h2 class="text-3xl md:text-4xl font-bold mb-4">Featured Works</h2>
-	<p class="text-gray-60">
-		A selection of my best automotive, portrait, aviation and street photography
-	</p>
+	<h2 class="text-3xl md:text-4xl font-bold mb-4">{t('featured.heading')}</h2>
+	<p class="text-gray-600 dark:text-gray-400">{t('featured.intro')}</p>
 </div>
 <PhotoGrid images={images} />

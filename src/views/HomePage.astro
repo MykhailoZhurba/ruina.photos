@@ -1,0 +1,25 @@
+---
+/** Home page body, shared by every language (see src/pages/index.astro and [locale]/). */
+import MainLayout from '../layouts/MainLayout.astro';
+import LandingHero from '../components/LandingHero-1.astro';
+import FeaturedGallery from '../components/FeaturedGallery.astro';
+import FeaturedWorkScroll from '../components/FeaturedWorkScroll.astro';
+import { personSchema, schemaGraph, websiteSchema } from '../data/structuredData';
+import { getLocale } from '../i18n/locales';
+import { seoFor } from '../i18n/seo';
+
+const { home } = seoFor(getLocale(Astro.url));
+const origin = Astro.site!;
+const jsonLd = schemaGraph(websiteSchema(origin), personSchema(origin));
+---
+
+<MainLayout title={home.title} description={home.description} jsonLd={jsonLd}>
+	<section class="relative min-h-screen items-center flex py-20 md:py-16 overflow-hidden">
+		<LandingHero />
+		<FeaturedWorkScroll />
+	</section>
+
+	<section class="featured-section py-20">
+		<FeaturedGallery />
+	</section>
+</MainLayout>

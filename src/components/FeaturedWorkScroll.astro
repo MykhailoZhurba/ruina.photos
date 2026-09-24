@@ -1,5 +1,9 @@
 ---
 import { ChevronDown } from 'lucide-astro';
+import { getLocale } from '../i18n/locales';
+import { useTranslations } from '../i18n/ui';
+
+const { t } = useTranslations(getLocale(Astro.url));
 ---
 
 <div
@@ -8,10 +12,10 @@ import { ChevronDown } from 'lucide-astro';
 >
 	<button
 		onclick="scrollToContent();"
-		class="flex flex-col items-center text-gray-600 hover:text-gray-900 transition-colors hover:cursor-pointer"
-		aria-label="Scroll down to see featured work"
+		class="flex flex-col items-center text-gray-600 hover:text-gray-900 transition-colors hover:cursor-pointer dark:text-gray-400 dark:hover:text-gray-100"
+		aria-label={t('hero.scroll')}
 	>
-		<span class="text-sm mb-2">Featured Work</span>
+		<span class="text-sm mb-2">{t('hero.featuredWork')}</span>
 		<ChevronDown size={24} />
 	</button>
 </div>

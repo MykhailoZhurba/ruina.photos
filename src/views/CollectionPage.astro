@@ -1,0 +1,80 @@
+---
+/** Gallery page body (all photos, or one category), shared by every language. */
+import MainLayout from '../layouts/MainLayout.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+import { getCollections, getImages } from '../data/imageStore';
+import siteConfig from '../../site.config.mjs';
+import { getLocale, localizePath } from '../i18n/locales';
+import { seoFor } from '../i18n/seo';
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+	/** Category id from gallery.yaml; undefined for "All". */
+	collection?: string;
+}
+
+const { collection } = Astro.props;
+const locale = getLocale(Astro.url);
+const { t, tOr } = useTranslations(locale);
+
+const collections = [{ id: undefined, name: t('gallery.all') }, ...(await getCollections())].map(
+	(c) => ({ ...c, name: c.id ? tOr(`collection.${c.id}`, c.name) : c.name }),
+);
+const images = await getImages(collection ? { collection } : {});
+
+// Wording for search results and the visible heading/intro. Each category gets its own,
+// so the pages are not near-duplicates of each other.
+const { gallery, collections: collectionSeo } = seoFor(locale);
+const currentName = collections.find((c) => c.id === collection)?.name ?? collection ?? '';
+const vars = { name: currentName, owner: siteConfig.owner, site: siteConfig.title };
+const seo =
+	(collection && collectionSeo[collection]) ||
+	(collection
+		? {
+				title: t('gallery.fallbackTitle', vars),
+				description: t('gallery.fallbackIntro', vars),
+				heading: t('gallery.fallbackHeading', vars),
+				intro: t('gallery.fallbackIntro', vars),
+			}
+		: gallery);
+
+// Link previews use a landscape photo from this category when there is one.
+const previewImage = (images.find((img) => img.src.width > img.src.height) ?? images[0])?.src;
+---
+
+<MainLayout title={seo.title} description={seo.description} image={previewImage}>
+	<section class="py-16 pt-24">
+		<div class="container-custom">
+			<div class="mb-16 text-center">
+				<h1 class="text-4xl md:text-5xl font-bold mb-4">{seo.heading}</h1>
+				<p class="text-gray-600 max-w-xl mx-auto dark:text-gray-400">{seo.intro}</p>
+			</div>
+
+			<div class="flex justify-center mb-10">
+				<div class="flex flex-wrap gap-2 justify-center">
+					{
+						collections.map((btn) => (
+							<a
+								href={localizePath(`/collections/${btn.id ?? ''}`, locale)}
+								aria-current={btn.id === collection ? 'page' : undefined}
+							>
+								<div
+									class:list={[
+										'px-4 py-2 border transition-all',
+										btn.id === collection
+											? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black'
+											: 'border-gray-200 text-gray-700 hover:border-gray-300 dark:border-neutral-700 dark:text-gray-300 dark:hover:border-neutral-500',
+									]}
+								>
+									{btn.name}
+								</div>
+							</a>
+						))
+					}
+				</div>
+			</div>
+		</div>
+
+		<PhotoGrid images={images} />
+	</section>
+</MainLayout>

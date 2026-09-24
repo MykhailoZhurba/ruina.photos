@@ -1,0 +1,39 @@
+---
+/**
+ * Language switcher for the mobile menu: one button-sized link per language,
+ * each pointing at the same page in that language.
+ */
+import { LOCALES, LOCALE_META, getLocale, localizePath } from '../i18n/locales';
+import { useTranslations } from '../i18n/ui';
+
+const current = getLocale(Astro.url);
+const { t } = useTranslations(current);
+const options = LOCALES.map((locale) => ({
+	locale,
+	href: localizePath(Astro.url.pathname, locale),
+	isCurrent: locale === current,
+	...LOCALE_META[locale],
+}));
+---
+
+<div role="group" aria-label={t('nav.language')} class="flex flex-wrap gap-2">
+	{
+		options.map((option) => (
+			<a
+				href={option.href}
+				hreflang={option.locale}
+				lang={option.locale}
+				title={option.name}
+				aria-current={option.isCurrent ? 'true' : undefined}
+				class:list={[
+					'rounded-md border px-3 py-1.5 text-sm font-medium transition-colors',
+					option.isCurrent
+						? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black'
+						: 'border-gray-300 text-gray-700 hover:border-black dark:border-neutral-600 dark:text-gray-300 dark:hover:border-white',
+				]}
+			>
+				{option.short}
+			</a>
+		))
+	}
+</div>

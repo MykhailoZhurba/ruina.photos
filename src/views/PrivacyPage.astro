@@ -1,0 +1,30 @@
+---
+/** Privacy notice, shared by every language. The text is one Markdown file per language. */
+import MainLayout from '../layouts/MainLayout.astro';
+import { Content as PrivacyEn } from '../content/privacy.md';
+import { Content as PrivacyLv } from '../content/privacy.lv.md';
+import { Content as PrivacyRu } from '../content/privacy.ru.md';
+import { Content as PrivacyUk } from '../content/privacy.uk.md';
+import { getLocale } from '../i18n/locales';
+import { seoFor } from '../i18n/seo';
+import { useTranslations } from '../i18n/ui';
+
+const locale = getLocale(Astro.url);
+const { t } = useTranslations(locale);
+const Notice = { en: PrivacyEn, lv: PrivacyLv, ru: PrivacyRu, uk: PrivacyUk }[locale];
+const { privacy } = seoFor(locale);
+---
+
+<MainLayout title={privacy.title} description={privacy.description}>
+	<section class="pt-32 pb-20">
+		<div class="container-custom">
+			<div class="max-w-2xl mx-auto">
+				<h1 class="text-4xl md:text-5xl font-bold mb-10 text-center">{t('privacy.heading')}</h1>
+
+				<div class="prose text-gray-700 dark:prose-invert dark:text-gray-300">
+					<Notice />
+				</div>
+			</div>
+		</div>
+	</section>
+</MainLayout>

@@ -9,7 +9,11 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
  * - Swipe or use the arrow keys to move between photos; Esc, swipe down or the X to close.
  */
 export function setupGallery() {
-	if (typeof document === 'undefined' || !document.querySelector('#photo-grid')) return;
+	const grid =
+		typeof document === 'undefined' ? null : document.querySelector<HTMLElement>('#photo-grid');
+	if (!grid) return;
+	// Button labels in the page's language, set on the grid by PhotoGrid.astro.
+	const labels = grid.dataset;
 
 	const lightbox = new PhotoSwipeLightbox({
 		gallery: '#photo-grid',
@@ -18,6 +22,12 @@ export function setupGallery() {
 
 		bgOpacity: 1,
 		wheelToZoom: true,
+
+		closeTitle: labels.lightboxClose ?? 'Close',
+		zoomTitle: labels.lightboxZoom ?? 'Zoom',
+		arrowPrevTitle: labels.lightboxPrev ?? 'Previous',
+		arrowNextTitle: labels.lightboxNext ?? 'Next',
+		errorMsg: labels.lightboxError ?? 'The image cannot be loaded',
 
 		// "Contain" the photo in the screen: as large as possible without cropping.
 		initialZoomLevel: (zoom) =>

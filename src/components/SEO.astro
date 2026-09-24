@@ -7,6 +7,8 @@ import { URL } from 'node:url';
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import siteConfig from '../../site.config.mjs';
+import { DEFAULT_LOCALE, LOCALES, LOCALE_META, getLocale, localizePath } from '../i18n/locales';
+import { useTranslations } from '../i18n/ui';
 
 interface Props {
 	title: string;
@@ -41,7 +43,22 @@ if (image) {
 	ogImage = { url: new URL(optimized.src, origin).href, width: 1200, height: 630 };
 }
 
-const socialImageAlt = imageAlt ?? `${siteConfig.title} – photograph by ${siteConfig.owner}`;
+const locale = getLocale(Astro.url);
+const { t } = useTranslations(locale);
+const socialImageAlt =
+	imageAlt ?? t('seo.imageAlt', { site: siteConfig.title, owner: siteConfig.owner });
+
+// Every public page exists in every language, so each one points at all of its
+// translations (and itself) with hreflang; x-default is the English version.
+// Pages that ask not to be indexed get none.
+const alternates =
+	noindex || hasFileExtension
+		? []
+		: LOCALES.map((l) => ({
+				hreflang: l,
+				href: new URL(localizePath(canonicalPath, l), origin).href,
+			}));
+const xDefault = alternates.find((a) => a.hreflang === DEFAULT_LOCALE)?.href;
 
 // Escape "<" so the JSON can never close the <script> tag early.
 const jsonLdString = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : undefined;
@@ -50,6 +67,8 @@ const jsonLdString = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : 
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
+{alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+{xDefault && <link rel="alternate" hreflang="x-default" href={xDefault} />}
 <meta
 	name="robots"
 	content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'}
@@ -60,6 +79,12 @@ const jsonLdString = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : 
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
+<meta property="og:locale" content={LOCALE_META[locale].ogLocale} />
+{
+	LOCALES.filter((l) => l !== locale).map((l) => (
+		<meta property="og:locale:alternate" content={LOCALE_META[l].ogLocale} />
+	))
+}
 {
 	ogImage && (
 		<>

@@ -44,6 +44,10 @@ Owner  → /admin → session cookie checked against D1 `sessions`
                    └─ /api/admin/calendar  Google Calendar, proxied server-side
 ```
 
+The visitor's auto-reply is sent in the language of the page they booked from;
+your notification stays in English and names that language (see
+[TRANSLATIONS.md](TRANSLATIONS.md)).
+
 The lead is written **before** any email is attempted, so a mail outage never
 loses an enquiry. Failures are recorded on the row (`email_status`,
 `email_error`) and flagged in the dashboard.
