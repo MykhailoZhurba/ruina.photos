@@ -12,6 +12,9 @@
     "/images/*",
     "/about",
     "/collections/*",
-    "/privacy"
+    "/privacy",
+    "/lv/*",
+    "/ru/*",
+    "/uk/*"
   ]
 }

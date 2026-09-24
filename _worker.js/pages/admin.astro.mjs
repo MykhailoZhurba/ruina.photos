@@ -1,5 +1,5 @@
 globalThis.process ??= {}; globalThis.process.env ??= {};
-import { a as createAstro, c as createComponent, e as renderHead, f as renderSlot, g as renderScript, r as renderTemplate, b as renderComponent, d as addAttribute, m as maybeRenderHead } from '../chunks/astro/server_BdF0GVBr.mjs';
+import { b as createAstro, c as createComponent, d as renderHead, e as renderSlot, f as renderScript, a as renderTemplate, r as renderComponent, g as addAttribute, m as maybeRenderHead } from '../chunks/astro/server_DAe86DXx.mjs';
 /* empty css                                 */
 import { l as listLeads, L as LEAD_STATUSES } from '../chunks/db_DqN0KZx9.mjs';
 import { c as currentAdmin } from '../chunks/session_BEjCJbxK.mjs';

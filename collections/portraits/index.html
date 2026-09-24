@@ -1,25 +1,58 @@
-<!DOCTYPE html><html lang="en" class="h-full"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/png" href="/favicon.png"><meta name="generator" content="Astro v5.8.1"><title>Portrait &amp; Cosplay Photography | Ruina Photos</title><meta name="description" content="Portrait and cosplay photography by Mykhailo Zhurba. Browse creative portraits and book a paid portrait photoshoot in Latvia."><link rel="canonical" href="https://ruina.photos/collections/portraits/"><meta name="robots" content="index, follow, max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="Ruina Photos"><meta property="og:title" content="Portrait &#38; Cosplay Photography | Ruina Photos"><meta property="og:description" content="Portrait and cosplay photography by Mykhailo Zhurba. Browse creative portraits and book a paid portrait photoshoot in Latvia."><meta property="og:url" content="https://ruina.photos/collections/portraits/"><meta property="og:image" content="https://ruina.photos/_astro/portraits-1.DCBk8PG4_1DVJ4L.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Ruina Photos – photograph by Mykhailo Zhurba"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Portrait &#38; Cosplay Photography | Ruina Photos"><meta name="twitter:description" content="Portrait and cosplay photography by Mykhailo Zhurba. Browse creative portraits and book a paid portrait photoshoot in Latvia."><meta name="twitter:image" content="https://ruina.photos/_astro/portraits-1.DCBk8PG4_1DVJ4L.jpg"><meta name="twitter:image:alt" content="Ruina Photos – photograph by Mykhailo Zhurba"><link rel="stylesheet" href="/_astro/index.D2hFw0tc.css">
+<!DOCTYPE html><html lang="en" class="h-full"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><!--
+			Theme, applied before first paint so a dark-mode visitor never sees a white
+			flash. Follows the system setting until the visitor presses the switch; their
+			choice is then kept in localStorage (it never leaves the device). Storage can be
+			unavailable (private mode, blocked site data), so every access is guarded.
+		--><script>
+			(() => {
+				const root = document.documentElement;
+				const media = window.matchMedia('(prefers-color-scheme: dark)');
+				const stored = () => {
+					try {
+						return localStorage.getItem('theme');
+					} catch {
+						return null;
+					}
+				};
+				const apply = (dark) => {
+					root.classList.toggle('dark', dark);
+					root.style.colorScheme = dark ? 'dark' : 'light';
+					document
+						.querySelectorAll('[data-theme-toggle]')
+						.forEach((button) => button.setAttribute('aria-pressed', String(dark)));
+				};
+				const saved = stored();
+				apply(saved ? saved === 'dark' : media.matches);
+
+				window.__toggleTheme = () => {
+					const dark = !root.classList.contains('dark');
+					try {
+						localStorage.setItem('theme', dark ? 'dark' : 'light');
+					} catch {
+						// Not persisted, but still switches for this page.
+					}
+					apply(dark);
+				};
+				// Follow system changes live, unless the visitor has chosen explicitly.
+				media.addEventListener('change', (event) => {
+					if (!stored()) apply(event.matches);
+				});
+				// The buttons do not exist yet at this point; sync their state once they do.
+				document.addEventListener('DOMContentLoaded', () => apply(root.classList.contains('dark')));
+			})();
+		</script><link rel="icon" type="image/png" href="/favicon.png"><meta name="generator" content="Astro v5.8.1"><title>Portrait &amp; Cosplay Photography | Ruina Photos</title><meta name="description" content="Portrait and cosplay photography by Mykhailo Zhurba. Browse creative portraits and book a paid portrait photoshoot in Latvia."><link rel="canonical" href="https://ruina.photos/collections/portraits/"><link rel="alternate" hreflang="en" href="https://ruina.photos/collections/portraits/"><link rel="alternate" hreflang="lv" href="https://ruina.photos/lv/collections/portraits/"><link rel="alternate" hreflang="ru" href="https://ruina.photos/ru/collections/portraits/"><link rel="alternate" hreflang="uk" href="https://ruina.photos/uk/collections/portraits/"><link rel="alternate" hreflang="x-default" href="https://ruina.photos/collections/portraits/"><meta name="robots" content="index, follow, max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="Ruina Photos"><meta property="og:title" content="Portrait &#38; Cosplay Photography | Ruina Photos"><meta property="og:description" content="Portrait and cosplay photography by Mykhailo Zhurba. Browse creative portraits and book a paid portrait photoshoot in Latvia."><meta property="og:url" content="https://ruina.photos/collections/portraits/"><meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="lv_LV"><meta property="og:locale:alternate" content="ru_RU"><meta property="og:locale:alternate" content="uk_UA"><meta property="og:image" content="https://ruina.photos/_astro/portraits-1.DCBk8PG4_1DVJ4L.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Ruina Photos – photograph by Mykhailo Zhurba"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Portrait &#38; Cosplay Photography | Ruina Photos"><meta name="twitter:description" content="Portrait and cosplay photography by Mykhailo Zhurba. Browse creative portraits and book a paid portrait photoshoot in Latvia."><meta name="twitter:image" content="https://ruina.photos/_astro/portraits-1.DCBk8PG4_1DVJ4L.jpg"><meta name="twitter:image:alt" content="Ruina Photos – photograph by Mykhailo Zhurba"><link rel="stylesheet" href="/_astro/index.CtlhIeD1.css">
 <link rel="stylesheet" href="/_astro/about.D6wN-5lE.css">
-<link rel="stylesheet" href="/_astro/index.CXixL5mu.css"></head> <body> <nav x-data="{ isOpen: false, scrolled: false }" @scroll.window="scrolled = window.scrollY > 50" class="fixed top-0 left-0 w-full z-50 transition-all duration-300" :class="scrolled ? 'py-3 bg-white shadow-sm' : 'py-5 bg-transparent'"> <div class="container mx-auto flex justify-between items-center"> <a href="/" id="logo" class="text-2xl md:text-4xl font-semibold tracking-tight"> Ruina Photos </a> <div class="hidden md:flex items-center space-x-8"> <a href="/" class="nav-link relative after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:h-[2px] after:bg-black after:w-0 hover:after:w-full transition-all"> Home </a><a href="/collections" class="nav-link relative after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:h-[2px] after:bg-black after:w-0 hover:after:w-full transition-all"> Gallery </a><a href="/about" class="nav-link relative after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:h-[2px] after:bg-black after:w-0 hover:after:w-full transition-all"> About </a> <!-- Opens BookingModal, which listens for this event on the window. --> <button type="button" @click="$dispatch('open-booking')" class="px-5 py-2 border-2 border-black rounded-md hover:bg-black hover:text-white transition-all duration-300 text-sm font-medium transform hover:scale-105 active:scale-95">
-Book
-</button> </div> <button @click="isOpen = !isOpen" type="button" aria-label="Menu" aria-controls="mobile-menu" :aria-expanded="isOpen ? 'true' : 'false'" class="md:hidden text-gray-800 focus:outline-none"> <svg x-show="!isOpen" aria-hidden="true" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg> <svg x-show="isOpen" aria-hidden="true" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path> </svg> </button> </div> <div id="mobile-menu" x-show="isOpen" class="md:hidden absolute top-full left-0 w-full bg-white shadow-md"> <div class="flex flex-col py-4 px-6 space-y-4"> <a href="/" class="text-lg" @click="isOpen = false"> Home </a><a href="/collections" class="text-lg" @click="isOpen = false"> Gallery </a><a href="/about" class="text-lg" @click="isOpen = false"> About </a> <button type="button" @click="isOpen = false; $dispatch('open-booking')" class="mt-2 w-full px-5 py-3 border-2 border-black rounded-md hover:bg-black hover:text-white transition-all duration-300 text-base font-medium">
-Book a shoot
-</button> </div> </div> </nav> <main>  <section class="py-16 pt-24"> <div class="container-custom"> <div class="mb-16 text-center"> <h1 class="text-4xl md:text-5xl font-bold mb-4">Portrait Photography</h1> <p class="text-gray-600 max-w-xl mx-auto">Portraits and cosplay shoots that capture the moment. Available for paid portrait photoshoots.</p> </div> <div class="flex justify-center mb-10"> <div class="flex flex-wrap gap-2 justify-center"> <a href="/collections/"> <div class="px-4 py-2 border border-gray-200 text-gray-700 hover:border-gray-300 transition-all"> All </div> </a><a href="/collections/automotive"> <div class="px-4 py-2 border border-gray-200 text-gray-700 hover:border-gray-300 transition-all"> Automotive </div> </a><a href="/collections/portraits"> <div class="px-4 py-2 border border-black bg-black text-white transition-all"> Portraits </div> </a><a href="/collections/street"> <div class="px-4 py-2 border border-gray-200 text-gray-700 hover:border-gray-300 transition-all"> Street </div> </a><a href="/collections/aviation"> <div class="px-4 py-2 border border-gray-200 text-gray-700 hover:border-gray-300 transition-all"> Aviation </div> </a> </div> </div> </div> <!--
+<link rel="stylesheet" href="/_astro/index.CXixL5mu.css"></head> <body> <!--
+	The full bar shows from `lg` (1024px) up. With the language and theme controls,
+	and the longer Russian and Ukrainian labels, it no longer fits at `md`, so
+	tablets use the menu button.
+--><nav x-data="{ isOpen: false, scrolled: false }" @scroll.window="scrolled = window.scrollY > 50" class="fixed top-0 left-0 w-full z-50 transition-all duration-300" :class="scrolled ? 'py-3 bg-white shadow-sm dark:bg-neutral-950 dark:shadow-black/40' : 'py-5 bg-transparent'"> <div class="container mx-auto flex justify-between items-center"> <a href="/" id="logo" class="text-2xl md:text-4xl font-semibold tracking-tight"> Ruina Photos </a> <div class="hidden lg:flex items-center space-x-6"> <a href="/" class="nav-link relative after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:h-[2px] after:bg-black dark:after:bg-white after:w-0 hover:after:w-full transition-all"> Home </a><a href="/collections/" class="nav-link relative after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:h-[2px] after:bg-black dark:after:bg-white after:w-0 hover:after:w-full transition-all"> Gallery </a><a href="/about/" class="nav-link relative after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:h-[2px] after:bg-black dark:after:bg-white after:w-0 hover:after:w-full transition-all"> About </a> <!-- Opens BookingModal, which listens for this event on the window. --> <button type="button" @click="$dispatch('open-booking')" class="border-2 border-black rounded-md hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 px-5 py-2 text-sm font-medium transform hover:scale-105 active:scale-95"> Book </button> <div class="flex items-center gap-1"> <div x-data="{ open: false }" @click.outside="open = false" @keydown.escape.window="open = false" class="relative"> <button type="button" @click="open = !open" :aria-expanded="open ? 'true' : 'false'" aria-controls="language-menu" aria-label="Language: English" title="Language: English" class="inline-flex items-center gap-1 rounded-md px-2 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-black/5 hover:text-black dark:text-gray-300 dark:hover:bg-white/10 dark:hover:text-white"> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="16" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="lucide lucide-globe">  <circle cx="12" cy="12" r="10"></circle> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path> <path d="M2 12h20"></path>  </svg> <span>EN</span> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="14" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="lucide lucide-chevron-down">  <path d="m6 9 6 6 6-6"></path>  </svg> </button> <ul id="language-menu" x-show="open" x-cloak x-transition.opacity class="absolute right-0 z-50 mt-2 w-44 overflow-hidden rounded-md border border-gray-200 bg-white py-1 shadow-lg dark:border-neutral-700 dark:bg-neutral-900"> <li> <a href="/collections/portraits/" hreflang="en" lang="en" aria-current="true" class="flex items-center justify-between px-4 py-2 text-sm transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800 font-semibold"> <span>English</span> <span class="text-xs text-gray-500 dark:text-gray-400">EN</span> </a> </li><li> <a href="/lv/collections/portraits/" hreflang="lv" lang="lv" class="flex items-center justify-between px-4 py-2 text-sm transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800"> <span>Latviešu</span> <span class="text-xs text-gray-500 dark:text-gray-400">LV</span> </a> </li><li> <a href="/ru/collections/portraits/" hreflang="ru" lang="ru" class="flex items-center justify-between px-4 py-2 text-sm transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800"> <span>Русский</span> <span class="text-xs text-gray-500 dark:text-gray-400">RU</span> </a> </li><li> <a href="/uk/collections/portraits/" hreflang="uk" lang="uk" class="flex items-center justify-between px-4 py-2 text-sm transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800"> <span>Українська</span> <span class="text-xs text-gray-500 dark:text-gray-400">UA</span> </a> </li> </ul> </div> <button type="button" data-theme-toggle aria-pressed="false" aria-label="Dark mode" title="Dark mode" onclick="window.__toggleTheme()" class="inline-flex h-9 w-9 items-center justify-center rounded-md text-gray-700 transition-colors hover:bg-black/5 hover:text-black dark:text-gray-300 dark:hover:bg-white/10 dark:hover:text-white"> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="20" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="lucide lucide-moon dark:hidden">  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="20" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="lucide lucide-sun hidden dark:block">  <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2"></path> <path d="M12 20v2"></path> <path d="m4.93 4.93 1.41 1.41"></path> <path d="m17.66 17.66 1.41 1.41"></path> <path d="M2 12h2"></path> <path d="M20 12h2"></path> <path d="m6.34 17.66-1.41 1.41"></path> <path d="m19.07 4.93-1.41 1.41"></path>  </svg> </button> </div> </div> <div class="flex items-center gap-1 lg:hidden"> <button type="button" data-theme-toggle aria-pressed="false" aria-label="Dark mode" title="Dark mode" onclick="window.__toggleTheme()" class="inline-flex h-9 w-9 items-center justify-center rounded-md text-gray-700 transition-colors hover:bg-black/5 hover:text-black dark:text-gray-300 dark:hover:bg-white/10 dark:hover:text-white"> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="20" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="lucide lucide-moon dark:hidden">  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="20" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="lucide lucide-sun hidden dark:block">  <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2"></path> <path d="M12 20v2"></path> <path d="m4.93 4.93 1.41 1.41"></path> <path d="m17.66 17.66 1.41 1.41"></path> <path d="M2 12h2"></path> <path d="M20 12h2"></path> <path d="m6.34 17.66-1.41 1.41"></path> <path d="m19.07 4.93-1.41 1.41"></path>  </svg> </button> <button @click="isOpen = !isOpen" type="button" aria-label="Menu" aria-controls="mobile-menu" :aria-expanded="isOpen ? 'true' : 'false'" class="p-1 text-gray-800 focus:outline-none dark:text-gray-200"> <svg x-show="!isOpen" aria-hidden="true" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg> <svg x-show="isOpen" aria-hidden="true" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path> </svg> </button> </div> </div> <div id="mobile-menu" x-show="isOpen" x-cloak class="lg:hidden absolute top-full left-0 w-full bg-white shadow-md dark:bg-neutral-900 dark:shadow-black/40"> <div class="flex flex-col py-4 px-6 space-y-4"> <a href="/" class="text-lg" @click="isOpen = false"> Home </a><a href="/collections/" class="text-lg" @click="isOpen = false"> Gallery </a><a href="/about/" class="text-lg" @click="isOpen = false"> About </a> <button type="button" @click="isOpen = false; $dispatch('open-booking')" class="border-2 border-black rounded-md hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 mt-2 w-full px-5 py-3 text-base font-medium"> Book a shoot </button> <div role="group" aria-label="Language" class="flex flex-wrap gap-2"> <a href="/collections/portraits/" hreflang="en" lang="en" title="English" aria-current="true" class="rounded-md border px-3 py-1.5 text-sm font-medium transition-colors border-black bg-black text-white dark:border-white dark:bg-white dark:text-black"> EN </a><a href="/lv/collections/portraits/" hreflang="lv" lang="lv" title="Latviešu" class="rounded-md border px-3 py-1.5 text-sm font-medium transition-colors border-gray-300 text-gray-700 hover:border-black dark:border-neutral-600 dark:text-gray-300 dark:hover:border-white"> LV </a><a href="/ru/collections/portraits/" hreflang="ru" lang="ru" title="Русский" class="rounded-md border px-3 py-1.5 text-sm font-medium transition-colors border-gray-300 text-gray-700 hover:border-black dark:border-neutral-600 dark:text-gray-300 dark:hover:border-white"> RU </a><a href="/uk/collections/portraits/" hreflang="uk" lang="uk" title="Українська" class="rounded-md border px-3 py-1.5 text-sm font-medium transition-colors border-gray-300 text-gray-700 hover:border-black dark:border-neutral-600 dark:text-gray-300 dark:hover:border-white"> UA </a> </div> </div> </div> </nav> <main>  <section class="py-16 pt-24"> <div class="container-custom"> <div class="mb-16 text-center"> <h1 class="text-4xl md:text-5xl font-bold mb-4">Portrait Photography</h1> <p class="text-gray-600 max-w-xl mx-auto dark:text-gray-400">Portraits and cosplay shoots that capture the moment. Available for paid portrait photoshoots.</p> </div> <div class="flex justify-center mb-10"> <div class="flex flex-wrap gap-2 justify-center"> <a href="/collections/"> <div class="px-4 py-2 border transition-all border-gray-200 text-gray-700 hover:border-gray-300 dark:border-neutral-700 dark:text-gray-300 dark:hover:border-neutral-500"> All </div> </a><a href="/collections/automotive/"> <div class="px-4 py-2 border transition-all border-gray-200 text-gray-700 hover:border-gray-300 dark:border-neutral-700 dark:text-gray-300 dark:hover:border-neutral-500"> Automotive </div> </a><a href="/collections/portraits/" aria-current="page"> <div class="px-4 py-2 border transition-all border-black bg-black text-white dark:border-white dark:bg-white dark:text-black"> Portraits </div> </a><a href="/collections/street/"> <div class="px-4 py-2 border transition-all border-gray-200 text-gray-700 hover:border-gray-300 dark:border-neutral-700 dark:text-gray-300 dark:hover:border-neutral-500"> Street </div> </a><a href="/collections/aviation/"> <div class="px-4 py-2 border transition-all border-gray-200 text-gray-700 hover:border-gray-300 dark:border-neutral-700 dark:text-gray-300 dark:hover:border-neutral-500"> Aviation </div> </a> </div> </div> </div> <!--
 	The grid spans the page. Side margins scale with the screen (16px on a phone, up to 80px on a
 	large monitor) and the grid stops growing at 2800px so it never becomes absurdly wide.
 	`columns-[18rem]` means "columns at least 18rem (288px) wide": the browser fits as many as it
 	can, so bigger screens automatically get more columns and photos stay a similar size.
---><section id="photo-grid" class="mx-auto w-full max-w-[2800px] px-[clamp(1rem,4vw,5rem)] py-12"> <div class="columns-[18rem] gap-6 space-y-6"> <div class="break-inside-avoid"> <a href="/_astro/portraits-1.DCBk8PG4_wYReN.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-1.DCBk8PG4_Z2wjESW.webp" alt="Portrait photography by Ruina Photos, image 1" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-2.DQplm3aV_22tz7i.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-2.DQplm3aV_Z1YlsOm.webp" alt="Portrait photography by Ruina Photos, image 2" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-3.DP7tjTHY_ZEeD7K.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-3.DP7tjTHY_ZUBQPn.webp" alt="Portrait photography by Ruina Photos, image 3" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-4.CrgARfSr_2cjekU.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-4.CrgARfSr_277EzB.webp" alt="Portrait photography by Ruina Photos, image 4" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-5.DhIvV2nR_1Q5757.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-5.DhIvV2nR_Z10FxUv.webp" alt="Portrait photography by Ruina Photos, image 5" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-6.3hescxRd_Z16PqqO.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-6.3hescxRd_2wagH.webp" alt="Portrait photography by Ruina Photos, image 6" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-7.7jSDNz6M_Z1jWuB8.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-7.7jSDNz6M_ZrTNJw.webp" alt="Portrait photography by Ruina Photos, image 7" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-8.DQw7mIGE_Z91UhE.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-8.DQw7mIGE_2cuYek.webp" alt="Portrait photography by Ruina Photos, image 8" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-9.Cw_xm8P9_256IWj.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-9.Cw_xm8P9_2qTgy8.webp" alt="Portrait photography by Ruina Photos, image 9" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div> </div> </section> <script type="module" src="/_astro/PhotoGrid.astro_astro_type_script_index_0_lang.D8ETR_pW.js"></script>  </section>  </main> <footer class="py-10 border-t border-gray-100 mt-auto"> <div class="container mx-auto"> <div class="flex flex-col md:flex-row justify-between items-center"> <div class="text-sm font-sans text-gray-500 mb-4 md:mb-0">
-© 2026 Mykhailo Zhurba. All rights reserved.
-<a href="/privacy/" class="ml-2 underline hover:text-gray-800">Privacy</a> </div> <div class="flex space-x-6"> <a href="https://www.facebook.com/ruina.photos/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gray-800 transition-colors duration-200" aria-label="Ruina Photos on Facebook" title="Ruina Photos on Facebook"> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="20" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" class="lucide lucide-facebook">  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>  </svg> </a><a href="https://www.instagram.com/ruina.photos/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gray-800 transition-colors duration-200" aria-label="Ruina Photos on Instagram" title="Ruina Photos on Instagram"> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="20" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" class="lucide lucide-instagram">  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect> <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path> <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>  </svg> </a><a href="https://www.instagram.com/mikelino1370/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gray-800 transition-colors duration-200" aria-label="Mykhailo Zhurba on Instagram" title="Mykhailo Zhurba on Instagram"> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="20" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" class="lucide lucide-instagram">  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect> <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path> <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>  </svg> </a> </div> </div> </div> </footer> <div x-data="bookingModal" x-on:open-booking.window="open()" x-on:keydown.escape.window="close()" x-show="isOpen" x-cloak class="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto p-4 sm:items-center sm:p-6">  <div x-show="isOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="close()" class="fixed inset-0 bg-black/50" aria-hidden="true"></div> <div x-ref="dialog" x-show="isOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-3" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-3" @keydown.tab="trapFocus($event)" role="dialog" aria-modal="true" aria-labelledby="booking-title" class="relative my-auto w-full max-w-lg border border-gray-200 bg-white p-6 shadow-xl sm:p-8"> <button @click="close()" type="button" aria-label="Close booking form" class="absolute top-4 right-4 text-gray-400 transition-colors hover:text-black"> <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path> </svg> </button>  <div x-show="!done"> <h2 id="booking-title" class="text-2xl">Book a shoot</h2> <p class="mt-2 text-sm text-gray-600">
-Leave your email and I will write back with the details. Everything below the email is
-				optional — fill in what you already know.
-</p> <form @submit.prevent="submit()" class="mt-6 space-y-4" novalidate>  <div class="absolute left-[-9999px] h-0 w-0 overflow-hidden" aria-hidden="true"> <label for="booking-website">Leave this field empty</label> <input id="booking-website" type="text" x-model="form.website" tabindex="-1" autocomplete="off"> </div> <div> <label for="booking-email" class="block text-sm font-medium">
-Email <span class="text-red-600" aria-hidden="true">*</span> </label> <input id="booking-email" x-ref="emailInput" type="email" x-model="form.email" required autocomplete="email" placeholder="you@example.com" :aria-invalid="errorField === 'email' ? 'true' : 'false'" aria-describedby="booking-error" class="mt-1 w-full border border-gray-300 px-3 py-2 transition-colors focus:border-black focus:outline-none" :class="errorField === 'email' ? 'border-red-500' : ''"> </div> <div class="grid gap-4 sm:grid-cols-2"> <div> <label for="booking-name" class="block text-sm font-medium">Name</label> <input id="booking-name" type="text" x-model="form.name" autocomplete="name" class="mt-1 w-full border border-gray-300 px-3 py-2 transition-colors focus:border-black focus:outline-none"> </div> <div> <label for="booking-date" class="block text-sm font-medium">Preferred date</label> <input id="booking-date" x-ref="dateInput" type="date" x-model="form.preferredDate" :aria-invalid="errorField === 'preferredDate' ? 'true' : 'false'" class="mt-1 w-full border border-gray-300 px-3 py-2 transition-colors focus:border-black focus:outline-none" :class="errorField === 'preferredDate' ? 'border-red-500' : ''"> </div> </div> <div> <label for="booking-type" class="block text-sm font-medium">Type of shoot</label> <select id="booking-type" x-model="form.shootType" class="mt-1 w-full border border-gray-300 bg-white px-3 py-2 transition-colors focus:border-black focus:outline-none"> <option value="">Not sure yet</option> <option value="Automotive">Automotive</option><option value="Portrait">Portrait</option><option value="Cosplay">Cosplay</option><option value="Aviation">Aviation</option><option value="Event">Event</option><option value="Street">Street</option><option value="Something else">Something else</option> </select> </div> <div> <label for="booking-message" class="block text-sm font-medium">Anything else?</label> <textarea id="booking-message" x-model="form.message" rows="3" maxlength="2000" placeholder="Location, mood, how many people…" class="mt-1 w-full resize-y border border-gray-300 px-3 py-2 transition-colors focus:border-black focus:outline-none"></textarea> </div> <p id="booking-error" x-show="errorMessage" x-text="errorMessage" role="alert" class="text-sm text-red-600"></p>  <button type="submit" :disabled="sending" class="mt-2 w-full transform rounded-md border-2 border-black px-6 py-3 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-black hover:text-white active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-white disabled:hover:text-black md:text-base"> <span x-text="sending ? 'Sending…' : 'Send enquiry'">Send enquiry</span> </button> <p class="text-center text-xs text-gray-500">
-Your email is used only to reply about your shoot.
-</p> </form> </div>  <div x-show="done" class="py-6 text-center"> <h2 x-ref="successHeading" tabindex="-1" class="text-2xl focus:outline-none">Thank you</h2> <p x-text="successMessage" class="mt-3 text-gray-600"></p> <button @click="close()" type="button" class="mt-6 rounded-md border-2 border-black px-6 py-2 text-sm font-medium transition-all duration-300 hover:bg-black hover:text-white">
-Close
-</button> </div> </div> </div> <script>
+--><!-- The viewer's button labels, in the page's language (read by photo-grid.ts). --><section id="photo-grid" class="mx-auto w-full max-w-[2800px] px-[clamp(1rem,4vw,5rem)] py-12" data-lightbox-close="Close" data-lightbox-zoom="Zoom" data-lightbox-prev="Previous" data-lightbox-next="Next" data-lightbox-error="The image cannot be loaded"> <div class="columns-[18rem] gap-6 space-y-6"> <div class="break-inside-avoid"> <a href="/_astro/portraits-1.DCBk8PG4_wYReN.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-1.DCBk8PG4_Z2wjESW.webp" alt="Portrait photography by Ruina Photos, image 1" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-2.DQplm3aV_22tz7i.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-2.DQplm3aV_Z1YlsOm.webp" alt="Portrait photography by Ruina Photos, image 2" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-3.DP7tjTHY_ZEeD7K.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-3.DP7tjTHY_ZUBQPn.webp" alt="Portrait photography by Ruina Photos, image 3" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-4.CrgARfSr_2cjekU.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-4.CrgARfSr_277EzB.webp" alt="Portrait photography by Ruina Photos, image 4" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-5.DhIvV2nR_1Q5757.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-5.DhIvV2nR_Z10FxUv.webp" alt="Portrait photography by Ruina Photos, image 5" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-6.3hescxRd_Z16PqqO.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-6.3hescxRd_2wagH.webp" alt="Portrait photography by Ruina Photos, image 6" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-7.7jSDNz6M_Z1jWuB8.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-7.7jSDNz6M_ZrTNJw.webp" alt="Portrait photography by Ruina Photos, image 7" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-8.DQw7mIGE_Z91UhE.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-8.DQw7mIGE_2cuYek.webp" alt="Portrait photography by Ruina Photos, image 8" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div><div class="break-inside-avoid"> <a href="/_astro/portraits-9.Cw_xm8P9_256IWj.webp" class="pswp-item block transition-transform duration-500 hover:scale-[1.05]" data-pswp-width="2048" data-pswp-height="2560"> <img src="/_astro/portraits-9.Cw_xm8P9_2qTgy8.webp" alt="Portrait photography by Ruina Photos, image 9" width="800" height="1000" loading="lazy" decoding="async" class="shadow-2xl rounded-sm"> </a> </div> </div> </section> <script type="module" src="/_astro/PhotoGrid.astro_astro_type_script_index_0_lang.DNPsvUB3.js"></script>  </section>  </main> <footer class="py-10 border-t border-gray-100 mt-auto dark:border-neutral-800"> <div class="container mx-auto"> <div class="flex flex-col md:flex-row justify-between items-center"> <div class="text-sm font-sans text-gray-500 mb-4 md:mb-0 dark:text-gray-400">
+© 2026 Mykhailo Zhurba. All rights reserved. <a href="/privacy/" class="ml-2 underline hover:text-gray-800 dark:hover:text-gray-200"> Privacy </a> </div> <div class="flex space-x-6"> <a href="https://www.facebook.com/ruina.photos/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gray-800 transition-colors duration-200 dark:text-gray-400 dark:hover:text-gray-200" aria-label="Ruina Photos on Facebook" title="Ruina Photos on Facebook"> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="20" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" class="lucide lucide-facebook">  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>  </svg> </a><a href="https://www.instagram.com/ruina.photos/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gray-800 transition-colors duration-200 dark:text-gray-400 dark:hover:text-gray-200" aria-label="Ruina Photos on Instagram" title="Ruina Photos on Instagram"> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="20" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" class="lucide lucide-instagram">  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect> <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path> <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>  </svg> </a><a href="https://www.instagram.com/mikelino1370/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gray-800 transition-colors duration-200 dark:text-gray-400 dark:hover:text-gray-200" aria-label="Mykhailo Zhurba on Instagram" title="Mykhailo Zhurba on Instagram"> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="20" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" class="lucide lucide-instagram">  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect> <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path> <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>  </svg> </a> </div> </div> </div> </footer> <script type="application/json" id="booking-i18n">{"locale":"en","labels":{"send":"Send enquiry","sending":"Sending…"},"messages":{"email_required":"Please enter your email address.","email_invalid":"That email address does not look right.","date_invalid":"Please choose a date that has not already passed.","too_long":"That message is too long.","rate_limited":"That is a few enquiries in a row — please try again shortly.","server_error":"Something went wrong on my end. Please try again.","malformed":"Something went wrong. Please try again.","network":"Could not reach the server. Please check your connection.","generic":"Something went wrong. Please try again.","sent":"Thank you — check your inbox, I have sent you a note.","stored":"Thank you — I have your enquiry and will be in touch by email shortly."}}</script><div x-data="bookingModal" x-on:open-booking.window="open()" x-on:keydown.escape.window="close()" x-show="isOpen" x-cloak class="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto p-4 sm:items-center sm:p-6">  <div x-show="isOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="close()" class="fixed inset-0 bg-black/50 dark:bg-black/70" aria-hidden="true"></div> <div x-ref="dialog" x-show="isOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-3" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-3" @keydown.tab="trapFocus($event)" role="dialog" aria-modal="true" aria-labelledby="booking-title" class="relative my-auto w-full max-w-lg border border-gray-200 bg-white p-6 shadow-xl sm:p-8 dark:border-neutral-700 dark:bg-neutral-900"> <button @click="close()" type="button" aria-label="Close booking form" class="absolute top-4 right-4 text-gray-400 transition-colors hover:text-black dark:hover:text-white"> <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path> </svg> </button>  <div x-show="!done"> <h2 id="booking-title" class="text-2xl">Book a shoot</h2> <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Leave your email and I will write back with the details. Everything below the email is optional — fill in what you already know.</p> <form @submit.prevent="submit()" class="mt-6 space-y-4" novalidate>  <div class="absolute left-[-9999px] h-0 w-0 overflow-hidden" aria-hidden="true"> <label for="booking-website">Leave this field empty</label> <input id="booking-website" type="text" x-model="form.website" tabindex="-1" autocomplete="off"> </div> <div> <label for="booking-email" class="block text-sm font-medium"> Email <span class="text-red-600 dark:text-red-400" aria-hidden="true">*</span> </label> <input id="booking-email" x-ref="emailInput" type="email" x-model="form.email" required autocomplete="email" placeholder="you@example.com" :aria-invalid="errorField === 'email' ? 'true' : 'false'" aria-describedby="booking-error" class="mt-1 w-full border border-gray-300 bg-white px-3 py-2 transition-colors placeholder:text-gray-400 focus:border-black focus:outline-none dark:border-neutral-600 dark:bg-neutral-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-white" :class="errorField === 'email' ? 'border-red-500 dark:border-red-400' : ''"> </div> <div class="grid gap-4 sm:grid-cols-2"> <div> <label for="booking-name" class="block text-sm font-medium">Name</label> <input id="booking-name" type="text" x-model="form.name" autocomplete="name" class="mt-1 w-full border border-gray-300 bg-white px-3 py-2 transition-colors placeholder:text-gray-400 focus:border-black focus:outline-none dark:border-neutral-600 dark:bg-neutral-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-white"> </div> <div> <label for="booking-date" class="block text-sm font-medium">Preferred date</label> <input id="booking-date" x-ref="dateInput" type="date" x-model="form.preferredDate" :aria-invalid="errorField === 'preferredDate' ? 'true' : 'false'" class="mt-1 w-full border border-gray-300 bg-white px-3 py-2 transition-colors placeholder:text-gray-400 focus:border-black focus:outline-none dark:border-neutral-600 dark:bg-neutral-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-white" :class="errorField === 'preferredDate' ? 'border-red-500 dark:border-red-400' : ''"> </div> </div> <div> <label for="booking-type" class="block text-sm font-medium">Type of shoot</label> <select id="booking-type" x-model="form.shootType" class="mt-1 w-full border border-gray-300 bg-white px-3 py-2 transition-colors placeholder:text-gray-400 focus:border-black focus:outline-none dark:border-neutral-600 dark:bg-neutral-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-white"> <option value="">Not sure yet</option> <option value="Automotive">Automotive</option><option value="Portrait">Portrait</option><option value="Cosplay">Cosplay</option><option value="Event">Event</option><option value="Street">Street</option><option value="Something else">Something else</option> </select> </div> <div> <label for="booking-message" class="block text-sm font-medium"> Anything else? </label> <textarea id="booking-message" x-model="form.message" rows="3" maxlength="2000" placeholder="Location, mood, how many people…" class="mt-1 w-full border border-gray-300 bg-white px-3 py-2 transition-colors placeholder:text-gray-400 focus:border-black focus:outline-none dark:border-neutral-600 dark:bg-neutral-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-white resize-y"></textarea> </div> <p id="booking-error" x-show="errorMessage" x-text="errorMessage" role="alert" class="text-sm text-red-600 dark:text-red-400"></p>  <button type="submit" :disabled="sending" class="rounded-md border-2 border-black font-medium transition-all duration-300 hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black mt-2 w-full transform px-6 py-3 text-sm hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-transparent disabled:hover:text-inherit md:text-base"> <span x-text="sending ? labels.sending : labels.send">Send enquiry</span> </button> <p class="text-center text-xs text-gray-500 dark:text-gray-400">Your email is used only to reply about your shoot.</p> </form> </div>  <div x-show="done" class="py-6 text-center"> <h2 x-ref="successHeading" tabindex="-1" class="text-2xl focus:outline-none"> Thank you </h2> <p x-text="successMessage" class="mt-3 text-gray-600 dark:text-gray-400"></p> <button @click="close()" type="button" class="rounded-md border-2 border-black font-medium transition-all duration-300 hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black mt-6 px-6 py-2 text-sm"> Close </button> </div> </div> </div> <script>
 	document.addEventListener('alpine:init', () => {
 		const emptyForm = () => ({
 			email: '',
@@ -30,106 +63,125 @@ Close
 			website: '',
 		});
 
-		window.Alpine.data('bookingModal', () => ({
-			isOpen: false,
-			sending: false,
-			done: false,
-			errorMessage: '',
-			errorField: '',
-			successMessage: '',
-			returnFocusTo: null,
-			form: emptyForm(),
+		// Translated text for this page, rendered by the component above.
+		const readI18n = () => {
+			try {
+				return JSON.parse(document.getElementById('booking-i18n').textContent);
+			} catch {
+				return { locale: 'en', labels: {}, messages: {} };
+			}
+		};
 
-			open() {
-				// Remember where focus came from so closing can put it back.
-				this.returnFocusTo = document.activeElement;
-				this.isOpen = true;
-				this.done = false;
-				this.errorMessage = '';
-				this.errorField = '';
-				document.body.style.overflow = 'hidden';
-				this.$nextTick(() => {
-					if (this.$refs.dateInput) {
-						this.$refs.dateInput.min = new Date().toISOString().slice(0, 10);
-					}
-					if (this.$refs.emailInput) this.$refs.emailInput.focus();
-				});
-			},
+		window.Alpine.data('bookingModal', () => {
+			const i18n = readI18n();
+			// Prefer the translation for the server's `code`; its English text is the
+			// fallback for a code this page does not know.
+			const message = (code, fallback) =>
+				(code && i18n.messages[code]) || fallback || i18n.messages.generic;
 
-			close() {
-				if (!this.isOpen) return;
-				this.isOpen = false;
-				document.body.style.overflow = '';
-				if (this.returnFocusTo && typeof this.returnFocusTo.focus === 'function') {
-					this.returnFocusTo.focus();
-				}
-			},
+			return {
+				isOpen: false,
+				sending: false,
+				done: false,
+				errorMessage: '',
+				errorField: '',
+				successMessage: '',
+				returnFocusTo: null,
+				labels: i18n.labels,
+				form: emptyForm(),
 
-			/** Keeps Tab inside the dialog while it is open. */
-			trapFocus(event) {
-				const candidates = this.$refs.dialog.querySelectorAll(
-					'a[href], button:not([disabled]), input:not([type="hidden"]), select, textarea',
-				);
-				const visible = Array.prototype.filter.call(
-					candidates,
-					(el) => el.offsetParent !== null && el.tabIndex !== -1,
-				);
-				if (visible.length === 0) return;
-				const first = visible[0];
-				const last = visible[visible.length - 1];
-				if (event.shiftKey && document.activeElement === first) {
-					event.preventDefault();
-					last.focus();
-				} else if (!event.shiftKey && document.activeElement === last) {
-					event.preventDefault();
-					first.focus();
-				}
-			},
-
-			async submit() {
-				if (this.sending) return;
-				this.errorMessage = '';
-				this.errorField = '';
-
-				const email = this.form.email.trim();
-				if (email === '' || email.indexOf('@') < 1 || /\s/.test(email)) {
-					this.errorMessage = 'Please enter a valid email address.';
-					this.errorField = 'email';
-					this.$nextTick(() => this.$refs.emailInput.focus());
-					return;
-				}
-
-				this.sending = true;
-				try {
-					const response = await fetch('/api/booking', {
-						method: 'POST',
-						headers: { 'Content-Type': 'application/json' },
-						body: JSON.stringify(this.form),
-					});
-					const payload = await response.json().catch(() => ({}));
-
-					if (!response.ok || !payload.ok) {
-						this.errorMessage = payload.error || 'Something went wrong. Please try again.';
-						this.errorField = payload.field || '';
-						if (this.errorField === 'email') {
-							this.$nextTick(() => this.$refs.emailInput.focus());
+				open() {
+					// Remember where focus came from so closing can put it back.
+					this.returnFocusTo = document.activeElement;
+					this.isOpen = true;
+					this.done = false;
+					this.errorMessage = '';
+					this.errorField = '';
+					document.body.style.overflow = 'hidden';
+					this.$nextTick(() => {
+						if (this.$refs.dateInput) {
+							this.$refs.dateInput.min = new Date().toISOString().slice(0, 10);
 						}
+						if (this.$refs.emailInput) this.$refs.emailInput.focus();
+					});
+				},
+
+				close() {
+					if (!this.isOpen) return;
+					this.isOpen = false;
+					document.body.style.overflow = '';
+					if (this.returnFocusTo && typeof this.returnFocusTo.focus === 'function') {
+						this.returnFocusTo.focus();
+					}
+				},
+
+				/** Keeps Tab inside the dialog while it is open. */
+				trapFocus(event) {
+					const candidates = this.$refs.dialog.querySelectorAll(
+						'a[href], button:not([disabled]), input:not([type="hidden"]), select, textarea',
+					);
+					const visible = Array.prototype.filter.call(
+						candidates,
+						(el) => el.offsetParent !== null && el.tabIndex !== -1,
+					);
+					if (visible.length === 0) return;
+					const first = visible[0];
+					const last = visible[visible.length - 1];
+					if (event.shiftKey && document.activeElement === first) {
+						event.preventDefault();
+						last.focus();
+					} else if (!event.shiftKey && document.activeElement === last) {
+						event.preventDefault();
+						first.focus();
+					}
+				},
+
+				async submit() {
+					if (this.sending) return;
+					this.errorMessage = '';
+					this.errorField = '';
+
+					const email = this.form.email.trim();
+					if (email === '' || email.indexOf('@') < 1 || /\s/.test(email)) {
+						this.errorMessage = message(email === '' ? 'email_required' : 'email_invalid');
+						this.errorField = 'email';
+						this.$nextTick(() => this.$refs.emailInput.focus());
 						return;
 					}
 
-					this.successMessage = payload.message || 'Thank you — check your inbox.';
-					this.done = true;
-					this.form = emptyForm();
-					// Move focus to the confirmation so screen readers announce it.
-					this.$nextTick(() => {
-						if (this.$refs.successHeading) this.$refs.successHeading.focus();
-					});
-				} catch {
-					this.errorMessage = 'Could not reach the server. Please check your connection.';
-				} finally {
-					this.sending = false;
-				}
-			},
-		}));
+					this.sending = true;
+					try {
+						const response = await fetch('/api/booking', {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json' },
+							// The page's language, so the visitor's auto-reply is in it too.
+							body: JSON.stringify({ ...this.form, locale: i18n.locale }),
+						});
+						const payload = await response.json().catch(() => ({}));
+
+						if (!response.ok || !payload.ok) {
+							this.errorMessage = message(payload.code, payload.error);
+							this.errorField = payload.field || '';
+							if (this.errorField === 'email') {
+								this.$nextTick(() => this.$refs.emailInput.focus());
+							}
+							return;
+						}
+
+						this.successMessage = message(payload.code, payload.message);
+						this.done = true;
+						this.form = emptyForm();
+						// Move focus to the confirmation so screen readers announce it.
+						this.$nextTick(() => {
+							if (this.$refs.successHeading) this.$refs.successHeading.focus();
+						});
+					} catch {
+						this.errorMessage = message('network');
+					} finally {
+						this.sending = false;
+					}
+				},
+			};
+		});
 	});
 </script> <script type="module" src="/_astro/MainLayout.astro_astro_type_script_index_0_lang.CXPMX3ER.js"></script> </body> </html>

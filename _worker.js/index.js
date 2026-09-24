@@ -1,7 +1,7 @@
 globalThis.process ??= {}; globalThis.process.env ??= {};
 import { renderers } from './renderers.mjs';
-import { c as createExports, s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_C_65fPqw.mjs';
-import { manifest } from './manifest_DtLyHgCF.mjs';
+import { c as createExports, s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_S-qs8H_3.mjs';
+import { manifest } from './manifest_C6lLxpg_.mjs';
 
 const serverIslandMap = new Map();;
 
@@ -16,7 +16,11 @@ const _page7 = () => import('./pages/api/auth/logout.astro.mjs');
 const _page8 = () => import('./pages/api/booking.astro.mjs');
 const _page9 = () => import('./pages/collections/_---collection_.astro.mjs');
 const _page10 = () => import('./pages/privacy.astro.mjs');
-const _page11 = () => import('./pages/index.astro.mjs');
+const _page11 = () => import('./pages/_locale_/about.astro.mjs');
+const _page12 = () => import('./pages/_locale_/collections/_---collection_.astro.mjs');
+const _page13 = () => import('./pages/_locale_/privacy.astro.mjs');
+const _page14 = () => import('./pages/_locale_.astro.mjs');
+const _page15 = () => import('./pages/index.astro.mjs');
 const pageMap = new Map([
     ["node_modules/@astrojs/cloudflare/dist/entrypoints/image-endpoint.js", _page0],
     ["src/pages/about.astro", _page1],
@@ -29,7 +33,11 @@ const pageMap = new Map([
     ["src/pages/api/booking.ts", _page8],
     ["src/pages/collections/[...collection].astro", _page9],
     ["src/pages/privacy.astro", _page10],
-    ["src/pages/index.astro", _page11]
+    ["src/pages/[locale]/about.astro", _page11],
+    ["src/pages/[locale]/collections/[...collection].astro", _page12],
+    ["src/pages/[locale]/privacy.astro", _page13],
+    ["src/pages/[locale]/index.astro", _page14],
+    ["src/pages/index.astro", _page15]
 ]);
 
 const _manifest = Object.assign(manifest, {
