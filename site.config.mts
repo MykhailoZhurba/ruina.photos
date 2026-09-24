@@ -54,7 +54,7 @@ const seo: SiteSeo = {
 	about: {
 		title: 'About Mykhailo Zhurba – Photographer | Ruina Photos',
 		description:
-			'Mykhailo Zhurba is the photographer behind Ruina Photos: automotive, portrait, aviation and aerial photography. Learn about the work and how to book a shoot.',
+			'Mykhailo Zhurba is the photographer behind Ruina Photos: automotive, portrait and aviation photography. Learn about the work and how to book a shoot.',
 	},
 
 	privacy: {

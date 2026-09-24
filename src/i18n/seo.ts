@@ -27,7 +27,7 @@ const lv: SiteSeo = {
 	about: {
 		title: 'Par Mykhailo Zhurba – fotogrāfs | Ruina Photos',
 		description:
-			'Mykhailo Zhurba – fotogrāfs aiz Ruina Photos: auto, portretu, aviācijas un aerofotogrāfija. Uzziniet par darbu un to, kā rezervēt fotosesiju.',
+			'Mykhailo Zhurba – fotogrāfs aiz Ruina Photos: auto, portretu un aviācijas fotogrāfija. Uzziniet par darbu un to, kā rezervēt fotosesiju.',
 	},
 	privacy: {
 		title: 'Privātums | Ruina Photos',
@@ -92,7 +92,7 @@ const ru: SiteSeo = {
 	about: {
 		title: 'Mykhailo Zhurba – фотограф | Ruina Photos',
 		description:
-			'Mykhailo Zhurba — фотограф Ruina Photos: автомобильная, портретная, авиационная фотография и аэросъёмка. О работе и о том, как записаться на съёмку.',
+			'Mykhailo Zhurba — фотограф Ruina Photos: автомобильная, портретная и авиационная фотография. О работе и о том, как записаться на съёмку.',
 	},
 	privacy: {
 		title: 'Конфиденциальность | Ruina Photos',
@@ -158,7 +158,7 @@ const uk: SiteSeo = {
 	about: {
 		title: 'Mykhailo Zhurba – фотограф | Ruina Photos',
 		description:
-			'Mykhailo Zhurba — фотограф Ruina Photos: автомобільна, портретна, авіаційна фотографія та аерозйомка. Про роботу і про те, як записатися на зйомку.',
+			'Mykhailo Zhurba — фотограф Ruina Photos: автомобільна, портретна й авіаційна фотографія. Про роботу і про те, як записатися на зйомку.',
 	},
 	privacy: {
 		title: 'Конфіденційність | Ruina Photos',

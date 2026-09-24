@@ -11,12 +11,11 @@ Esmu Mykhailo Zhurba, fotogrāfs, kas strādā Latvijā. Fotografēju jau dažus
 - **Auto:** automašīnas pasākumos un uz vietas, kā arī drifts, ko fotografēju kā LatviaDrift mediju pārstāvis.
 - **Portreti:** portretu un kospleja fotosesijas.
 - **Aviācija:** reaktīvās lidmašīnas un citi gaisa kuģi aviošovos.
-- **Aerofotogrāfija:** fotografēšana no gaisa maksas projektiem.
 - **Ielas:** vecpilsētas ielas un pilsētas ikdienas mirkļi.
 
 #### Sadarbība
 
-Piedāvāju maksas fotosesijas: portretu, auto un aerofotogrāfiju. Esmu atvērts visiem priekšlikumiem un piedāvājumiem.
+Piedāvāju maksas portretu un auto fotosesijas. Esmu atvērts visiem priekšlikumiem un piedāvājumiem.
 
 #### Sazinieties ar mani
 
