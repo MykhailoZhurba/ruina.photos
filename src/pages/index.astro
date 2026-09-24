@@ -1,23 +1,5 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import LandingHero from '../components/LandingHero-1.astro';
-import FeaturedGallery from '../components/FeaturedGallery.astro';
-import FeaturedWorkScroll from '../components/FeaturedWorkScroll.astro';
-import siteConfig from '../../site.config.mjs';
-import { personSchema, schemaGraph, websiteSchema } from '../data/structuredData';
-
-const { home } = siteConfig.seo;
-const origin = Astro.site!;
-const jsonLd = schemaGraph(websiteSchema(origin), personSchema(origin));
+import HomePage from '../views/HomePage.astro';
 ---
 
-<MainLayout title={home.title} description={home.description} jsonLd={jsonLd}>
-	<section class="relative min-h-screen items-center flex py-20 md:py-16 overflow-hidden">
-		<LandingHero />
-		<FeaturedWorkScroll />
-	</section>
-
-	<section class="featured-section py-20">
-		<FeaturedGallery />
-	</section>
-</MainLayout>
+<HomePage />

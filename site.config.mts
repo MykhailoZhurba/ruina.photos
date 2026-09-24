@@ -2,11 +2,12 @@ import type { AstroInstance } from 'astro';
 import { Facebook, Instagram } from 'lucide-astro';
 
 export interface SocialLink {
-	/** Stable key. `privacy.astro` looks entries up by this exact value. */
+	/** Stable key. SocialIcon maps it to a translated label (src/i18n/ui.ts). */
 	name: string;
 	/**
-	 * Accessible name and hover tooltip. Needed where two entries share an icon
-	 * (both Instagram accounts) so they are distinguishable. Falls back to `name`.
+	 * English accessible name and hover tooltip, used when no translation exists.
+	 * Needed where two entries share an icon (both Instagram accounts) so they
+	 * are distinguishable. Falls back to `name`.
 	 */
 	label?: string;
 	url: string;
@@ -53,12 +54,13 @@ const seo: SiteSeo = {
 	about: {
 		title: 'About Mykhailo Zhurba – Photographer | Ruina Photos',
 		description:
-			'Mykhailo Zhurba is the photographer behind Ruina Photos: automotive, portrait, aviation and aerial photography. Learn about the work and how to book a shoot.',
+			'Mykhailo Zhurba is the photographer behind Ruina Photos: automotive, portrait and aviation photography. Learn about the work and how to book a shoot.',
 	},
 
 	privacy: {
 		title: 'Privacy | Ruina Photos',
-		description: 'How Ruina Photos handles your data: no cookies, no analytics and no tracking.',
+		description:
+			'How Ruina Photos handles your data: no cookies, analytics or tracking, and booking enquiries used only to reply.',
 	},
 
 	gallery: {
@@ -120,15 +122,7 @@ export default {
 	ownerEmail: 'vitoruina@gmail.com',
 
 	/** Options offered in the booking popup's "type of shoot" dropdown. */
-	shootTypes: [
-		'Automotive',
-		'Portrait',
-		'Cosplay',
-		'Aviation',
-		'Event',
-		'Street',
-		'Something else',
-	],
+	shootTypes: ['Automotive', 'Portrait', 'Cosplay', 'Event', 'Street', 'Something else'],
 
 	favicon: 'favicon.png',
 	owner: 'Mykhailo Zhurba',

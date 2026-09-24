@@ -1,80 +1,16 @@
 ---
-import MainLayout from '../../layouts/MainLayout.astro';
-import PhotoGrid from '../../components/PhotoGrid.astro';
-import { getCollections, getImages } from '../../data/imageStore';
-import siteConfig from '../../../site.config.mjs';
-
-const allCollection = {
-	id: undefined,
-	name: 'All',
-};
-
-const collections = [allCollection, ...(await getCollections())];
-const { collection } = Astro.params;
-const images = await getImages(collection ? { collection } : {});
-
-// Wording for search results and the visible heading/intro. Each category gets its own,
-// so the pages are not near-duplicates of each other.
-const { gallery, collections: collectionSeo } = siteConfig.seo;
-const currentCollection = collections.find((c) => c.id === collection);
-const seo =
-	(collection && collectionSeo[collection]) ||
-	(collection
-		? {
-				title: `${currentCollection?.name ?? collection} Photography | ${siteConfig.title}`,
-				description: `${currentCollection?.name ?? collection} photography by ${siteConfig.owner}.`,
-				heading: `${currentCollection?.name ?? collection} Photography`,
-				intro: `${currentCollection?.name ?? collection} photography by ${siteConfig.owner}.`,
-			}
-		: gallery);
-
-// Link previews use a landscape photo from this category when there is one.
-const previewImage = (images.find((img) => img.src.width > img.src.height) ?? images[0])?.src;
-
-// Helper to prevent "//" double slash bug
-const base = import.meta.env.BASE_URL;
-const safeBase = base.endsWith('/') ? base.slice(0, -1) : base;
+import CollectionPage from '../../views/CollectionPage.astro';
+import { getCollections } from '../../data/imageStore';
 
 export const getStaticPaths = async () => {
-	const cols = await getCollections();
-	// Use 'c' instead of 'collection' to avoid shadowing errors
-	return [{ id: undefined }, ...cols].map((c) => {
-		return {
-			params: { collection: c.id },
-		};
-	});
+	const collections = await getCollections();
+	// `undefined` is the "All" page at /collections/.
+	return [undefined, ...collections.map((c) => c.id)].map((collection) => ({
+		params: { collection },
+	}));
 };
+
+const { collection } = Astro.params;
 ---
 
-<MainLayout title={seo.title} description={seo.description} image={previewImage}>
-	<section class="py-16 pt-24">
-		<div class="container-custom">
-			<div class="mb-16 text-center">
-				<h1 class="text-4xl md:text-5xl font-bold mb-4">{seo.heading}</h1>
-				<p class="text-gray-600 max-w-xl mx-auto">{seo.intro}</p>
-			</div>
-
-			<div class="flex justify-center mb-10">
-				<div class="flex flex-wrap gap-2 justify-center">
-					{
-						collections.map((btn) => (
-							<a href={`${safeBase}/collections/${btn.id ? btn.id : ''}`}>
-								<div
-									class={`px-4 py-2 border ${
-										btn.id === collection
-											? 'border-black bg-black text-white'
-											: 'border-gray-200 text-gray-700 hover:border-gray-300'
-									} transition-all`}
-								>
-									{btn.name}
-								</div>
-							</a>
-						))
-					}
-				</div>
-			</div>
-		</div>
-
-		<PhotoGrid images={images} />
-	</section>
-</MainLayout>
+<CollectionPage collection={collection} />

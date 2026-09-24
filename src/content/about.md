@@ -11,12 +11,11 @@ I'm Mykhailo Zhurba, a photographer working in Latvia. I've been shooting for a 
 - **Automotive:** cars at events and on location, plus drift coverage as current media for LatviaDrift.
 - **Portraits:** portrait and cosplay shoots.
 - **Aviation:** jets and aircraft at airshows.
-- **Aerial:** aerial photography for paid projects.
 - **Street:** old-town streets and everyday city moments.
 
 #### Work with me
 
-I do paid photoshoots: portrait, automotive and aerial. I'm open to all proposals and offers.
+I do paid photoshoots: portrait and automotive. I'm open to all proposals and offers.
 
 #### Get in touch
 

@@ -20,6 +20,8 @@ import NavBar from '../components/NavBar.astro';
 import BookingModal from '../components/BookingModal.astro';
 import SEO from '../components/SEO.astro';
 import { featuredCollectionId, getImages } from '../data/imageStore';
+import { getLocale } from '../i18n/locales';
+import { seoFor } from '../i18n/seo';
 
 interface Props {
 	title?: string;
@@ -31,9 +33,12 @@ interface Props {
 	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
+const locale = getLocale(Astro.url);
+const homeSeo = seoFor(locale).home;
+
 const {
-	title = siteConfig.seo.home.title,
-	description = siteConfig.seo.home.description,
+	title = homeSeo.title,
+	description = homeSeo.description,
 	image,
 	imageAlt,
 	noindex,
@@ -48,10 +53,54 @@ const featured = await getImages({ collection: featuredCollectionId });
 const defaultImage = (featured.find((img) => img.src.width > img.src.height) ?? featured[0])?.src;
 ---
 
-<html lang="en" class="h-full">
+<html lang={locale} class="h-full">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--
+			Theme, applied before first paint so a dark-mode visitor never sees a white
+			flash. Follows the system setting until the visitor presses the switch; their
+			choice is then kept in localStorage (it never leaves the device). Storage can be
+			unavailable (private mode, blocked site data), so every access is guarded.
+		-->
+		<script is:inline>
+			(() => {
+				const root = document.documentElement;
+				const media = window.matchMedia('(prefers-color-scheme: dark)');
+				const stored = () => {
+					try {
+						return localStorage.getItem('theme');
+					} catch {
+						return null;
+					}
+				};
+				const apply = (dark) => {
+					root.classList.toggle('dark', dark);
+					root.style.colorScheme = dark ? 'dark' : 'light';
+					document
+						.querySelectorAll('[data-theme-toggle]')
+						.forEach((button) => button.setAttribute('aria-pressed', String(dark)));
+				};
+				const saved = stored();
+				apply(saved ? saved === 'dark' : media.matches);
+
+				window.__toggleTheme = () => {
+					const dark = !root.classList.contains('dark');
+					try {
+						localStorage.setItem('theme', dark ? 'dark' : 'light');
+					} catch {
+						// Not persisted, but still switches for this page.
+					}
+					apply(dark);
+				};
+				// Follow system changes live, unless the visitor has chosen explicitly.
+				media.addEventListener('change', (event) => {
+					if (!stored()) apply(event.matches);
+				});
+				// The buttons do not exist yet at this point; sync their state once they do.
+				document.addEventListener('DOMContentLoaded', () => apply(root.classList.contains('dark')));
+			})();
+		</script>
 		<link rel="icon" type="image/png" href={`${safeBase}/${favicon}`} />
 		<meta name="generator" content={Astro.generator} />
 		<SEO

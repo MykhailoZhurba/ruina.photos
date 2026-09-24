@@ -5,12 +5,18 @@ import { Image, getImage } from 'astro:assets';
 import type { Image as ImageType } from '../data/galleryData';
 import { featuredCollectionId } from '../data/imageStore';
 import siteConfig from '../../site.config.mjs';
+import { getLocale } from '../i18n/locales';
+import { seoFor } from '../i18n/seo';
+import { useTranslations } from '../i18n/ui';
 
 interface Props {
 	images: ImageType[];
 }
 
 const { images } = Astro.props;
+const locale = getLocale(Astro.url);
+const { t } = useTranslations(locale);
+const { categoryLabels } = seoFor(locale);
 
 // The photo viewer shows a resized copy (long edge 2560px) instead of the multi-megabyte original,
 // so photos open and zoom quickly, including on phones. Small originals are never enlarged.
@@ -41,9 +47,10 @@ const viewerImage = async (image: ImageType) => {
 const altFor = (image: ImageType): string => {
 	if (image.description?.trim()) return image.description.trim();
 	const categoryId = image.collections.find((id) => id !== featuredCollectionId);
-	const label = (categoryId && siteConfig.seo.categoryLabels[categoryId]) || 'Photography';
+	const label = (categoryId && categoryLabels[categoryId]) || t('alt.default');
 	const number = image.title.match(/(\d+)\s*$/)?.[1];
-	return `${label} by ${siteConfig.title}${number ? `, image ${number}` : ''}`;
+	const alt = t('alt.photo', { label, site: siteConfig.title });
+	return number ? `${alt}, ${t('alt.number', { n: number })}` : alt;
 };
 ---
 
@@ -52,8 +59,16 @@ const altFor = (image: ImageType): string => {
 	large monitor) and the grid stops growing at 2800px so it never becomes absurdly wide.
 	`columns-[18rem]` means "columns at least 18rem (288px) wide": the browser fits as many as it
 	can, so bigger screens automatically get more columns and photos stay a similar size.
--->
-<section id="photo-grid" class="mx-auto w-full max-w-[2800px] px-[clamp(1rem,4vw,5rem)] py-12">
+--><!-- The viewer's button labels, in the page's language (read by photo-grid.ts). -->
+<section
+	id="photo-grid"
+	class="mx-auto w-full max-w-[2800px] px-[clamp(1rem,4vw,5rem)] py-12"
+	data-lightbox-close={t('lightbox.close')}
+	data-lightbox-zoom={t('lightbox.zoom')}
+	data-lightbox-prev={t('lightbox.prev')}
+	data-lightbox-next={t('lightbox.next')}
+	data-lightbox-error={t('lightbox.error')}
+>
 	<div class="columns-[18rem] gap-6 space-y-6">
 		{
 			images.map(async (image) => {

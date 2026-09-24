@@ -1,21 +1,28 @@
 ---
 import siteConfig from '../../site.config.mjs';
+import { getLocale, localizePath } from '../i18n/locales';
+import { useTranslations } from '../i18n/ui';
 import SocialIcon from './SocialIcon.astro';
 
 const year = new Date().getFullYear();
 const owner = siteConfig.owner;
-const base = import.meta.env.BASE_URL;
-const safeBase = base.endsWith('/') ? base.slice(0, -1) : base;
+const locale = getLocale(Astro.url);
+const { t } = useTranslations(locale);
 const socialLinks = siteConfig.socialLinks;
 ---
 
-<footer class="py-10 border-t border-gray-100 mt-auto">
+<footer class="py-10 border-t border-gray-100 mt-auto dark:border-neutral-800">
 	<div class="container mx-auto">
 		<div class="flex flex-col md:flex-row justify-between items-center">
-			<div class="text-sm font-sans text-gray-500 mb-4 md:mb-0">
+			<div class="text-sm font-sans text-gray-500 mb-4 md:mb-0 dark:text-gray-400">
 				© {year}
-				{owner}. All rights reserved.
-				<a href={`${safeBase}/privacy/`} class="ml-2 underline hover:text-gray-800">Privacy</a>
+				{owner}. {t('footer.rights')}
+				<a
+					href={localizePath('/privacy/', locale)}
+					class="ml-2 underline hover:text-gray-800 dark:hover:text-gray-200"
+				>
+					{t('footer.privacy')}
+				</a>
 			</div>
 
 			<div class="flex space-x-6">

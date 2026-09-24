@@ -23,9 +23,17 @@ export type BookingInput = {
 	message: string | null;
 };
 
+/** Stable machine-readable reason; the popup maps it to a translated message. */
+export type ValidationCode =
+	| 'malformed'
+	| 'rejected'
+	| 'email_required'
+	| 'email_invalid'
+	| 'date_invalid';
+
 export type ValidationResult =
 	| { ok: true; value: BookingInput }
-	| { ok: false; error: string; field?: string };
+	| { ok: false; code: ValidationCode; error: string; field?: string };
 
 const CONTROL_CHARS = /[\p{Cc}]/gu;
 
@@ -91,28 +99,39 @@ function normalizeDate(raw: string | null): { ok: true; value: string | null } |
 
 export function validateBooking(body: unknown, allowedShootTypes: string[]): ValidationResult {
 	if (typeof body !== 'object' || body === null) {
-		return { ok: false, error: 'Malformed request.' };
+		return { ok: false, code: 'malformed', error: 'Malformed request.' };
 	}
 	const input = body as Record<string, unknown>;
 
 	// Honeypot: a hidden field no human ever sees. Bots that autofill every input
 	// give themselves away here.
 	if (clean(input.website, 100) !== null) {
-		return { ok: false, error: 'Rejected.' };
+		return { ok: false, code: 'rejected', error: 'Rejected.' };
 	}
 
 	const email = clean(input.email, LIMITS.email)?.toLowerCase() ?? null;
 	if (email === null) {
-		return { ok: false, error: 'Please enter your email address.', field: 'email' };
+		return {
+			ok: false,
+			code: 'email_required',
+			error: 'Please enter your email address.',
+			field: 'email',
+		};
 	}
 	if (!isPlausibleEmail(email)) {
-		return { ok: false, error: 'That email address does not look right.', field: 'email' };
+		return {
+			ok: false,
+			code: 'email_invalid',
+			error: 'That email address does not look right.',
+			field: 'email',
+		};
 	}
 
 	const date = normalizeDate(clean(input.preferredDate, LIMITS.preferredDate));
 	if (!date.ok) {
 		return {
 			ok: false,
+			code: 'date_invalid',
 			error: 'Please choose a date that has not already passed.',
 			field: 'preferredDate',
 		};

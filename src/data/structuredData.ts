@@ -1,4 +1,5 @@
 import siteConfig from '../../site.config.mjs';
+import { LOCALES } from '../i18n/locales';
 
 /**
  * schema.org JSON-LD helpers.
@@ -31,7 +32,8 @@ export const websiteSchema = (origin: URL) => ({
 	'@id': new URL('/#website', origin).href,
 	url: origin.href,
 	name: siteConfig.title,
-	inLanguage: 'en',
+	// The site is published in every one of these languages.
+	inLanguage: [...LOCALES],
 	publisher: { '@id': personId(origin) },
 });
 

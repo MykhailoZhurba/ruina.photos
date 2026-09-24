@@ -1,0 +1,8 @@
+---
+import PrivacyPage from '../../views/PrivacyPage.astro';
+import { PREFIXED_LOCALES } from '../../i18n/locales';
+
+export const getStaticPaths = () => PREFIXED_LOCALES.map((locale) => ({ params: { locale } }));
+---
+
+<PrivacyPage />

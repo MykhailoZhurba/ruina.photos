@@ -14,7 +14,15 @@ export default defineConfig({
 		platformProxy: { enabled: true },
 		imageService: 'compile',
 	}),
-	integrations: [sitemap()],
+	integrations: [
+		// Links each page to its other language versions (xhtml:link alternates).
+		sitemap({
+			i18n: {
+				defaultLocale: 'en',
+				locales: { en: 'en', lv: 'lv', ru: 'ru', uk: 'uk' },
+			},
+		}),
+	],
 	vite: {
 		plugins: [tailwindcss()],
 	},

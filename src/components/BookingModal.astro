@@ -1,7 +1,45 @@
 ---
 import siteConfig from '../../site.config.mjs';
+import { getLocale } from '../i18n/locales';
+import { shootTypeKey, useTranslations } from '../i18n/ui';
 
-const shootTypes: string[] = siteConfig.shootTypes;
+const locale = getLocale(Astro.url);
+const { t, tOr } = useTranslations(locale);
+
+// The value sent to the server stays the English shoot type from the config
+// (the server validates it and emails it to the owner); only the label shown
+// here is translated.
+const shootTypes = (siteConfig.shootTypes as string[]).map((value) => ({
+	value,
+	label: tOr(shootTypeKey(value), value),
+}));
+
+// Text the script below needs. Messages are keyed by the `code` the booking
+// endpoint returns. Passed as JSON in a script tag rather than an attribute
+// (Astro strips backslashes from attribute values), with "<" escaped so the
+// JSON can never close the tag early.
+const i18n = JSON.stringify({
+	locale,
+	labels: { send: t('booking.send'), sending: t('booking.sending') },
+	messages: {
+		email_required: t('booking.err.email_required'),
+		email_invalid: t('booking.err.email_invalid'),
+		date_invalid: t('booking.err.date_invalid'),
+		too_long: t('booking.err.too_long'),
+		rate_limited: t('booking.err.rate_limited'),
+		server_error: t('booking.err.server_error'),
+		malformed: t('booking.err.generic'),
+		network: t('booking.err.network'),
+		generic: t('booking.err.generic'),
+		sent: t('booking.ok.sent'),
+		stored: t('booking.ok.stored'),
+	},
+}).replace(/</g, '\\u003c');
+
+const field =
+	'mt-1 w-full border border-gray-300 bg-white px-3 py-2 transition-colors placeholder:text-gray-400 focus:border-black focus:outline-none dark:border-neutral-600 dark:bg-neutral-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-white';
+const outlined =
+	'rounded-md border-2 border-black font-medium transition-all duration-300 hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black';
 ---
 
 {
@@ -16,6 +54,8 @@ const shootTypes: string[] = siteConfig.shootTypes;
   `alpine:init` listener is guaranteed to be attached in time.
 */
 }
+<script type="application/json" id="booking-i18n" set:html={i18n} />
+
 <div
 	x-data="bookingModal"
 	x-on:open-booking.window="open()"
@@ -34,7 +74,7 @@ const shootTypes: string[] = siteConfig.shootTypes;
 		x-transition:leave-start="opacity-100"
 		x-transition:leave-end="opacity-0"
 		@click="close()"
-		class="fixed inset-0 bg-black/50"
+		class="fixed inset-0 bg-black/50 dark:bg-black/70"
 		aria-hidden="true"
 	>
 	</div>
@@ -52,13 +92,13 @@ const shootTypes: string[] = siteConfig.shootTypes;
 		role="dialog"
 		aria-modal="true"
 		aria-labelledby="booking-title"
-		class="relative my-auto w-full max-w-lg border border-gray-200 bg-white p-6 shadow-xl sm:p-8"
+		class="relative my-auto w-full max-w-lg border border-gray-200 bg-white p-6 shadow-xl sm:p-8 dark:border-neutral-700 dark:bg-neutral-900"
 	>
 		<button
 			@click="close()"
 			type="button"
-			aria-label="Close booking form"
-			class="absolute top-4 right-4 text-gray-400 transition-colors hover:text-black"
+			aria-label={t('booking.closeForm')}
+			class="absolute top-4 right-4 text-gray-400 transition-colors hover:text-black dark:hover:text-white"
 		>
 			<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				<path
@@ -71,11 +111,8 @@ const shootTypes: string[] = siteConfig.shootTypes;
 
 		{/* Enquiry form */}
 		<div x-show="!done">
-			<h2 id="booking-title" class="text-2xl">Book a shoot</h2>
-			<p class="mt-2 text-sm text-gray-600">
-				Leave your email and I will write back with the details. Everything below the email is
-				optional — fill in what you already know.
-			</p>
+			<h2 id="booking-title" class="text-2xl">{t('booking.title')}</h2>
+			<p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{t('booking.intro')}</p>
 
 			<form @submit.prevent="submit()" class="mt-6 space-y-4" novalidate>
 				{
@@ -97,7 +134,8 @@ const shootTypes: string[] = siteConfig.shootTypes;
 
 				<div>
 					<label for="booking-email" class="block text-sm font-medium">
-						Email <span class="text-red-600" aria-hidden="true">*</span>
+						{t('booking.email')}
+						<span class="text-red-600 dark:text-red-400" aria-hidden="true">*</span>
 					</label>
 					<input
 						id="booking-email"
@@ -109,58 +147,55 @@ const shootTypes: string[] = siteConfig.shootTypes;
 						placeholder="you@example.com"
 						:aria-invalid="errorField === 'email' ? 'true' : 'false'"
 						aria-describedby="booking-error"
-						class="mt-1 w-full border border-gray-300 px-3 py-2 transition-colors focus:border-black focus:outline-none"
-						:class="errorField === 'email' ? 'border-red-500' : ''"
+						class={field}
+						:class="errorField === 'email' ? 'border-red-500 dark:border-red-400' : ''"
 					/>
 				</div>
 
 				<div class="grid gap-4 sm:grid-cols-2">
 					<div>
-						<label for="booking-name" class="block text-sm font-medium">Name</label>
+						<label for="booking-name" class="block text-sm font-medium">{t('booking.name')}</label>
 						<input
 							id="booking-name"
 							type="text"
 							x-model="form.name"
 							autocomplete="name"
-							class="mt-1 w-full border border-gray-300 px-3 py-2 transition-colors focus:border-black focus:outline-none"
+							class={field}
 						/>
 					</div>
 					<div>
-						<label for="booking-date" class="block text-sm font-medium">Preferred date</label>
+						<label for="booking-date" class="block text-sm font-medium">{t('booking.date')}</label>
 						<input
 							id="booking-date"
 							x-ref="dateInput"
 							type="date"
 							x-model="form.preferredDate"
 							:aria-invalid="errorField === 'preferredDate' ? 'true' : 'false'"
-							class="mt-1 w-full border border-gray-300 px-3 py-2 transition-colors focus:border-black focus:outline-none"
-							:class="errorField === 'preferredDate' ? 'border-red-500' : ''"
+							class={field}
+							:class="errorField === 'preferredDate' ? 'border-red-500 dark:border-red-400' : ''"
 						/>
 					</div>
 				</div>
 
 				<div>
-					<label for="booking-type" class="block text-sm font-medium">Type of shoot</label>
-					<select
-						id="booking-type"
-						x-model="form.shootType"
-						class="mt-1 w-full border border-gray-300 bg-white px-3 py-2 transition-colors focus:border-black focus:outline-none"
-					>
-						<option value="">Not sure yet</option>
-						{shootTypes.map((type) => <option value={type}>{type}</option>)}
+					<label for="booking-type" class="block text-sm font-medium">{t('booking.type')}</label>
+					<select id="booking-type" x-model="form.shootType" class={field}>
+						<option value="">{t('booking.typeUnsure')}</option>
+						{shootTypes.map((type) => <option value={type.value}>{type.label}</option>)}
 					</select>
 				</div>
 
 				<div>
-					<label for="booking-message" class="block text-sm font-medium">Anything else?</label>
+					<label for="booking-message" class="block text-sm font-medium">
+						{t('booking.message')}
+					</label>
 					<textarea
 						id="booking-message"
 						x-model="form.message"
 						rows="3"
 						maxlength="2000"
-						placeholder="Location, mood, how many people…"
-						class="mt-1 w-full resize-y border border-gray-300 px-3 py-2 transition-colors focus:border-black focus:outline-none"
-					></textarea>
+						placeholder={t('booking.messagePlaceholder')}
+						class:list={[field, 'resize-y']}></textarea>
 				</div>
 
 				<p
@@ -168,7 +203,7 @@ const shootTypes: string[] = siteConfig.shootTypes;
 					x-show="errorMessage"
 					x-text="errorMessage"
 					role="alert"
-					class="text-sm text-red-600"
+					class="text-sm text-red-600 dark:text-red-400"
 				>
 				</p>
 
@@ -181,27 +216,26 @@ const shootTypes: string[] = siteConfig.shootTypes;
 				<button
 					type="submit"
 					:disabled="sending"
-					class="mt-2 w-full transform rounded-md border-2 border-black px-6 py-3 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-black hover:text-white active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-white disabled:hover:text-black md:text-base"
+					class:list={[
+						outlined,
+						'mt-2 w-full transform px-6 py-3 text-sm hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-transparent disabled:hover:text-inherit md:text-base',
+					]}
 				>
-					<span x-text="sending ? 'Sending…' : 'Send enquiry'">Send enquiry</span>
+					<span x-text="sending ? labels.sending : labels.send">{t('booking.send')}</span>
 				</button>
 
-				<p class="text-center text-xs text-gray-500">
-					Your email is used only to reply about your shoot.
-				</p>
+				<p class="text-center text-xs text-gray-500 dark:text-gray-400">{t('booking.note')}</p>
 			</form>
 		</div>
 
 		{/* Success state */}
 		<div x-show="done" class="py-6 text-center">
-			<h2 x-ref="successHeading" tabindex="-1" class="text-2xl focus:outline-none">Thank you</h2>
-			<p x-text="successMessage" class="mt-3 text-gray-600"></p>
-			<button
-				@click="close()"
-				type="button"
-				class="mt-6 rounded-md border-2 border-black px-6 py-2 text-sm font-medium transition-all duration-300 hover:bg-black hover:text-white"
-			>
-				Close
+			<h2 x-ref="successHeading" tabindex="-1" class="text-2xl focus:outline-none">
+				{t('booking.thanks')}
+			</h2>
+			<p x-text="successMessage" class="mt-3 text-gray-600 dark:text-gray-400"></p>
+			<button @click="close()" type="button" class:list={[outlined, 'mt-6 px-6 py-2 text-sm']}>
+				{t('booking.done')}
 			</button>
 		</div>
 	</div>
@@ -218,106 +252,125 @@ const shootTypes: string[] = siteConfig.shootTypes;
 			website: '',
 		});
 
-		window.Alpine.data('bookingModal', () => ({
-			isOpen: false,
-			sending: false,
-			done: false,
-			errorMessage: '',
-			errorField: '',
-			successMessage: '',
-			returnFocusTo: null,
-			form: emptyForm(),
+		// Translated text for this page, rendered by the component above.
+		const readI18n = () => {
+			try {
+				return JSON.parse(document.getElementById('booking-i18n').textContent);
+			} catch {
+				return { locale: 'en', labels: {}, messages: {} };
+			}
+		};
 
-			open() {
-				// Remember where focus came from so closing can put it back.
-				this.returnFocusTo = document.activeElement;
-				this.isOpen = true;
-				this.done = false;
-				this.errorMessage = '';
-				this.errorField = '';
-				document.body.style.overflow = 'hidden';
-				this.$nextTick(() => {
-					if (this.$refs.dateInput) {
-						this.$refs.dateInput.min = new Date().toISOString().slice(0, 10);
-					}
-					if (this.$refs.emailInput) this.$refs.emailInput.focus();
-				});
-			},
+		window.Alpine.data('bookingModal', () => {
+			const i18n = readI18n();
+			// Prefer the translation for the server's `code`; its English text is the
+			// fallback for a code this page does not know.
+			const message = (code, fallback) =>
+				(code && i18n.messages[code]) || fallback || i18n.messages.generic;
 
-			close() {
-				if (!this.isOpen) return;
-				this.isOpen = false;
-				document.body.style.overflow = '';
-				if (this.returnFocusTo && typeof this.returnFocusTo.focus === 'function') {
-					this.returnFocusTo.focus();
-				}
-			},
+			return {
+				isOpen: false,
+				sending: false,
+				done: false,
+				errorMessage: '',
+				errorField: '',
+				successMessage: '',
+				returnFocusTo: null,
+				labels: i18n.labels,
+				form: emptyForm(),
 
-			/** Keeps Tab inside the dialog while it is open. */
-			trapFocus(event) {
-				const candidates = this.$refs.dialog.querySelectorAll(
-					'a[href], button:not([disabled]), input:not([type="hidden"]), select, textarea',
-				);
-				const visible = Array.prototype.filter.call(
-					candidates,
-					(el) => el.offsetParent !== null && el.tabIndex !== -1,
-				);
-				if (visible.length === 0) return;
-				const first = visible[0];
-				const last = visible[visible.length - 1];
-				if (event.shiftKey && document.activeElement === first) {
-					event.preventDefault();
-					last.focus();
-				} else if (!event.shiftKey && document.activeElement === last) {
-					event.preventDefault();
-					first.focus();
-				}
-			},
-
-			async submit() {
-				if (this.sending) return;
-				this.errorMessage = '';
-				this.errorField = '';
-
-				const email = this.form.email.trim();
-				if (email === '' || email.indexOf('@') < 1 || /\s/.test(email)) {
-					this.errorMessage = 'Please enter a valid email address.';
-					this.errorField = 'email';
-					this.$nextTick(() => this.$refs.emailInput.focus());
-					return;
-				}
-
-				this.sending = true;
-				try {
-					const response = await fetch('/api/booking', {
-						method: 'POST',
-						headers: { 'Content-Type': 'application/json' },
-						body: JSON.stringify(this.form),
-					});
-					const payload = await response.json().catch(() => ({}));
-
-					if (!response.ok || !payload.ok) {
-						this.errorMessage = payload.error || 'Something went wrong. Please try again.';
-						this.errorField = payload.field || '';
-						if (this.errorField === 'email') {
-							this.$nextTick(() => this.$refs.emailInput.focus());
+				open() {
+					// Remember where focus came from so closing can put it back.
+					this.returnFocusTo = document.activeElement;
+					this.isOpen = true;
+					this.done = false;
+					this.errorMessage = '';
+					this.errorField = '';
+					document.body.style.overflow = 'hidden';
+					this.$nextTick(() => {
+						if (this.$refs.dateInput) {
+							this.$refs.dateInput.min = new Date().toISOString().slice(0, 10);
 						}
+						if (this.$refs.emailInput) this.$refs.emailInput.focus();
+					});
+				},
+
+				close() {
+					if (!this.isOpen) return;
+					this.isOpen = false;
+					document.body.style.overflow = '';
+					if (this.returnFocusTo && typeof this.returnFocusTo.focus === 'function') {
+						this.returnFocusTo.focus();
+					}
+				},
+
+				/** Keeps Tab inside the dialog while it is open. */
+				trapFocus(event) {
+					const candidates = this.$refs.dialog.querySelectorAll(
+						'a[href], button:not([disabled]), input:not([type="hidden"]), select, textarea',
+					);
+					const visible = Array.prototype.filter.call(
+						candidates,
+						(el) => el.offsetParent !== null && el.tabIndex !== -1,
+					);
+					if (visible.length === 0) return;
+					const first = visible[0];
+					const last = visible[visible.length - 1];
+					if (event.shiftKey && document.activeElement === first) {
+						event.preventDefault();
+						last.focus();
+					} else if (!event.shiftKey && document.activeElement === last) {
+						event.preventDefault();
+						first.focus();
+					}
+				},
+
+				async submit() {
+					if (this.sending) return;
+					this.errorMessage = '';
+					this.errorField = '';
+
+					const email = this.form.email.trim();
+					if (email === '' || email.indexOf('@') < 1 || /\s/.test(email)) {
+						this.errorMessage = message(email === '' ? 'email_required' : 'email_invalid');
+						this.errorField = 'email';
+						this.$nextTick(() => this.$refs.emailInput.focus());
 						return;
 					}
 
-					this.successMessage = payload.message || 'Thank you — check your inbox.';
-					this.done = true;
-					this.form = emptyForm();
-					// Move focus to the confirmation so screen readers announce it.
-					this.$nextTick(() => {
-						if (this.$refs.successHeading) this.$refs.successHeading.focus();
-					});
-				} catch {
-					this.errorMessage = 'Could not reach the server. Please check your connection.';
-				} finally {
-					this.sending = false;
-				}
-			},
-		}));
+					this.sending = true;
+					try {
+						const response = await fetch('/api/booking', {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json' },
+							// The page's language, so the visitor's auto-reply is in it too.
+							body: JSON.stringify({ ...this.form, locale: i18n.locale }),
+						});
+						const payload = await response.json().catch(() => ({}));
+
+						if (!response.ok || !payload.ok) {
+							this.errorMessage = message(payload.code, payload.error);
+							this.errorField = payload.field || '';
+							if (this.errorField === 'email') {
+								this.$nextTick(() => this.$refs.emailInput.focus());
+							}
+							return;
+						}
+
+						this.successMessage = message(payload.code, payload.message);
+						this.done = true;
+						this.form = emptyForm();
+						// Move focus to the confirmation so screen readers announce it.
+						this.$nextTick(() => {
+							if (this.$refs.successHeading) this.$refs.successHeading.focus();
+						});
+					} catch {
+						this.errorMessage = message('network');
+					} finally {
+						this.sending = false;
+					}
+				},
+			};
+		});
 	});
 </script>

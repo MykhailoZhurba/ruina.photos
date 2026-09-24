@@ -1,0 +1,17 @@
+---
+import CollectionPage from '../../../views/CollectionPage.astro';
+import { getCollections } from '../../../data/imageStore';
+import { PREFIXED_LOCALES } from '../../../i18n/locales';
+
+export const getStaticPaths = async () => {
+	const collections = await getCollections();
+	const ids = [undefined, ...collections.map((c) => c.id)];
+	return PREFIXED_LOCALES.flatMap((locale) =>
+		ids.map((collection) => ({ params: { locale, collection } })),
+	);
+};
+
+const { collection } = Astro.params;
+---
+
+<CollectionPage collection={collection} />

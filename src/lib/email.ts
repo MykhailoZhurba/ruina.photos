@@ -7,6 +7,9 @@
  */
 
 import type { LeadRow } from './db';
+import { emailStrings, type EmailStrings } from '../i18n/email';
+import { DEFAULT_LOCALE, LOCALE_META, type Locale } from '../i18n/locales';
+import { shootTypeKey, useTranslations } from '../i18n/ui';
 
 const RESEND_ENDPOINT = 'https://api.resend.com/emails';
 
@@ -59,9 +62,9 @@ async function send(env: MailEnv, args: SendArgs): Promise<void> {
 }
 
 /** Wraps body content in the plain, serif shell used by both emails. */
-function layout(bodyHtml: string, ownerName: string): string {
+function layout(bodyHtml: string, ownerName: string, locale: Locale = DEFAULT_LOCALE): string {
 	return `<!doctype html>
-<html><body style="margin:0;padding:24px;background:#f6f6f6;font-family:Georgia,'Times New Roman',serif;color:#111;">
+<html lang="${locale}"><body style="margin:0;padding:24px;background:#f6f6f6;font-family:Georgia,'Times New Roman',serif;color:#111;">
 <div style="max-width:560px;margin:0 auto;background:#fff;padding:32px;border:1px solid #e5e5e5;">
 ${bodyHtml}
 <p style="margin:32px 0 0;padding-top:16px;border-top:1px solid #eee;font-size:13px;color:#777;">
@@ -71,62 +74,93 @@ ${escapeHtml(ownerName)} &middot; ruina.photos
 }
 
 /**
- * The questions still worth asking. Anything the visitor already answered in the
- * popup is left out, so nobody is asked to repeat themselves.
+ * The questions still worth asking, in the visitor's language. Anything they
+ * already answered in the popup is left out, so nobody is asked to repeat
+ * themselves.
  */
-function outstandingQuestions(lead: LeadRow): string[] {
+function outstandingQuestions(lead: LeadRow, s: EmailStrings): string[] {
 	const questions: string[] = [];
-	if (lead.preferred_date === null)
-		questions.push('What date (or rough window) do you have in mind?');
-	if (lead.shoot_type === null) questions.push('What kind of shoot is it?');
-	questions.push('Where would you like to shoot, and roughly how long do you need?');
-	questions.push('How many people will be in front of the camera?');
-	if (lead.message === null) questions.push('Anything else about the look or mood you are after?');
+	if (lead.preferred_date === null) questions.push(s.qDate);
+	if (lead.shoot_type === null) questions.push(s.qType);
+	questions.push(s.qPlace);
+	questions.push(s.qPeople);
+	if (lead.message === null) questions.push(s.qMood);
 	return questions;
 }
 
-export async function sendAutoReply(env: MailEnv, lead: LeadRow, ownerName: string): Promise<void> {
-	const greeting = lead.name === null ? 'Hello,' : `Hi ${escapeHtml(lead.name)},`;
-	const questions = outstandingQuestions(lead);
+/**
+ * What the visitor already told us, as "label: value" pairs. A list rather than
+ * a sentence ("a portrait shoot"), because inflected languages cannot drop a
+ * noun into a fixed sentence and stay grammatical.
+ */
+function knownDetails(lead: LeadRow, s: EmailStrings, locale: Locale): Array<[string, string]> {
+	const { tOr } = useTranslations(locale);
+	const known: Array<[string, string]> = [];
+	if (lead.shoot_type !== null) {
+		known.push([s.typeLabel, tOr(shootTypeKey(lead.shoot_type), lead.shoot_type)]);
+	}
+	if (lead.preferred_date !== null) known.push([s.dateLabel, lead.preferred_date]);
+	return known;
+}
 
-	const known: string[] = [];
-	if (lead.shoot_type !== null) known.push(`a ${lead.shoot_type.toLowerCase()} shoot`);
-	if (lead.preferred_date !== null) known.push(`around ${lead.preferred_date}`);
-	const knownLine =
+export async function sendAutoReply(
+	env: MailEnv,
+	lead: LeadRow,
+	ownerName: string,
+	locale: Locale = DEFAULT_LOCALE,
+): Promise<void> {
+	const s = emailStrings[locale] ?? emailStrings[DEFAULT_LOCALE];
+	// A replacer function, not a string: a name containing "$&" must not be
+	// expanded by String.replace.
+	const name = lead.name;
+	const greeting = name === null ? s.hello : s.helloName.replace('{name}', () => name);
+	const questions = outstandingQuestions(lead, s);
+	const known = knownDetails(lead, s, locale);
+
+	const knownHtml =
 		known.length > 0
-			? `<p style="margin:0 0 16px;">I have you down for ${escapeHtml(known.join(', '))}.</p>`
+			? `<p style="margin:0 0 8px;">${escapeHtml(s.soFar)}</p>
+<ul style="margin:0 0 16px;padding-left:20px;">
+${known.map(([label, value]) => `<li style="margin-bottom:4px;">${escapeHtml(label)}: ${escapeHtml(value)}</li>`).join('\n')}
+</ul>`
 			: '';
 
 	const html = layout(
-		`<p style="margin:0 0 16px;">${greeting}</p>
-<p style="margin:0 0 16px;">Thank you for getting in touch about a shoot — I am glad you did.</p>
-${knownLine}
-<p style="margin:0 0 12px;">To put together the right plan and a price, it would help to know:</p>
+		`<p style="margin:0 0 16px;">${escapeHtml(greeting)}</p>
+<p style="margin:0 0 16px;">${escapeHtml(s.thanks)}</p>
+${knownHtml}
+<p style="margin:0 0 12px;">${escapeHtml(s.askIntro)}</p>
 <ul style="margin:0 0 16px;padding-left:20px;">
 ${questions.map((q) => `<li style="margin-bottom:8px;">${escapeHtml(q)}</li>`).join('\n')}
 </ul>
-<p style="margin:0 0 16px;">Just reply to this email — no forms. I usually answer within a day or two.</p>
-<p style="margin:0;">Looking forward to hearing more,<br />${escapeHtml(ownerName)}</p>`,
+<p style="margin:0 0 16px;">${escapeHtml(s.reply)}</p>
+<p style="margin:0;">${escapeHtml(s.signoff)}<br />${escapeHtml(ownerName)}</p>`,
 		ownerName,
+		locale,
 	);
 
-	const text = `${lead.name === null ? 'Hello,' : `Hi ${lead.name},`}
+	const knownText =
+		known.length > 0
+			? `\n${s.soFar}\n${known.map(([label, value]) => `  - ${label}: ${value}`).join('\n')}\n`
+			: '';
 
-Thank you for getting in touch about a shoot - I am glad you did.
-${known.length > 0 ? `\nI have you down for ${known.join(', ')}.\n` : ''}
-To put together the right plan and a price, it would help to know:
+	const text = `${greeting}
+
+${s.thanks}
+${knownText}
+${s.askIntro}
 
 ${questions.map((q) => `  - ${q}`).join('\n')}
 
-Just reply to this email - no forms. I usually answer within a day or two.
+${s.reply}
 
-Looking forward to hearing more,
+${s.signoff}
 ${ownerName}
 ruina.photos`;
 
 	await send(env, {
 		to: lead.email,
-		subject: 'About your shoot — a few details',
+		subject: s.subject,
 		html,
 		text,
 		// Replies land in the owner's inbox, not in the no-reply sending address.
@@ -134,13 +168,19 @@ ruina.photos`;
 	});
 }
 
-export async function sendOwnerNotification(env: MailEnv, lead: LeadRow): Promise<void> {
+export async function sendOwnerNotification(
+	env: MailEnv,
+	lead: LeadRow,
+	locale: Locale = DEFAULT_LOCALE,
+): Promise<void> {
 	const fields: Array<[string, string]> = [
 		['Email', lead.email],
 		['Name', lead.name ?? '—'],
 		['Preferred date', lead.preferred_date ?? '—'],
 		['Shoot type', lead.shoot_type ?? '—'],
 		['Message', lead.message ?? '—'],
+		// The visitor's auto-reply went out in this language; reply in it too.
+		['Language', `${LOCALE_META[locale].name} (${locale})`],
 	];
 
 	const rows = fields
