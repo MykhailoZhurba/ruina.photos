@@ -84,6 +84,24 @@ const defaultImage = (featured.find((img) => img.src.width > img.src.height) ?? 
 				const saved = stored();
 				apply(saved ? saved === 'dark' : media.matches);
 
+				// Switching after load fades between the two themes instead of snapping.
+				// Browsers with view transitions cross-fade the whole page (images and
+				// all); older ones ease the colours through a temporary class. Skipped
+				// for visitors who ask for reduced motion.
+				const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+				let fadeTimer;
+				const applySmoothly = (dark) => {
+					if (reduceMotion.matches) return apply(dark);
+					if (document.startViewTransition) {
+						document.startViewTransition(() => apply(dark));
+						return;
+					}
+					root.classList.add('theme-fade');
+					apply(dark);
+					clearTimeout(fadeTimer);
+					fadeTimer = setTimeout(() => root.classList.remove('theme-fade'), 500);
+				};
+
 				window.__toggleTheme = () => {
 					const dark = !root.classList.contains('dark');
 					try {
@@ -91,11 +109,11 @@ const defaultImage = (featured.find((img) => img.src.width > img.src.height) ?? 
 					} catch {
 						// Not persisted, but still switches for this page.
 					}
-					apply(dark);
+					applySmoothly(dark);
 				};
 				// Follow system changes live, unless the visitor has chosen explicitly.
 				media.addEventListener('change', (event) => {
-					if (!stored()) apply(event.matches);
+					if (!stored()) applySmoothly(event.matches);
 				});
 				// The buttons do not exist yet at this point; sync their state once they do.
 				document.addEventListener('DOMContentLoaded', () => apply(root.classList.contains('dark')));
