@@ -14,6 +14,28 @@
 	display: none !important;
 }
 
+/* Theme switch fade (see the theme script in MainLayout). The view transition
+   cross-fades a snapshot of the old theme into the new one; `theme-fade` is the
+   fallback for browsers without view transitions, easing every colour at once. */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 0.45s;
+	animation-timing-function: ease-in-out;
+}
+
+.theme-fade,
+.theme-fade *,
+.theme-fade *::before,
+.theme-fade *::after {
+	transition:
+		background-color 0.45s ease-in-out,
+		border-color 0.45s ease-in-out,
+		color 0.45s ease-in-out,
+		fill 0.45s ease-in-out,
+		stroke 0.45s ease-in-out,
+		box-shadow 0.45s ease-in-out !important;
+}
+
 @layer base {
 	:root {
 		--background: 0 0% 100%;
