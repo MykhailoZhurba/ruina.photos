@@ -20,7 +20,7 @@ const { t, tOr } = useTranslations(locale);
 const collections = [{ id: undefined, name: t('gallery.all') }, ...(await getCollections())].map(
 	(c) => ({ ...c, name: c.id ? tOr(`collection.${c.id}`, c.name) : c.name }),
 );
-const images = await getImages({ collection, spread: true });
+const images = await getImages({ collection, shuffle: true });
 
 // Wording for search results and the visible heading/intro. Each category gets its own,
 // so the pages are not near-duplicates of each other.

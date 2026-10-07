@@ -7,7 +7,7 @@ import {
 	type ImageModule,
 	loadGallery,
 } from './galleryData.ts';
-import { spreadByCollection } from './spread.ts';
+import { shuffleWithinCollections } from './shuffle.ts';
 
 /**
  * Error class for image-related errors
@@ -43,8 +43,8 @@ interface GetImagesOptions {
 	collection?: string;
 	sortBy?: 'captureDate';
 	order?: 'asc' | 'desc';
-	/** Mix the categories together (see spread.ts) instead of keeping gallery.yaml order. */
-	spread?: boolean;
+	/** Shuffle the photos inside each category (see shuffle.ts) instead of keeping gallery.yaml order. */
+	shuffle?: boolean;
 }
 
 /**
@@ -69,7 +69,7 @@ export const getImages = async (options: GetImagesOptions = {}): Promise<Image[]
 		images = filterImagesByCollection(collection, images);
 		images = sortImages(images, options);
 		const processed = processImages(images, galleryPath);
-		return options.spread ? spreadByCollection(processed, builtInCollections) : processed;
+		return options.shuffle ? shuffleWithinCollections(processed, builtInCollections) : processed;
 	} catch (error) {
 		throw new ImageStoreError(
 			`Failed to load images from ${galleryPath}: ${getErrorMsgFrom(error)}`,
