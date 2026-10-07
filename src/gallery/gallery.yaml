@@ -130,28 +130,6 @@ images:
         - featured
         - portraits
     exif: {}
-  - path: portraits\portraits-10.jpg
-    meta:
-      title: Portraits 10
-      description: ''
-      collections:
-        - portraits
-    exif: {}
-  - path: portraits\portraits-11.jpg
-    meta:
-      title: Portraits 11
-      description: ''
-      collections:
-        - portraits
-    exif: {}
-  - path: portraits\portraits-12.jpg
-    meta:
-      title: Portraits 12
-      description: ''
-      collections:
-        - featured
-        - portraits
-    exif: {}
   - path: portraits\portraits-2.jpg
     meta:
       title: Portraits 2
@@ -410,43 +388,6 @@ images:
         - automotive
         - featured
     exif: {}
-  - path: portraits\portraits-13.jpg
-    meta:
-      title: Portraits 13
-      description: ''
-      collections:
-        - portraits
-        - featured
-    exif: {}
-  - path: portraits\portraits-14.jpg
-    meta:
-      title: Portraits 14
-      description: ''
-      collections:
-        - portraits
-    exif: {}
-  - path: portraits\portraits-15.jpg
-    meta:
-      title: Portraits 15
-      description: ''
-      collections:
-        - portraits
-    exif: {}
-  - path: portraits\portraits-16.jpg
-    meta:
-      title: Portraits 16
-      description: ''
-      collections:
-        - portraits
-        - featured
-    exif: {}
-  - path: portraits\portraits-17.jpg
-    meta:
-      title: Portraits 17
-      description: ''
-      collections:
-        - portraits
-    exif: {}
   - path: automotive\automotive-32.jpg
     meta:
       title: Automotive 32
@@ -695,13 +636,6 @@ images:
   - path: aviation\aviation-27.jpg
     meta:
       title: Aviation 27
-      description: ''
-      collections:
-        - aviation
-    exif: {}
-  - path: aviation\aviation-28.jpg
-    meta:
-      title: Aviation 28
       description: ''
       collections:
         - aviation
@@ -1024,43 +958,6 @@ images:
       description: ''
       collections:
         - aviation
-    exif: {}
-  - path: portraits\portraits-18.jpg
-    meta:
-      title: Portraits 18
-      description: ''
-      collections:
-        - portraits
-    exif: {}
-  - path: portraits\portraits-19.jpg
-    meta:
-      title: Portraits 19
-      description: ''
-      collections:
-        - portraits
-    exif: {}
-  - path: portraits\portraits-20.jpg
-    meta:
-      title: Portraits 20
-      description: ''
-      collections:
-        - portraits
-        - featured
-    exif: {}
-  - path: portraits\portraits-21.jpg
-    meta:
-      title: Portraits 21
-      description: ''
-      collections:
-        - portraits
-    exif: {}
-  - path: portraits\portraits-22.jpg
-    meta:
-      title: Portraits 22
-      description: ''
-      collections:
-        - portraits
-        - featured
     exif: {}
   - path: street\street-12.jpg
     meta:
