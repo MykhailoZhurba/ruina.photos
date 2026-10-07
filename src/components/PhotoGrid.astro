@@ -11,9 +11,11 @@ import { useTranslations } from '../i18n/ui';
 
 interface Props {
 	images: ImageType[];
+	/** Reshuffle the photos inside each category every time the page loads (see the script below). */
+	shuffle?: boolean;
 }
 
-const { images } = Astro.props;
+const { images, shuffle = false } = Astro.props;
 const locale = getLocale(Astro.url);
 const { t } = useTranslations(locale);
 const { categoryLabels } = seoFor(locale);
@@ -52,6 +54,35 @@ const altFor = (image: ImageType): string => {
 	const alt = t('alt.photo', { label, site: siteConfig.title });
 	return number ? `${alt}, ${t('alt.number', { n: number })}` : alt;
 };
+/*
+ * Reshuffles the photos inside each category on every page load. It runs right after the grid is
+ * parsed, so the photos are already in their final order when the page first paints. The order in
+ * the HTML (shuffled at build time) is what visitors see without JavaScript, and what search
+ * engines read. Categories keep their order; only the photos inside each one move.
+ *
+ * Kept as a string because Astro copies the contents of an inline script as plain text.
+ */
+const shuffleScript = `
+(() => {
+	const list = document.querySelector('#photo-grid [data-shuffle]');
+	if (!list) return;
+	const groups = new Map();
+	for (const item of Array.from(list.children)) {
+		const key = item.dataset.section || '';
+		if (!groups.has(key)) groups.set(key, []);
+		groups.get(key).push(item);
+	}
+	const ordered = document.createDocumentFragment();
+	for (const group of groups.values()) {
+		for (let i = group.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[group[i], group[j]] = [group[j], group[i]];
+		}
+		group.forEach((item) => ordered.appendChild(item));
+	}
+	list.appendChild(ordered);
+})();
+`;
 ---
 
 <!--
@@ -69,12 +100,15 @@ const altFor = (image: ImageType): string => {
 	data-lightbox-next={t('lightbox.next')}
 	data-lightbox-error={t('lightbox.error')}
 >
-	<div class="columns-[18rem] gap-6 space-y-6">
+	<div class="columns-[18rem] gap-6 space-y-6" data-shuffle={shuffle ? '' : undefined}>
 		{
 			images.map(async (image) => {
 				const viewer = await viewerImage(image);
 				return (
-					<div class="break-inside-avoid">
+					<div
+						class="break-inside-avoid"
+						data-section={image.collections.find((id) => id !== featuredCollectionId)}
+					>
 						<a
 							href={viewer.src}
 							class="pswp-item block transition-transform duration-500 hover:scale-[1.05]"
@@ -97,6 +131,8 @@ const altFor = (image: ImageType): string => {
 		}
 	</div>
 </section>
+
+{shuffle && <script is:inline set:html={shuffleScript} />}
 
 <script>
 	import '../scripts/photo-grid';
