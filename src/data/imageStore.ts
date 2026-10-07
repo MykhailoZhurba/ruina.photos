@@ -7,6 +7,7 @@ import {
 	type ImageModule,
 	loadGallery,
 } from './galleryData.ts';
+import { spreadByCollection } from './spread.ts';
 
 /**
  * Error class for image-related errors
@@ -42,6 +43,8 @@ interface GetImagesOptions {
 	collection?: string;
 	sortBy?: 'captureDate';
 	order?: 'asc' | 'desc';
+	/** Mix the categories together (see spread.ts) instead of keeping gallery.yaml order. */
+	spread?: boolean;
 }
 
 /**
@@ -65,7 +68,8 @@ export const getImages = async (options: GetImagesOptions = {}): Promise<Image[]
 
 		images = filterImagesByCollection(collection, images);
 		images = sortImages(images, options);
-		return processImages(images, galleryPath);
+		const processed = processImages(images, galleryPath);
+		return options.spread ? spreadByCollection(processed, builtInCollections) : processed;
 	} catch (error) {
 		throw new ImageStoreError(
 			`Failed to load images from ${galleryPath}: ${getErrorMsgFrom(error)}`,
